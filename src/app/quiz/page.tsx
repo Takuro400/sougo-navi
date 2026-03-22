@@ -17,32 +17,23 @@ export default function QuizPage() {
 
   const current = quizQuestions[currentIndex];
   const total = quizQuestions.length;
-  const progress = Math.round((currentIndex / total) * 100);
+  const progress = ((currentIndex + 1) / total) * 100;
   const isLast = currentIndex === total - 1;
 
-  /** 選択肢を選んだとき */
-  const handleSelect = (value: string) => {
-    setSelected(value);
-  };
+  const handleSelect = (value: string) => setSelected(value);
 
-  /** 次へ進む */
   const handleNext = () => {
     if (!selected) return;
-
     const newAnswers = { ...answers, [current.id]: selected };
     setAnswers(newAnswers);
-
     if (isLast) {
-      // 結果ページへ。URLパラメータとして回答を渡す
-      const encoded = encodeURIComponent(JSON.stringify(newAnswers));
-      router.push(`/result?answers=${encoded}`);
+      router.push(`/result?answers=${encodeURIComponent(JSON.stringify(newAnswers))}`);
     } else {
       setCurrentIndex((i) => i + 1);
       setSelected(null);
     }
   };
 
-  /** 前の問いに戻る */
   const handleBack = () => {
     if (currentIndex === 0) return;
     setCurrentIndex((i) => i - 1);
@@ -50,98 +41,99 @@ export default function QuizPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-indigo-50">
+    <div className="min-h-screen bg-slate-950 relative overflow-hidden">
+      {/* 背景グラデーションオーブ */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl pointer-events-none" />
+
       <Header />
 
-      <div className="max-w-lg mx-auto px-4 py-8">
-        {/* プログレス */}
-        <div className="mb-6">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-bold text-primary-600">
-              質問 {currentIndex + 1} / {total}
-            </span>
-            <span className="text-sm text-gray-500">{progress}%完了</span>
+      {/* グローバル進捗バー */}
+      <div className="fixed top-14 left-0 right-0 z-40 h-0.5 bg-white/5">
+        <div
+          className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-700 ease-out"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+
+      <div className="relative max-w-lg mx-auto px-4 pt-10 pb-16">
+
+        {/* ヘッダー行 */}
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-2 text-white/30">
+            <span className="text-2xl font-black text-white">{currentIndex + 1}</span>
+            <span className="text-sm">/ {total}</span>
           </div>
-          <div className="w-full bg-white rounded-full h-3 shadow-inner">
-            <div
-              className="bg-primary-500 h-3 rounded-full transition-all duration-500"
-              style={{ width: `${((currentIndex + 1) / total) * 100}%` }}
-            />
-          </div>
+          <span className="text-xs font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">
+            {categoryLabel(current.category)}
+          </span>
         </div>
 
-        {/* 質問カード */}
-        <div className="card shadow-md">
-          {/* カテゴリラベル */}
-          <div className="mb-4">
-            <span className="badge bg-primary-50 text-primary-600 text-xs">
-              {categoryLabel(current.category)}
-            </span>
-          </div>
+        {/* 質問文 */}
+        <h2 className="font-display font-black text-2xl text-white leading-snug mb-8">
+          {current.text}
+        </h2>
 
-          {/* 質問文 */}
-          <h2 className="font-display font-black text-2xl text-gray-900 leading-snug mb-6">
-            {current.text}
-          </h2>
-
-          {/* 選択肢 */}
-          <div className="flex flex-col gap-3.5">
-            {current.options.map((option) => {
-              const isActive = selected === option.value;
-              return (
-                <button
-                  key={option.value}
-                  onClick={() => handleSelect(option.value)}
-                  className={`w-full text-left px-5 py-5 rounded-2xl border-2 transition-all duration-150 text-base font-medium leading-snug active:scale-[0.98]
-                    ${isActive
-                      ? "border-primary-500 bg-primary-50 text-primary-800 shadow-md"
-                      : "border-surface-200 bg-white text-gray-700 hover:border-primary-300 hover:bg-primary-50/50"
-                    }`}
-                >
-                  <span className="flex items-center gap-3.5">
-                    <span
-                      className={`w-6 h-6 rounded-full border-2 shrink-0 flex items-center justify-center transition-all
-                        ${isActive ? "border-primary-500 bg-primary-500 scale-110" : "border-gray-300"}`}
-                    >
-                      {isActive && (
-                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 12 12">
-                          <path d="M3.5 6.5L5.5 8.5L8.5 4.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                        </svg>
-                      )}
-                    </span>
-                    {option.label}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* ナビゲーションボタン */}
-          <div className="flex gap-3 mt-7">
-            {currentIndex > 0 && (
+        {/* 選択肢 */}
+        <div className="flex flex-col gap-3 mb-8">
+          {current.options.map((option) => {
+            const isActive = selected === option.value;
+            return (
               <button
-                onClick={handleBack}
-                className="flex-none py-4 px-6 text-base font-bold text-gray-500 bg-surface-100 hover:bg-surface-200 rounded-xl transition-colors"
+                key={option.value}
+                onClick={() => handleSelect(option.value)}
+                className={`w-full text-left px-5 py-5 rounded-2xl border-2 transition-all duration-200 active:scale-[0.97]
+                  ${isActive
+                    ? "bg-gradient-to-r from-indigo-600/70 to-violet-600/70 border-indigo-400/70 shadow-lg shadow-indigo-500/20 text-white"
+                    : "bg-white/5 border-white/10 text-white/75 hover:bg-white/8 hover:border-white/20 hover:text-white"
+                  }`}
               >
-                ← 戻る
+                <span className="flex items-center gap-4">
+                  <span
+                    className={`w-6 h-6 rounded-full border-2 shrink-0 flex items-center justify-center transition-all duration-200
+                      ${isActive
+                        ? "border-white/60 bg-white/20 scale-110"
+                        : "border-white/20"
+                      }`}
+                  >
+                    {isActive && (
+                      <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 12 12">
+                        <path d="M2.5 6L5 8.5L9.5 3.5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    )}
+                  </span>
+                  <span className="text-base font-medium leading-snug">{option.label}</span>
+                </span>
               </button>
-            )}
+            );
+          })}
+        </div>
+
+        {/* ナビゲーション */}
+        <div className="flex gap-3">
+          {currentIndex > 0 && (
             <button
-              onClick={handleNext}
-              disabled={!selected}
-              className={`flex-1 py-4 text-base font-bold rounded-xl transition-all duration-200
-                ${selected
-                  ? "bg-primary-600 hover:bg-primary-700 text-white shadow-md hover:shadow-lg active:scale-95"
-                  : "bg-gray-100 text-gray-400 cursor-not-allowed"
-                }`}
+              onClick={handleBack}
+              className="py-4 px-6 text-base font-bold text-white/40 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-colors"
             >
-              {isLast ? "診断結果を見る 🎉" : "次の質問へ →"}
+              ← 戻る
             </button>
-          </div>
+          )}
+          <button
+            onClick={handleNext}
+            disabled={!selected}
+            className={`flex-1 py-4 text-base font-bold rounded-xl transition-all duration-200
+              ${selected
+                ? "bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 text-white shadow-lg shadow-indigo-500/25 active:scale-95"
+                : "bg-white/5 text-white/20 cursor-not-allowed"
+              }`}
+          >
+            {isLast ? "診断結果を見る ✨" : "次の質問へ →"}
+          </button>
         </div>
 
         {/* 注意文 */}
-        <p className="text-center text-xs text-gray-400 mt-5 leading-relaxed">
+        <p className="text-center text-xs text-white/20 mt-6 leading-relaxed">
           診断結果は参考情報です。合格を保証するものではありません。
         </p>
       </div>
@@ -149,18 +141,22 @@ export default function QuizPage() {
   );
 }
 
-/** カテゴリ → 日本語ラベル */
 function categoryLabel(cat: string): string {
   const map: Record<string, string> = {
-    interest: "興味・関心",
-    career: "将来の目標",
-    learning: "学び方",
-    personality: "性格・特性",
-    activity: "高校での活動",
-    academic: "学力・評定",
-    location: "地域志向",
-    school_type: "学校の種別",
-    finance: "学費・通学",
+    interest:          "興味・関心",
+    career:            "将来の目標",
+    learning:          "学び方",
+    personality:       "性格・特性",
+    activity:          "高校での活動",
+    academic:          "学力・評定",
+    location:          "地域志向",
+    school_type:       "学校の種別",
+    finance:           "学費・通学",
+    subject:           "得意科目",
+    club:              "部活動",
+    graduation_vision: "卒業後の姿",
+    campus_life:       "大学生活",
+    info_gathering:    "情報収集",
   };
   return map[cat] || cat;
 }

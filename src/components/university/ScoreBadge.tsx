@@ -3,35 +3,39 @@ interface Props {
 }
 
 export default function ScoreBadge({ score }: Props) {
-  // スコアに応じた色を設定
-  const getColor = (s: number) => {
-    if (s >= 70) return { bar: "bg-green-500", text: "text-green-700", bg: "bg-green-50" };
-    if (s >= 45) return { bar: "bg-yellow-500", text: "text-yellow-700", bg: "bg-yellow-50" };
-    return { bar: "bg-orange-400", text: "text-orange-700", bg: "bg-orange-50" };
+  const getConfig = (s: number) => {
+    if (s >= 70) return {
+      bar: "bg-gradient-to-r from-emerald-500 to-teal-400",
+      text: "text-emerald-400",
+      label: "相性が高い",
+    };
+    if (s >= 45) return {
+      bar: "bg-gradient-to-r from-amber-500 to-yellow-400",
+      text: "text-amber-400",
+      label: "まずまず合っている",
+    };
+    return {
+      bar: "bg-gradient-to-r from-orange-500 to-rose-400",
+      text: "text-orange-400",
+      label: "別の観点で可能性あり",
+    };
   };
 
-  const getLabel = (s: number) => {
-    if (s >= 70) return "相性が高い";
-    if (s >= 45) return "まずまず合っている";
-    return "別の観点で可能性あり";
-  };
-
-  const colors = getColor(score);
+  const cfg = getConfig(score);
 
   return (
-    <div className={`rounded-xl px-3 py-2 ${colors.bg}`}>
-      <div className="flex items-center justify-between mb-1">
-        <span className={`text-xs font-bold ${colors.text}`}>{getLabel(score)}</span>
-        <span className={`text-sm font-black ${colors.text}`}>{score}点</span>
+    <div className="rounded-xl px-3 py-2.5 bg-white/5 border border-white/10">
+      <div className="flex items-center justify-between mb-1.5">
+        <span className="text-xs font-bold text-white/50">{cfg.label}</span>
+        <span className={`text-lg font-black ${cfg.text}`}>{score}<span className="text-xs font-bold ml-0.5">点</span></span>
       </div>
-      {/* プログレスバー */}
-      <div className="w-full bg-gray-200 rounded-full h-1.5">
+      <div className="w-full bg-white/10 rounded-full h-1.5">
         <div
-          className={`${colors.bar} h-1.5 rounded-full transition-all duration-500`}
+          className={`${cfg.bar} h-1.5 rounded-full transition-all duration-700`}
           style={{ width: `${score}%` }}
         />
       </div>
-      <p className="text-xs text-gray-500 mt-1">相性スコア（参考値）</p>
+      <p className="text-xs text-white/25 mt-1.5">相性スコア（参考値）</p>
     </div>
   );
 }
