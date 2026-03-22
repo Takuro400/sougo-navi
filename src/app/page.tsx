@@ -59,29 +59,53 @@ export default function TopPage() {
       <Header />
 
       {/* ヒーローセクション */}
-      <section className="bg-gradient-to-br from-primary-600 via-primary-700 to-indigo-800 text-white pt-16 pb-20 px-4">
-        <div className="max-w-2xl mx-auto text-center">
-          <span className="inline-block bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-5 tracking-wide">
-            総合型選抜を受ける高校生へ
+      <section className="relative bg-gradient-to-br from-primary-600 via-primary-700 to-indigo-800 text-white pt-16 pb-28 px-4 overflow-hidden">
+        {/* 装飾サークル */}
+        <div className="absolute -top-12 -right-12 w-72 h-72 bg-white/5 rounded-full pointer-events-none" />
+        <div className="absolute top-1/2 -left-20 w-64 h-64 bg-indigo-400/10 rounded-full pointer-events-none" />
+        <div className="absolute -bottom-20 right-1/4 w-96 h-96 bg-primary-400/10 rounded-full pointer-events-none" />
+
+        <div className="relative max-w-2xl mx-auto text-center">
+          <span className="inline-flex items-center gap-1.5 bg-yellow-400/20 text-yellow-200 text-xs font-bold px-4 py-1.5 rounded-full mb-5 tracking-wide border border-yellow-300/30">
+            ✨ 総合型選抜を受ける高校生へ
           </span>
-          <h1 className="font-display font-black text-3xl md:text-4xl leading-tight mb-4">
-            質問に答えるだけで<br />
-            自分に合う大学が<br />
-            <span className="text-yellow-300">見つかる</span>
+          <h1 className="font-display font-black text-4xl md:text-5xl leading-tight mb-5">
+            10問に答えるだけで<br />
+            <span className="text-yellow-300">自分に合う大学</span>が<br />
+            見つかる
           </h1>
           <p className="text-base text-white/80 mb-8 leading-relaxed">
-            興味・価値観・学びたいことを10問で診断。<br />
-            相性の良い大学候補とおすすめ理由を、すぐに表示します。
+            興味・価値観・学びたいことを診断。<br />
+            相性の良い大学候補とおすすめ理由を、今すぐ表示します。
           </p>
+
+          {/* 統計バー */}
+          <div className="flex items-center justify-center gap-5 mb-8">
+            <div className="text-center">
+              <div className="text-2xl font-black text-yellow-300">10問</div>
+              <div className="text-xs text-white/60 mt-0.5">質問数</div>
+            </div>
+            <div className="w-px h-10 bg-white/20" />
+            <div className="text-center">
+              <div className="text-2xl font-black text-yellow-300">約3分</div>
+              <div className="text-xs text-white/60 mt-0.5">所要時間</div>
+            </div>
+            <div className="w-px h-10 bg-white/20" />
+            <div className="text-center">
+              <div className="text-2xl font-black text-yellow-300">無料</div>
+              <div className="text-xs text-white/60 mt-0.5">登録不要</div>
+            </div>
+          </div>
+
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/quiz" className="btn-primary bg-white text-primary-700 hover:bg-yellow-50 shadow-xl text-base py-3.5 px-8">
-              無料で診断する（約3分）
+            <Link href="/quiz" className="btn-primary bg-yellow-400 text-gray-900 hover:bg-yellow-300 shadow-xl font-black text-base py-4 px-8">
+              🎯 無料で診断する（約3分）
             </Link>
-            <Link href="/mentors" className="btn-secondary border-white/40 text-white hover:bg-white/10 text-base py-3.5 px-6">
-              先輩に相談する
+            <Link href="/mentors" className="btn-secondary border-white/40 bg-white/10 text-white hover:bg-white/20 text-base py-4 px-6">
+              先輩に相談する →
             </Link>
           </div>
-          <p className="text-xs text-white/60 mt-4">登録不要・無料でご利用いただけます</p>
+          <p className="text-xs text-white/50 mt-4">登録不要・無料でご利用いただけます</p>
         </div>
       </section>
 
