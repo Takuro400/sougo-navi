@@ -57,14 +57,14 @@ export default function QuizPage() {
         {/* プログレス */}
         <div className="mb-6">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-xs font-bold text-primary-600">
+            <span className="text-sm font-bold text-primary-600">
               質問 {currentIndex + 1} / {total}
             </span>
-            <span className="text-xs text-gray-500">{progress}%完了</span>
+            <span className="text-sm text-gray-500">{progress}%完了</span>
           </div>
-          <div className="w-full bg-white rounded-full h-2 shadow-inner">
+          <div className="w-full bg-white rounded-full h-3 shadow-inner">
             <div
-              className="bg-primary-500 h-2 rounded-full transition-all duration-500"
+              className="bg-primary-500 h-3 rounded-full transition-all duration-500"
               style={{ width: `${((currentIndex + 1) / total) * 100}%` }}
             />
           </div>
@@ -80,31 +80,31 @@ export default function QuizPage() {
           </div>
 
           {/* 質問文 */}
-          <h2 className="font-display font-black text-xl text-gray-900 leading-snug mb-6">
+          <h2 className="font-display font-black text-2xl text-gray-900 leading-snug mb-6">
             {current.text}
           </h2>
 
           {/* 選択肢 */}
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3.5">
             {current.options.map((option) => {
               const isActive = selected === option.value;
               return (
                 <button
                   key={option.value}
                   onClick={() => handleSelect(option.value)}
-                  className={`w-full text-left px-4 py-4 rounded-xl border-2 transition-all duration-150 text-sm font-medium leading-snug active:scale-[0.98]
+                  className={`w-full text-left px-5 py-5 rounded-2xl border-2 transition-all duration-150 text-base font-medium leading-snug active:scale-[0.98]
                     ${isActive
-                      ? "border-primary-500 bg-primary-50 text-primary-800 shadow-sm"
+                      ? "border-primary-500 bg-primary-50 text-primary-800 shadow-md"
                       : "border-surface-200 bg-white text-gray-700 hover:border-primary-300 hover:bg-primary-50/50"
                     }`}
                 >
-                  <span className="flex items-start gap-3">
+                  <span className="flex items-center gap-3.5">
                     <span
-                      className={`mt-0.5 w-5 h-5 rounded-full border-2 shrink-0 flex items-center justify-center transition-colors
-                        ${isActive ? "border-primary-500 bg-primary-500" : "border-gray-300"}`}
+                      className={`w-6 h-6 rounded-full border-2 shrink-0 flex items-center justify-center transition-all
+                        ${isActive ? "border-primary-500 bg-primary-500 scale-110" : "border-gray-300"}`}
                     >
                       {isActive && (
-                        <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 12 12">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 12 12">
                           <path d="M3.5 6.5L5.5 8.5L8.5 4.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                         </svg>
                       )}
@@ -117,11 +117,11 @@ export default function QuizPage() {
           </div>
 
           {/* ナビゲーションボタン */}
-          <div className="flex gap-3 mt-6">
+          <div className="flex gap-3 mt-7">
             {currentIndex > 0 && (
               <button
                 onClick={handleBack}
-                className="flex-none py-3 px-5 text-sm font-bold text-gray-500 bg-surface-100 hover:bg-surface-200 rounded-xl transition-colors"
+                className="flex-none py-4 px-6 text-base font-bold text-gray-500 bg-surface-100 hover:bg-surface-200 rounded-xl transition-colors"
               >
                 ← 戻る
               </button>
@@ -129,7 +129,7 @@ export default function QuizPage() {
             <button
               onClick={handleNext}
               disabled={!selected}
-              className={`flex-1 py-3 text-sm font-bold rounded-xl transition-all duration-200
+              className={`flex-1 py-4 text-base font-bold rounded-xl transition-all duration-200
                 ${selected
                   ? "bg-primary-600 hover:bg-primary-700 text-white shadow-md hover:shadow-lg active:scale-95"
                   : "bg-gray-100 text-gray-400 cursor-not-allowed"

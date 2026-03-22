@@ -51,9 +51,37 @@ function ResultContent() {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center py-24">
-        <div className="w-12 h-12 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin mb-4" />
-        <p className="text-gray-500 text-sm">診断中です…少々お待ちください</p>
+      <div className="flex flex-col items-center justify-center min-h-[60vh] px-4">
+        {/* スピナー + アイコン */}
+        <div className="relative mb-6">
+          <div className="w-20 h-20 rounded-full border-4 border-primary-100 border-t-primary-600 animate-spin" />
+          <div className="absolute inset-0 flex items-center justify-center text-2xl">🎯</div>
+        </div>
+
+        <h2 className="font-display font-black text-xl text-gray-800 mb-2">分析中です…</h2>
+        <p className="text-gray-500 text-sm text-center leading-relaxed mb-6">
+          あなたの回答をもとに<br />ぴったりの大学を探しています
+        </p>
+
+        {/* ステップ表示 */}
+        <div className="flex flex-col gap-2 w-full max-w-xs mb-6">
+          {["回答を分析中", "大学データと照合中", "おすすめ順に整理中"].map((step, i) => (
+            <div key={i} className="flex items-center gap-2.5 text-sm text-gray-500">
+              <div
+                className="w-4 h-4 rounded-full border-2 border-primary-300 border-t-primary-600 animate-spin shrink-0"
+                style={{ animationDelay: `${i * 0.3}s` }}
+              />
+              <span>{step}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* バウンスドット */}
+        <div className="flex gap-2">
+          <span className="loading-dot w-2.5 h-2.5 rounded-full bg-primary-400 block" />
+          <span className="loading-dot w-2.5 h-2.5 rounded-full bg-primary-500 block" />
+          <span className="loading-dot w-2.5 h-2.5 rounded-full bg-primary-600 block" />
+        </div>
       </div>
     );
   }
@@ -160,9 +188,17 @@ export default function ResultPage() {
     <div className="min-h-screen bg-surface-50">
       <Header />
       <Suspense fallback={
-        <div className="flex flex-col items-center justify-center py-24">
-          <div className="w-12 h-12 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin mb-4" />
-          <p className="text-gray-500 text-sm">読み込み中…</p>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] px-4">
+          <div className="relative mb-6">
+            <div className="w-20 h-20 rounded-full border-4 border-primary-100 border-t-primary-600 animate-spin" />
+            <div className="absolute inset-0 flex items-center justify-center text-2xl">🎯</div>
+          </div>
+          <h2 className="font-display font-black text-xl text-gray-800 mb-2">読み込み中…</h2>
+          <div className="flex gap-2 mt-4">
+            <span className="loading-dot w-2.5 h-2.5 rounded-full bg-primary-400 block" />
+            <span className="loading-dot w-2.5 h-2.5 rounded-full bg-primary-500 block" />
+            <span className="loading-dot w-2.5 h-2.5 rounded-full bg-primary-600 block" />
+          </div>
         </div>
       }>
         <ResultContent />
