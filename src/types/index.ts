@@ -1,0 +1,100 @@
+// ===========================
+// 型定義
+// ===========================
+
+/** 診断の1問分 */
+export interface QuizQuestion {
+  id: string;
+  text: string;
+  options: QuizOption[];
+  category: QuizCategory;
+}
+
+export interface QuizOption {
+  value: string;
+  label: string;
+  tags: string[]; // マッチングに使うタグ
+}
+
+export type QuizCategory =
+  | "interest"       // 興味分野
+  | "career"         // 将来の目標
+  | "learning"       // 学び方の好み
+  | "personality"    // 性格・行動特性
+  | "activity"       // 高校での活動
+  | "academic"       // 学力・評定
+  | "location"       // 地域志向
+  | "school_type"    // 国公立/私立
+  | "finance";       // 学費・通学
+
+/** 診断の回答セット */
+export type QuizAnswers = Record<string, string>;
+
+/** 大学データ */
+export interface University {
+  id: string;
+  name: string;
+  faculty: string;        // 学部名
+  department: string;     // 学科名
+  region: string;         // 地域
+  prefecture: string;     // 都道府県
+  type: "国立" | "公立" | "私立";
+  description: string;    // 学びの特徴
+  features: string[];     // 特徴タグ
+  sougoCompatibility: "高" | "中" | "低"; // 総合型選抜との相性
+  idealStudent: string;   // 向いている学生像
+  requiredActivities: string[]; // 必要になりそうな活動
+  matchTags: string[];    // マッチングタグ
+  links: UniversityLinks;
+  mentorCount: number;    // 相談可能な先輩数
+}
+
+export interface UniversityLinks {
+  official: string;
+  admissions: string;
+  passnavi: string;
+  openCampus?: string;
+}
+
+/** 診断結果の1件 */
+export interface MatchResult {
+  university: University;
+  score: number;           // 0-100
+  matchReasons: string[];  // おすすめ理由
+  readinessLevel: "高" | "中" | "低"; // 準備度
+  requiredActions: string[]; // 出願までに必要な行動
+}
+
+/** メンター（先輩大学生）データ */
+export interface Mentor {
+  id: string;
+  universityId: string;
+  name: string;           // ニックネーム
+  faculty: string;
+  grade: string;          // 学年
+  hometown: string;       // 出身地
+  highSchoolType: string; // 高校の種別
+  message: string;        // 一言メッセージ
+  specialties: string[];  // 相談得意分野
+  availableDays: string[]; // 相談可能な曜日
+  imageInitial: string;   // アバター用頭文字
+  avatarColor: string;    // アバター背景色
+}
+
+/** 相談申請フォーム */
+export interface ConsultationRequest {
+  mentorId: string;
+  studentName: string;
+  email: string;
+  grade: string;
+  question: string;
+  preferredDate: string;
+}
+
+/** マイページ保存データ */
+export interface MyPageData {
+  quizAnswers: QuizAnswers | null;
+  savedUniversities: string[]; // university IDs
+  lastDiagnosisDate: string | null;
+  matchResults: MatchResult[];
+}
