@@ -1,10 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+const COMPARE_KEY = "sougo_navi_compare_ids";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [compareCount, setCompareCount] = useState(0);
+
+  useEffect(() => {
+    const read = () => {
+      const raw = localStorage.getItem(COMPARE_KEY);
+      setCompareCount(raw ? JSON.parse(raw).length : 0);
+    };
+    read();
+    // 同一タブ内での更新を検知するカスタムイベント
+    window.addEventListener("compare-updated", read);
+    return () => window.removeEventListener("compare-updated", read);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-surface-200 shadow-sm">
@@ -21,6 +35,14 @@ export default function Header() {
           </Link>
           <Link href="/mentors" className="hover:text-primary-600 transition-colors">
             先輩に相談
+          </Link>
+          <Link href="/compare" className="hover:text-primary-600 transition-colors flex items-center gap-1">
+            比較する
+            {compareCount > 0 && (
+              <span className="bg-primary-600 text-white text-xs font-black w-5 h-5 rounded-full flex items-center justify-center">
+                {compareCount}
+              </span>
+            )}
           </Link>
           <Link href="/mypage" className="hover:text-primary-600 transition-colors">
             マイページ
@@ -54,6 +76,14 @@ export default function Header() {
           </Link>
           <Link href="/mentors" className="py-2 text-gray-700 font-medium" onClick={() => setMenuOpen(false)}>
             先輩に相談
+          </Link>
+          <Link href="/compare" className="py-2 text-gray-700 font-medium flex items-center gap-2" onClick={() => setMenuOpen(false)}>
+            比較する
+            {compareCount > 0 && (
+              <span className="bg-primary-600 text-white text-xs font-black w-5 h-5 rounded-full flex items-center justify-center">
+                {compareCount}
+              </span>
+            )}
           </Link>
           <Link href="/mypage" className="py-2 text-gray-700 font-medium" onClick={() => setMenuOpen(false)}>
             マイページ

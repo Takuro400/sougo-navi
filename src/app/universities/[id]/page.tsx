@@ -7,8 +7,10 @@ import Footer from "@/components/layout/Footer";
 import MentorCard from "@/components/mentor/MentorCard";
 import { getUniversityById } from "@/data/universities";
 import { getMentorsByUniversityId } from "@/data/mentors";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mentor } from "@/types";
+
+const COMPARE_KEY = "sougo_navi_compare_ids";
 
 // ===========================
 // 大学詳細ページ
@@ -22,6 +24,25 @@ export default function UniversityDetailPage() {
   const [showConsultModal, setShowConsultModal] = useState(false);
   const [selectedMentor, setSelectedMentor] = useState<Mentor | null>(null);
   const [formSent, setFormSent] = useState(false);
+  const [compareIds, setCompareIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    const raw = localStorage.getItem(COMPARE_KEY);
+    setCompareIds(raw ? JSON.parse(raw) : []);
+  }, []);
+
+  const isCompared = compareIds.includes(id);
+  const isFull = compareIds.length >= 3 && !isCompared;
+
+  const handleCompareToggle = () => {
+    const next = isCompared
+      ? compareIds.filter((x) => x !== id)
+      : [...compareIds, id];
+    setCompareIds(next);
+    localStorage.setItem(COMPARE_KEY, JSON.stringify(next));
+    // ヘッダーのカウントバッジを更新
+    window.dispatchEvent(new Event("compare-updated"));
+  };
 
   if (!university) {
     return (
@@ -60,9 +81,24 @@ export default function UniversityDetailPage() {
       {/* ページヘッダー */}
       <div className="bg-gradient-to-br from-primary-700 to-indigo-800 text-white py-10 px-4">
         <div className="max-w-2xl mx-auto">
-          <Link href="/" className="inline-flex items-center gap-1 text-white/70 text-sm mb-4 hover:text-white transition-colors">
-            ← 戻る
-          </Link>
+          <div className="flex items-center justify-between mb-4">
+            <Link href="/" className="inline-flex items-center gap-1 text-white/70 text-sm hover:text-white transition-colors">
+              ← 戻る
+            </Link>
+            <button
+              onClick={handleCompareToggle}
+              disabled={isFull}
+              className={`inline-flex items-center gap-1.5 text-sm font-bold px-4 py-2 rounded-xl transition-all active:scale-95
+                ${isCompared
+                  ? "bg-white text-primary-700 shadow-md"
+                  : isFull
+                    ? "bg-white/20 text-white/40 cursor-not-allowed"
+                    : "bg-white/20 hover:bg-white/30 text-white border border-white/40"
+                }`}
+            >
+              {isCompared ? "✓ 比較中" : isFull ? "比較は最大3校" : "⚖️ 比較に追加"}
+            </button>
+          </div>
           <div className="flex flex-wrap gap-2 mb-3">
             <span className={`badge ${typeColor[university.type]}`}>{university.type}</span>
             <span className="badge bg-white/20 text-white">{university.prefecture}</span>
@@ -76,6 +112,16 @@ export default function UniversityDetailPage() {
       </div>
 
       <div className="max-w-2xl mx-auto px-4 py-8 space-y-6">
+
+        {/* 比較バナー */}
+        {isCompared && (
+          <div className="flex items-center justify-between bg-primary-50 border border-primary-100 rounded-xl px-4 py-3">
+            <p className="text-sm text-primary-700 font-bold">✓ 比較リストに追加済みです</p>
+            <Link href="/compare" className="text-sm font-bold text-primary-600 hover:underline flex items-center gap-1">
+              比較ページを見る →
+            </Link>
+          </div>
+        )}
 
         {/* 学びの特徴 */}
         <div className="card">
