@@ -1,6 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { MatchResult } from "@/types";
 import ScoreBadge from "./ScoreBadge";
+
+const COMPARE_KEY = "sougo_navi_compare_ids";
 
 interface Props {
   result: MatchResult;
@@ -11,6 +16,30 @@ interface Props {
 
 export default function UniversityCard({ result, rank, isSaved, onSave }: Props) {
   const { university: univ, score, matchReasons, readinessLevel } = result;
+  const [compareIds, setCompareIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    const raw = localStorage.getItem(COMPARE_KEY);
+    setCompareIds(raw ? JSON.parse(raw) : []);
+    const sync = () => {
+      const r = localStorage.getItem(COMPARE_KEY);
+      setCompareIds(r ? JSON.parse(r) : []);
+    };
+    window.addEventListener("compare-updated", sync);
+    return () => window.removeEventListener("compare-updated", sync);
+  }, []);
+
+  const isCompared = compareIds.includes(univ.id);
+  const isFull = compareIds.length >= 3 && !isCompared;
+
+  const handleCompareToggle = () => {
+    const next = isCompared
+      ? compareIds.filter((x) => x !== univ.id)
+      : [...compareIds, univ.id];
+    setCompareIds(next);
+    localStorage.setItem(COMPARE_KEY, JSON.stringify(next));
+    window.dispatchEvent(new Event("compare-updated"));
+  };
 
   const readinessConfig = {
     高: { color: "bg-green-100 text-green-700", label: "準備度：高" },
@@ -86,19 +115,51 @@ export default function UniversityCard({ result, rank, isSaved, onSave }: Props)
       </div>
 
       {/* アクションボタン */}
-      <div className="flex gap-2.5">
-        <Link
-          href={`/universities/${univ.id}`}
-          className="flex-1 text-center py-3.5 text-base font-bold text-primary-600 bg-primary-50 hover:bg-primary-100 rounded-xl transition-colors"
+      <div className="flex flex-col gap-2">
+        <div className="flex gap-2.5">
+          <Link
+            href={`/universities/${univ.id}`}
+            className="flex-1 text-center py-3.5 text-base font-bold text-primary-600 bg-primary-50 hover:bg-primary-100 rounded-xl transition-colors"
+          >
+            詳細を見る
+          </Link>
+          <Link
+            href={`/mentors?university=${univ.id}`}
+            className="flex-1 text-center py-3.5 text-base font-bold text-white bg-primary-600 hover:bg-primary-700 rounded-xl transition-colors shadow-sm"
+          >
+            先輩に相談
+          </Link>
+        </div>
+
+        {/* 比較ボタン */}
+        <button
+          onClick={handleCompareToggle}
+          disabled={isFull}
+          className={`w-full py-2.5 text-sm font-bold rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-1.5
+            ${isCompared
+              ? "bg-indigo-50 text-indigo-700 border-2 border-indigo-300"
+              : isFull
+                ? "bg-gray-50 text-gray-300 border-2 border-gray-100 cursor-not-allowed"
+                : "bg-gray-50 text-gray-500 border-2 border-gray-200 hover:border-indigo-300 hover:text-indigo-600 hover:bg-indigo-50"
+            }`}
         >
-          詳細を見る
-        </Link>
-        <Link
-          href={`/mentors?university=${univ.id}`}
-          className="flex-1 text-center py-3.5 text-base font-bold text-white bg-primary-600 hover:bg-primary-700 rounded-xl transition-colors shadow-sm"
-        >
-          先輩に相談
-        </Link>
+          {isCompared ? (
+            <>
+              <span>✓</span> 比較リストに追加済み
+              <Link
+                href="/compare"
+                onClick={(e) => e.stopPropagation()}
+                className="ml-auto text-xs text-indigo-500 hover:underline"
+              >
+                比較する →
+              </Link>
+            </>
+          ) : isFull ? (
+            <>⚖️ 比較リストが上限（3校）</>
+          ) : (
+            <>⚖️ 比較に追加</>
+          )}
+        </button>
       </div>
     </div>
   );
