@@ -7,7 +7,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import UniversityCard from "@/components/university/UniversityCard";
 import { generateMatchResults } from "@/lib/matchingEngine";
-import { MatchResult, QuizAnswers } from "@/types";
+import { MatchResult, QuizAnswers, UserTypeInfo } from "@/types";
 
 // ===========================
 // 診断結果ページ（内部コンポーネント）
@@ -15,6 +15,7 @@ import { MatchResult, QuizAnswers } from "@/types";
 function ResultContent() {
   const searchParams = useSearchParams();
   const [results, setResults] = useState<MatchResult[]>([]);
+  const [userType, setUserType] = useState<UserTypeInfo | null>(null);
   const [savedIds, setSavedIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -26,12 +27,14 @@ function ResultContent() {
     }
     try {
       const answers: QuizAnswers = JSON.parse(decodeURIComponent(raw));
-      const matched = generateMatchResults(answers);
+      const { matchResults: matched, userType: type } = generateMatchResults(answers);
       setResults(matched);
+      setUserType(type);
 
       // ローカルストレージに保存（マイページ用）
       const saveData = {
         matchResults: matched,
+        userType: type,
         answers,
         savedAt: new Date().toISOString(),
       };
@@ -114,6 +117,27 @@ function ResultContent() {
           各大学の詳細や先輩への相談もここから進められます。
         </p>
       </div>
+
+      {/* あなたのタイプ */}
+      {userType && (
+        <div className={`border rounded-2xl p-5 mb-6 ${userType.bgColor}`}>
+          <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">あなたのタイプ</p>
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-4xl">{userType.icon}</span>
+            <div>
+              <h2 className={`font-display font-black text-xl ${userType.color}`}>{userType.label}</h2>
+            </div>
+          </div>
+          <p className="text-sm text-gray-700 leading-relaxed mb-3">{userType.description}</p>
+          <div className="flex flex-wrap gap-2">
+            {userType.traits.map((trait) => (
+              <span key={trait} className="inline-flex items-center gap-1 text-xs font-medium bg-white/70 text-gray-700 px-2.5 py-1 rounded-full border border-white">
+                ✓ {trait}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* 1位ピックアップ */}
       <div className="bg-gradient-to-br from-primary-600 to-indigo-700 rounded-2xl p-5 mb-6 text-white">

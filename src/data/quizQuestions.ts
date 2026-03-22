@@ -1,7 +1,7 @@
 import { QuizQuestion } from "@/types";
 
 // ===========================
-// 診断質問データ（10問）
+// 診断質問データ（15問）
 // ===========================
 
 export const quizQuestions: QuizQuestion[] = [
@@ -113,6 +113,64 @@ export const quizQuestions: QuizQuestion[] = [
       { value: "b", label: "最先端の研究・技術を学ぶ", tags: ["tech", "stem", "engineering"] },
       { value: "c", label: "地域課題・社会課題に取り組む", tags: ["community", "social", "welfare"] },
       { value: "d", label: "多様な人と出会い、自分の視野を広げる", tags: ["interdisciplinary", "global", "innovation"] },
+    ],
+  },
+  // ===========================
+  // 追加5問
+  // ===========================
+  {
+    id: "q11",
+    category: "subject",
+    text: "高校で一番得意な（または好きな）科目はどれですか？",
+    options: [
+      { value: "a", label: "数学・物理・化学などの理系科目", tags: ["stem", "tech", "engineering", "math"] },
+      { value: "b", label: "国語・歴史・倫理などの文系科目", tags: ["humanities", "social", "culture"] },
+      { value: "c", label: "英語・外国語", tags: ["global", "international", "english", "language"] },
+      { value: "d", label: "体育・芸術・家庭科などの実技系", tags: ["hands-on", "practical", "welfare", "community"] },
+    ],
+  },
+  {
+    id: "q12",
+    category: "club",
+    text: "部活動・課外活動はどのタイプに近いですか？",
+    options: [
+      { value: "a", label: "運動部（スポーツ系）", tags: ["leadership", "collaborative", "hands-on"] },
+      { value: "b", label: "文化部（科学・情報・ロボット・研究系）", tags: ["stem", "tech", "engineering", "innovation"] },
+      { value: "c", label: "文化部（音楽・演劇・美術・文芸系）", tags: ["humanities", "culture", "interdisciplinary"] },
+      { value: "d", label: "生徒会・ボランティア・委員会活動", tags: ["leadership", "community", "social", "entrepreneurship"] },
+    ],
+  },
+  {
+    id: "q13",
+    category: "graduation_vision",
+    text: "大学を卒業したあと、どんな自分になっていたいですか？",
+    options: [
+      { value: "a", label: "専門職（医師・エンジニア・研究者など）として第一線で活躍している", tags: ["medical", "stem", "engineering", "tech"] },
+      { value: "b", label: "起業・ベンチャーで社会に新しい価値を生み出している", tags: ["entrepreneurship", "innovation", "business", "leadership"] },
+      { value: "c", label: "海外を舞台に、グローバルな仕事をしている", tags: ["global", "international", "english", "language"] },
+      { value: "d", label: "地元・地域で、人や社会の役に立つ仕事をしている", tags: ["community", "welfare", "social", "kyushu"] },
+    ],
+  },
+  {
+    id: "q14",
+    category: "campus_life",
+    text: "大学生活で一番大切にしたいことはどれですか？",
+    options: [
+      { value: "a", label: "留学・国際交流の機会が豊富な環境", tags: ["global", "international", "english"] },
+      { value: "b", label: "研究室・ゼミで専門を深く掘り下げる", tags: ["stem", "tech", "engineering", "humanities"] },
+      { value: "c", label: "サークル・課外活動で多様な人と繋がる", tags: ["collaborative", "leadership", "community", "interdisciplinary"] },
+      { value: "d", label: "資格取得・就職に向けた実践的なスキルを身につける", tags: ["business", "practical", "entrepreneurship"] },
+    ],
+  },
+  {
+    id: "q15",
+    category: "info_gathering",
+    text: "気になることを調べるとき、どんな方法が一番しっくりきますか？",
+    options: [
+      { value: "a", label: "本・論文・ニュース記事など文字情報を読む", tags: ["humanities", "stem", "interdisciplinary"] },
+      { value: "b", label: "動画・SNS・YouTubeで視覚的に情報収集する", tags: ["innovation", "interdisciplinary", "global"] },
+      { value: "c", label: "実際に現場に足を運んだり、人に話を聞く", tags: ["community", "fieldwork", "welfare", "social"] },
+      { value: "d", label: "データ・統計・グラフで数値から分析する", tags: ["stem", "tech", "engineering", "math"] },
     ],
   },
 ];

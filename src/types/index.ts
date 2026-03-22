@@ -17,15 +17,33 @@ export interface QuizOption {
 }
 
 export type QuizCategory =
-  | "interest"       // 興味分野
-  | "career"         // 将来の目標
-  | "learning"       // 学び方の好み
-  | "personality"    // 性格・行動特性
-  | "activity"       // 高校での活動
-  | "academic"       // 学力・評定
-  | "location"       // 地域志向
-  | "school_type"    // 国公立/私立
-  | "finance";       // 学費・通学
+  | "interest"          // 興味分野
+  | "career"            // 将来の目標
+  | "learning"          // 学び方の好み
+  | "personality"       // 性格・行動特性
+  | "activity"          // 高校での活動
+  | "academic"          // 学力・評定
+  | "location"          // 地域志向
+  | "school_type"       // 国公立/私立
+  | "finance"           // 学費・通学
+  | "subject"           // 得意科目
+  | "club"              // 部活の種類
+  | "graduation_vision" // 卒業後のなりたい姿
+  | "campus_life"       // 大学生活に求めること
+  | "info_gathering";   // 情報収集の好み
+
+/** ユーザータイプ */
+export type UserType = "global" | "stem" | "community" | "business" | "culture";
+
+export interface UserTypeInfo {
+  type: UserType;
+  label: string;
+  icon: string;
+  color: string;
+  bgColor: string;
+  description: string;
+  traits: string[];
+}
 
 /** 診断の回答セット */
 export type QuizAnswers = Record<string, string>;
@@ -63,6 +81,12 @@ export interface MatchResult {
   matchReasons: string[];  // おすすめ理由
   readinessLevel: "高" | "中" | "低"; // 準備度
   requiredActions: string[]; // 出願までに必要な行動
+}
+
+/** generateMatchResults の戻り値 */
+export interface DiagnosisResult {
+  matchResults: MatchResult[];
+  userType: UserTypeInfo;
 }
 
 /** メンター（先輩大学生）データ */
