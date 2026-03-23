@@ -91,9 +91,9 @@ export interface University {
   matchTags: string[];    // マッチングタグ
   links: UniversityLinks;
   mentorCount: number;    // 相談可能な先輩数
-  hensachi: number;       // 一般入試の偏差値目安
-  hensachiRange: "最難関" | "難関" | "中堅上位" | "中堅" | "挑戦しやすい"; // 偏差値帯（最難関:70以上 難関:65〜69 中堅上位:60〜64 中堅:55〜59 挑戦しやすい:54以下）
-  sougouAdmission: SougouAdmission; // 総合型選抜情報
+  hensachi?: number;       // 一般入試の偏差値目安
+  hensachiRange?: "最難関" | "難関" | "中堅上位" | "中堅" | "挑戦しやすい"; // 偏差値帯（最難関:70以上 難関:65〜69 中堅上位:60〜64 中堅:55〜59 挑戦しやすい:54以下）
+  sougouAdmission?: SougouAdmission; // 総合型選抜情報
 }
 
 export interface UniversityLinks {
