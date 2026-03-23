@@ -8,6 +8,7 @@ import Footer from "@/components/layout/Footer";
 import UniversityCard from "@/components/university/UniversityCard";
 import { generateMatchResults } from "@/lib/matchingEngine";
 import { MatchResult, QuizAnswers, UserTypeInfo } from "@/types";
+import type { AiAnalysisResponse } from "@/app/api/ai-analysis/route";
 
 // ユーザータイプごとのカラー（ライト版）
 const typeGradients: Record<string, string> = {
@@ -35,6 +36,12 @@ function ResultContent() {
   const [userType, setUserType] = useState<UserTypeInfo | null>(null);
   const [savedIds, setSavedIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const [rawAnswers, setRawAnswers] = useState<QuizAnswers>({});
+
+  // AI分析
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiResult, setAiResult] = useState<AiAnalysisResponse | null>(null);
+  const [aiError, setAiError] = useState<string | null>(null);
 
   useEffect(() => {
     const raw = searchParams.get("answers");
@@ -42,10 +49,11 @@ function ResultContent() {
       try {
         const saved = localStorage.getItem("sougo_navi_result");
         if (saved) {
-          const { matchResults, userType } = JSON.parse(saved);
+          const { matchResults, userType, answers: savedAnswers } = JSON.parse(saved);
           if (matchResults?.length) {
             setResults(matchResults);
             setUserType(userType);
+            if (savedAnswers) setRawAnswers(savedAnswers);
           }
         }
       } catch (e) {
@@ -60,6 +68,7 @@ function ResultContent() {
       const { matchResults: matched, userType: type } = generateMatchResults(answers, region);
       setResults(matched);
       setUserType(type);
+      setRawAnswers(answers);
       localStorage.setItem("sougo_navi_result", JSON.stringify({
         matchResults: matched, userType: type, answers, savedAt: new Date().toISOString(),
       }));
@@ -71,6 +80,36 @@ function ResultContent() {
 
   const handleSave = (id: string) => {
     setSavedIds((prev) => prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]);
+  };
+
+  const handleAiAnalysis = async () => {
+    if (!results.length || !userType) return;
+    setAiLoading(true);
+    setAiError(null);
+    setAiResult(null);
+    try {
+      const top = results[0];
+      const res = await fetch("/api/ai-analysis", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          answers: rawAnswers,
+          userTypeLabel: userType.label,
+          topUniversityName: top.university.name,
+          topFaculty: top.university.faculty,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setAiError(data.error ?? "分析中にエラーが発生しました");
+      } else {
+        setAiResult(data as AiAnalysisResponse);
+      }
+    } catch {
+      setAiError("ネットワークエラーが発生しました。もう一度お試しください");
+    } finally {
+      setAiLoading(false);
+    }
   };
 
   /* ローディング */
@@ -204,6 +243,87 @@ function ResultContent() {
             </li>
           ))}
         </ul>
+      </div>
+
+      {/* AIによる詳細分析セクション */}
+      <div className="mb-6">
+        {/* ボタン */}
+        {!aiResult && (
+          <button
+            onClick={handleAiAnalysis}
+            disabled={aiLoading}
+            className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl font-bold text-sm
+              bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md shadow-indigo-200/60
+              hover:from-violet-700 hover:to-indigo-700 active:scale-[.98] transition-all
+              disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            {aiLoading ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                AIが分析中…
+              </>
+            ) : (
+              <>
+                <span className="text-lg">✨</span>
+                AIが詳しく分析する
+              </>
+            )}
+          </button>
+        )}
+
+        {/* エラー表示 */}
+        {aiError && (
+          <div className="mt-3 bg-red-50 border border-red-200 rounded-xl p-3 text-xs text-red-600">
+            ⚠️ {aiError}
+          </div>
+        )}
+
+        {/* 分析結果カード */}
+        {aiResult && (
+          <div className="bg-gradient-to-br from-violet-50 to-indigo-50 border border-violet-200 rounded-2xl p-5">
+            {/* ヘッダー */}
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-xl">✨</span>
+              <h2 className="font-mincho font-bold text-slate-800 text-base">AIによる詳細分析</h2>
+            </div>
+
+            {/* タイプ一言表現 */}
+            <div className="bg-white rounded-xl px-4 py-3 mb-4 border border-violet-100">
+              <p className="text-xs font-bold text-violet-500 mb-1">あなたのタイプ</p>
+              <p className="font-mincho font-bold text-slate-800 text-base">
+                💡 {aiResult.oneLiner}
+              </p>
+            </div>
+
+            {/* 合う大学・学部の特徴 */}
+            <div className="mb-4">
+              <p className="text-xs font-bold text-slate-500 mb-2">あなたに合う大学・学部の特徴</p>
+              <p className="text-sm text-slate-600 leading-relaxed bg-white rounded-xl p-3 border border-violet-100">
+                {aiResult.features}
+              </p>
+            </div>
+
+            {/* 今すぐ始めるべき3つのアクション */}
+            <div className="mb-4">
+              <p className="text-xs font-bold text-slate-500 mb-2">今すぐ始めるべき3つのアクション</p>
+              <ul className="space-y-2">
+                {aiResult.actions.map((action, i) => (
+                  <li key={i} className="flex items-start gap-2.5 bg-white rounded-xl p-3 border border-violet-100">
+                    <span className="shrink-0 w-5 h-5 rounded-full bg-violet-100 text-violet-600 text-xs font-black flex items-center justify-center mt-0.5">
+                      {i + 1}
+                    </span>
+                    <span className="text-sm text-slate-600 leading-relaxed">{action}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* 注意書き */}
+            <p className="text-xs text-slate-400 text-center leading-relaxed">
+              ⚠️ この分析はAIによる参考情報です。合格を保証するものではありません。
+            </p>
+          </div>
+        )}
       </div>
 
       {/* CTAボタン群 */}
