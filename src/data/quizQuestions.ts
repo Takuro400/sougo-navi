@@ -173,4 +173,26 @@ export const quizQuestions: QuizQuestion[] = [
       { value: "d", label: "データ・統計・グラフで数値から分析する", tags: ["stem", "tech", "engineering", "math"] },
     ],
   },
+  {
+    id: "q16",
+    category: "subject",
+    text: "得意な科目・好きな勉強はどちらですか？",
+    options: [
+      { value: "a", label: "数学・理科が得意", tags: ["stem", "math", "engineering", "tech"] },
+      { value: "b", label: "国語・社会・英語が得意", tags: ["humanities", "language", "culture", "social"] },
+      { value: "c", label: "どちらも同じくらい", tags: ["interdisciplinary", "innovation"] },
+      { value: "d", label: "まだよくわからない", tags: ["interdisciplinary"] },
+    ],
+  },
+  {
+    id: "q17",
+    category: "interest",
+    text: "将来学びたい分野はどれに近いですか？",
+    options: [
+      { value: "a", label: "経済・経営・法律", tags: ["business", "career-focused", "leadership", "entrepreneurship"] },
+      { value: "b", label: "文学・語学・国際", tags: ["culture", "humanities", "language", "global", "international"] },
+      { value: "c", label: "理工・情報・工学", tags: ["stem", "tech", "engineering", "math"] },
+      { value: "d", label: "医療・福祉・生命科学", tags: ["medical", "welfare", "medicine", "community"] },
+    ],
+  },
 ];
