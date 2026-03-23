@@ -213,6 +213,44 @@ export default function UniversityDetailPage() {
           </div>
         )}
 
+        {/* オープンキャンパス */}
+        {university.openCampusEvents && university.openCampusEvents.length > 0 && (
+          <div className="card">
+            <h2 className="font-mincho font-bold text-slate-800 mb-3 flex items-center gap-2">
+              <span className="text-emerald-500">🎪</span> オープンキャンパス情報
+            </h2>
+            <div className="space-y-3">
+              {university.openCampusEvents.map((ev, i) => (
+                <div key={i} className="bg-emerald-50/60 border border-emerald-200 rounded-xl p-4">
+                  <div className="flex items-start justify-between gap-2 mb-2">
+                    <div>
+                      <p className="font-bold text-slate-800 text-sm">{ev.title}</p>
+                      <p className="text-sm text-slate-600 mt-0.5">📅 {ev.date}</p>
+                    </div>
+                    <span className={`shrink-0 badge font-bold ${ev.isOnline ? "bg-blue-100 text-blue-700 border border-blue-200" : "bg-emerald-100 text-emerald-700 border border-emerald-200"}`}>
+                      {ev.isOnline ? "オンライン" : "対面"}
+                    </span>
+                  </div>
+                  {ev.note && (
+                    <p className="text-xs text-slate-500 mb-3">📝 {ev.note}</p>
+                  )}
+                  <a
+                    href={ev.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-700 bg-white border border-emerald-200 px-4 py-2 rounded-xl hover:bg-emerald-50 transition-colors"
+                  >
+                    詳細・予約はこちら →
+                  </a>
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-slate-400 mt-3">
+              ⚠️ 日程は変更になる場合があります。必ず公式サイトでご確認ください。
+            </p>
+          </div>
+        )}
+
         {/* 必要になりそうな活動 */}
         <div className="card">
           <h2 className="font-mincho font-bold text-slate-800 mb-3 flex items-center gap-2">

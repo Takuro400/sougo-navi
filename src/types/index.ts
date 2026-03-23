@@ -62,6 +62,15 @@ export type MajorField =
   | "教育"
   | "国際";
 
+/** オープンキャンパス情報 */
+export interface OpenCampusEvent {
+  date: string;       // 例："2025年8月3日（日）"
+  title: string;      // 例："夏のオープンキャンパス2025"
+  url: string;        // 公式サイトURL
+  isOnline: boolean;  // オンライン開催か
+  note: string;       // 例："要予約・先着300名"
+}
+
 /** 総合型選抜情報 */
 export interface SougouAdmission {
   available: boolean;           // 総合型選抜があるか
@@ -94,6 +103,7 @@ export interface University {
   hensachi?: number;       // 一般入試の偏差値目安
   hensachiRange?: "最難関" | "難関" | "中堅上位" | "中堅" | "挑戦しやすい"; // 偏差値帯（最難関:70以上 難関:65〜69 中堅上位:60〜64 中堅:55〜59 挑戦しやすい:54以下）
   sougouAdmission?: SougouAdmission; // 総合型選抜情報
+  openCampusEvents?: OpenCampusEvent[]; // オープンキャンパス情報
 }
 
 export interface UniversityLinks {
