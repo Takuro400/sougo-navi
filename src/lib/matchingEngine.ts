@@ -232,7 +232,7 @@ function calcReadinessLevel(
   score: number,
   answers: QuizAnswers
 ): "高" | "中" | "低" {
-  const academicAnswer = answers["q6"];
+  const academicAnswer = answers["q13"]; // q13: 今の偏差値帯（a=60以上, b=53〜59）
   const hasHighAcademic = academicAnswer === "a" || academicAnswer === "b";
   if (score >= 65 && hasHighAcademic) return "高";
   if (score >= 40) return "中";
