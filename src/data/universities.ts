@@ -314,6 +314,264 @@ export const universities: University[] = [
     },
     mentorCount: 2,
   },
+  // ===========================
+  // 北海道・東北
+  // ===========================
+  {
+    id: "hokkaido",
+    name: "北海道大学",
+    faculty: "文学部・理学部・工学部・農学部・医学部他",
+    department: "各学科",
+    region: "北海道",
+    prefecture: "北海道",
+    type: "国立",
+    description:
+      "札幌に本部を置く旧帝国大学。広大なキャンパスと豊かな自然環境の中で、農学・水産・環境・医学など幅広い分野の研究が盛ん。国際連携が活発でグローバル人材の育成にも力を入れている。総合型選抜では学問への深い探究心と主体的な学びの姿勢が問われる。",
+    features: ["旧帝大", "総合大学", "農学・環境が強い", "国立", "広大なキャンパス"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "特定の学問分野に強い探究心を持ち、広大な自然環境の中で主体的に研究・学習に取り組みたい学生。グローバルな視野も持つ人。",
+    requiredActivities: [
+      "志望分野に関する探究活動や自主研究",
+      "学外コンテスト・研究発表への参加",
+      "英語学習や国際交流の経験",
+    ],
+    matchTags: ["academic", "research", "agriculture", "environment", "national", "global", "stem", "prestigious"],
+    links: {
+      official: "https://www.hokudai.ac.jp/",
+      admissions: "https://www.hokudai.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%8C%97%E6%B5%B7%E9%81%93%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.hokudai.ac.jp/event/",
+    },
+    mentorCount: 4,
+  },
+  {
+    id: "tohoku",
+    name: "東北大学",
+    faculty: "文学部・理学部・工学部・医学部・農学部他",
+    department: "各学科",
+    region: "東北",
+    prefecture: "宮城県",
+    type: "国立",
+    description:
+      "「研究第一」「門戸開放」「実学尊重」を建学の精神に掲げる旧帝国大学。理工系・医学系の研究水準が特に高く、世界トップレベルの研究機関として知られる。総合型選抜（AO入試）の先駆け的存在で、学力だけでなく個性・意欲を重視した選考が特徴。",
+    features: ["旧帝大", "研究力トップレベル", "AO入試の先駆け", "国立", "理工・医学が強い"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "研究・探究活動に強い情熱を持ち、自ら課題を設定して取り組める学生。学力だけでなく、個性や意欲・体験を持ち合わせた人。",
+    requiredActivities: [
+      "自主研究・探究活動の実績（レポート・論文など）",
+      "科学系コンテストや発表会への参加",
+      "志望分野に関する深い学習と言語化",
+    ],
+    matchTags: ["academic", "research", "stem", "medicine", "national", "prestigious", "innovation", "hands-on"],
+    links: {
+      official: "https://www.tohoku.ac.jp/",
+      admissions: "https://www.tohoku.ac.jp/japanese/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E6%9D%B1%E5%8C%97%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.tohoku.ac.jp/japanese/event/",
+    },
+    mentorCount: 5,
+  },
+  {
+    id: "otaru_shoka",
+    name: "小樽商科大学",
+    faculty: "商学部",
+    department: "各学科",
+    region: "北海道",
+    prefecture: "北海道",
+    type: "国立",
+    description:
+      "商学・経営・経済に特化した国立大学。少人数で専門性の高い教育が受けられ、ビジネス・会計・情報システムなど実践的なカリキュラムが充実。学生と教員の距離が近く、就職支援も手厚い。北海道内外から商学を学びたい学生が集まる。",
+    features: ["商学特化", "少人数教育", "高い就職実績", "国立", "コスパが高い"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "ビジネス・経営・会計・経済に明確な関心を持ち、専門性を高めてキャリアに活かしたいと考える学生。",
+    requiredActivities: [
+      "ビジネスコンテストや経済系の課外活動への参加",
+      "簿記・ITパスポートなど関連資格の取得",
+      "志望理由を具体的に言語化する練習",
+    ],
+    matchTags: ["business", "academic", "career-focused", "national", "leadership", "entrepreneurship", "math"],
+    links: {
+      official: "https://www.otaru-uc.ac.jp/",
+      admissions: "https://www.otaru-uc.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%B0%8F%E6%A8%BD%E5%95%86%E7%A7%91%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.otaru-uc.ac.jp/event/",
+    },
+    mentorCount: 2,
+  },
+  {
+    id: "sapporo_city",
+    name: "札幌市立大学",
+    faculty: "デザイン学部・看護学部",
+    department: "各学科",
+    region: "北海道",
+    prefecture: "北海道",
+    type: "公立",
+    description:
+      "デザインと看護の2学部を擁する札幌市の公立大学。デザイン学部では社会課題をデザインで解決する実践的な教育が特徴で、プロダクト・コミュニケーション・環境デザインなど幅広い領域を学べる。少人数制で学生一人ひとりへのサポートが充実している。",
+    features: ["デザイン特化", "看護学部", "少人数教育", "公立", "実践的なカリキュラム"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "デザインや医療・看護に強い関心を持ち、実践的な制作・実習を通じて専門スキルを身につけたい学生。",
+    requiredActivities: [
+      "デザイン・アート作品の制作やポートフォリオの作成",
+      "医療・福祉ボランティアや看護体験",
+      "社会課題への関心をデザインや看護と結びつけて言語化する",
+    ],
+    matchTags: ["design", "arts", "welfare", "community", "hands-on", "creative", "medicine", "local"],
+    links: {
+      official: "https://www.scu.ac.jp/",
+      admissions: "https://www.scu.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E6%9C%AD%E5%B9%8C%E5%B8%82%E7%AB%8B%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.scu.ac.jp/event/",
+    },
+    mentorCount: 1,
+  },
+  // ===========================
+  // 中部・北陸
+  // ===========================
+  {
+    id: "nagoya",
+    name: "名古屋大学",
+    faculty: "文学部・理学部・工学部・医学部・農学部他",
+    department: "各学科",
+    region: "中部",
+    prefecture: "愛知県",
+    type: "国立",
+    description:
+      "中部地方を代表する旧帝国大学。ノーベル賞受賞者を多数輩出した研究環境が世界的に有名で、特に理工系・医学系の研究水準は国内トップクラス。「自由闊達」な学風のもと、学生の主体的な探究を重視している。総合型選抜では学問への深い関心と探究実績が問われる。",
+    features: ["旧帝大", "ノーベル賞輩出", "研究力が高い", "国立", "理工・医学が強い"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "科学・研究に強い情熱を持ち、自ら問いを立てて探究できる学生。特定の学問分野に深くのめり込んだ経験がある人。",
+    requiredActivities: [
+      "志望分野に関する自主研究・探究活動",
+      "科学系コンテストや論文発表への参加",
+      "高い学業成績と明確な学習動機の言語化",
+    ],
+    matchTags: ["academic", "research", "stem", "medicine", "national", "prestigious", "innovation", "math"],
+    links: {
+      official: "https://www.nagoya-u.ac.jp/",
+      admissions: "https://www.nagoya-u.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.nagoya-u.ac.jp/event/",
+    },
+    mentorCount: 4,
+  },
+  {
+    id: "kanazawa",
+    name: "金沢大学",
+    faculty: "人間社会学域・理工学域・医薬保健学域",
+    department: "各学科",
+    region: "北陸",
+    prefecture: "石川県",
+    type: "国立",
+    description:
+      "北陸を代表する国立総合大学。医薬保健・理工・人文社会の3学域制を採用し、学際的な学びを推進している。金沢という文化・歴史の豊かな地にあり、伝統と先端研究が融合したユニークな環境が特徴。総合型選抜では主体的な学びの姿勢と探究心が重視される。",
+    features: ["総合大学", "医薬保健が強い", "3学域制", "国立", "文化・歴史豊かな立地"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "特定の分野に強い関心を持ちながら、異分野にも好奇心を持って学べる学生。地域・文化・社会への関心も持つ人。",
+    requiredActivities: [
+      "志望分野に関する探究活動や自主学習",
+      "地域・社会課題への関心を示す活動",
+      "志望理由を具体的に深める読書・調査",
+    ],
+    matchTags: ["academic", "research", "medicine", "national", "interdisciplinary", "community", "culture"],
+    links: {
+      official: "https://www.kanazawa-u.ac.jp/",
+      admissions: "https://www.kanazawa-u.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E9%87%91%E6%B2%A2%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.kanazawa-u.ac.jp/event/",
+    },
+    mentorCount: 2,
+  },
+  {
+    id: "toyama",
+    name: "富山大学",
+    faculty: "人文学部・教育学部・理学部・工学部・医学部・薬学部他",
+    department: "各学科",
+    region: "北陸",
+    prefecture: "富山県",
+    type: "国立",
+    description:
+      "薬学部・医学部を擁し、医薬系の研究・教育が特に充実した北陸の国立総合大学。漢方・和漢薬研究の分野では国内トップクラスの実績を持つ。豊かな自然環境と住みやすい地域性のなか、落ち着いた環境で専門を深められる。",
+    features: ["薬学・医学が強い", "和漢薬研究", "総合大学", "国立", "穏やかな環境"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "医薬・理工・教育などの分野に強い関心を持ち、落ち着いた環境で専門性を深めたい学生。地域医療や自然科学への興味がある人。",
+    requiredActivities: [
+      "医療・薬学・理科に関するボランティアや体験活動",
+      "志望分野に関する自主学習や探究活動",
+      "地域課題や自然環境に関する取り組み",
+    ],
+    matchTags: ["medicine", "research", "science", "national", "community", "local", "hands-on", "welfare"],
+    links: {
+      official: "https://www.u-toyama.ac.jp/",
+      admissions: "https://www.u-toyama.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%AF%8C%E5%B1%B1%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.u-toyama.ac.jp/event/",
+    },
+    mentorCount: 1,
+  },
+  {
+    id: "shizuoka",
+    name: "静岡大学",
+    faculty: "人文社会科学部・教育学部・理学部・工学部・農学部・情報学部他",
+    department: "各学科",
+    region: "中部",
+    prefecture: "静岡県",
+    type: "国立",
+    description:
+      "情報学部を全国に先駆けて設置した中部の国立総合大学。農学・理工・情報系の研究が充実しており、産学連携も盛ん。温暖な気候と豊かな自然環境の中で、幅広い分野をバランスよく学べる。総合型選抜では主体的な学びの実績と明確な志望動機が求められる。",
+    features: ["情報学部が先進的", "農学・理工系", "産学連携", "国立", "温暖な環境"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "情報・理工・農学などの分野に関心を持ち、実践的な学びや産業との連携に興味がある学生。",
+    requiredActivities: [
+      "情報・理工・農業に関する探究活動や作品制作",
+      "プログラミングや実験などの自主的な取り組み",
+      "インターンシップや職場体験の経験",
+    ],
+    matchTags: ["tech", "stem", "agriculture", "engineering", "national", "hands-on", "innovation", "research"],
+    links: {
+      official: "https://www.shizuoka.ac.jp/",
+      admissions: "https://www.shizuoka.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E9%9D%99%E5%B2%A1%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.shizuoka.ac.jp/event/",
+    },
+    mentorCount: 2,
+  },
+  {
+    id: "nanzan",
+    name: "南山大学",
+    faculty: "人文学部・外国語学部・経済学部・経営学部・法学部・理工学部・国際教養学部他",
+    department: "各学科",
+    region: "中部",
+    prefecture: "愛知県",
+    type: "私立",
+    description:
+      "カトリック精神に基づく教育を行う名古屋の伝統的私立大学。外国語教育・国際交流に特に力を入れており、英語をはじめ多言語教育が充実。中部地区の私立大学の中でもトップクラスの評価を受けており、文系から理系・国際系まで幅広い学部を持つ。",
+    features: ["外国語・国際交流が強い", "カトリック系", "中部トップ私大", "私立", "多言語教育"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "語学や国際交流に強い関心を持ち、多文化環境の中でグローバルな視野を身につけたい学生。",
+    requiredActivities: [
+      "英語・外国語学習や語学検定の取得（英検・TOEIC等）",
+      "国際交流・異文化体験の経験",
+      "ボランティアやリーダーシップ活動の実績",
+    ],
+    matchTags: ["global", "english", "humanities", "private", "international", "culture", "leadership", "language"],
+    links: {
+      official: "https://www.nanzan-u.ac.jp/",
+      admissions: "https://www.nanzan-u.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%8D%97%E5%B1%B1%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.nanzan-u.ac.jp/event/",
+    },
+    mentorCount: 2,
+  },
 ];
 
 /** IDで大学を取得 */
