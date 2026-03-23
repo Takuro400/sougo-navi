@@ -31,6 +31,7 @@ const config: Config = {
       fontFamily: {
         sans:    ["'Noto Sans JP'", "sans-serif"],
         display: ["'Zen Kaku Gothic New'", "sans-serif"],
+        mincho:  ["'Noto Serif JP'", "serif"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
