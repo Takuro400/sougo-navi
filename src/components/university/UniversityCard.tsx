@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function UniversityCard({ result, rank, isSaved, onSave }: Props) {
-  const { university: univ, score, matchReasons, readinessLevel } = result;
+  const { university: univ, score, matchReasons, readinessLevel, aiComment } = result;
   const [compareIds, setCompareIds] = useState<string[]>([]);
 
   useEffect(() => {
@@ -121,6 +121,14 @@ export default function UniversityCard({ result, rank, isSaved, onSave }: Props)
       <div className="mb-4">
         <ScoreBadge score={score} />
       </div>
+
+      {/* AIコメント（AIマッチング時のみ表示） */}
+      {aiComment && (
+        <div className="mb-4 bg-gradient-to-r from-violet-50 to-indigo-50 border border-violet-200 rounded-xl px-4 py-3">
+          <p className="text-xs font-bold text-violet-500 mb-1">✨ AIからの一言</p>
+          <p className="text-sm text-slate-700 leading-relaxed">{aiComment}</p>
+        </div>
+      )}
 
       {/* おすすめ理由 */}
       <div className="mb-5 space-y-2">

@@ -121,6 +121,7 @@ export interface MatchResult {
   readinessLevel: "高" | "中" | "低"; // 準備度
   requiredActions: string[]; // 出願までに必要な行動
   userType: UserTypeInfo;  // 判定されたユーザータイプ
+  aiComment?: string;      // AIによる一言コメント（AIマッチング時のみ）
 }
 
 /** generateMatchResults の戻り値 */

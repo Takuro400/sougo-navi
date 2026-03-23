@@ -1,229 +1,237 @@
 import { QuizQuestion } from "@/types";
 
 // ===========================
-// 診断質問データ（15問）
-// 順番：答えやすい具体的な行動ベース → 深い価値観・ビジョン系
+// 診断質問データ（15問・5軸設計）
+// 軸①何を学びたいか (Q1-Q3)
+// 軸②どう学びたいか (Q4-Q6)
+// 軸③どこで・どんな環境で学びたいか (Q7-Q9)
+// 軸④卒業後どうなりたいか (Q10-Q12)
+// 軸⑤今の自分の状況 (Q13-Q15)
 // ===========================
 
 export const quizQuestions: QuizQuestion[] = [
-  // ── ① 答えやすい・具体的な行動ベース（Q1〜Q5）──────────────────
+
+  // ── 軸①：何を学びたいか（Q1〜Q3）──────────────────────────────
+
   {
     id: "q1",
     category: "interest",
-    text: "自由な休日、気づいたら自然にやっていることに一番近いのは？",
+    text: "学校の授業や勉強の中で、一番「面白い・好き」と感じる科目・分野は？",
     options: [
       {
         value: "a",
-        label: "パソコンやスマホで何かを作ったり、仕組みを調べている（プログラム・ゲーム・DIYなど）",
-        tags: ["tech", "stem", "engineering", "hands-on"],
-      },
-      {
-        value: "b",
-        label: "SNSやニュースでビジネス・社会の動きをチェックしたり、アイデアを考えている",
-        tags: ["business", "entrepreneurship", "innovation", "leadership"],
-      },
-      {
-        value: "c",
-        label: "友達と出かけたり、地域のイベント・ボランティアに顔を出している",
-        tags: ["community", "social", "collaborative", "fieldwork"],
-      },
-      {
-        value: "d",
-        label: "本・映画・音楽・アートなど文化的なコンテンツに触れてゆっくり過ごしている",
-        tags: ["humanities", "culture", "interdisciplinary", "language"],
-      },
-    ],
-  },
-  {
-    id: "q2",
-    category: "personality",
-    text: "友達や周囲から「あなたに頼みたい」「向いてそう」と言われることは？",
-    options: [
-      {
-        value: "a",
-        label: "調べ物・データ整理・パソコンや機械のトラブル対応",
-        tags: ["tech", "stem", "engineering", "math"],
-      },
-      {
-        value: "b",
-        label: "計画を立てること・みんなをまとめること・企画を仕切ること",
-        tags: ["leadership", "entrepreneurship", "business", "collaborative"],
-      },
-      {
-        value: "c",
-        label: "悩みを聞くこと・人と人をつなぐこと・気持ちに寄り添うこと",
-        tags: ["welfare", "community", "social", "collaborative"],
-      },
-      {
-        value: "d",
-        label: "英語の翻訳・海外のこと・異文化の話をすること",
-        tags: ["global", "international", "english", "language"],
-      },
-    ],
-  },
-  {
-    id: "q3",
-    category: "subject",
-    text: "学校の授業で「楽しい」「得意」と感じるのはどれですか？",
-    options: [
-      {
-        value: "a",
-        label: "数学・物理・化学・情報（理系科目）",
+        label: "数学・物理・化学・情報など理系科目（論理や仕組みを考えるのが好き）",
         tags: ["stem", "tech", "engineering", "math"],
       },
       {
         value: "b",
-        label: "英語・外国語（読む・話す・書く全般）",
+        label: "英語・世界史・地理など語学・国際系の科目（外の世界に興味がある）",
         tags: ["global", "international", "english", "language"],
       },
       {
         value: "c",
-        label: "国語・歴史・倫理・現代社会（文系科目）",
-        tags: ["humanities", "culture", "social", "interdisciplinary"],
+        label: "国語・倫理・歴史・現代文など文系科目（言葉や人間・社会を深く考えるのが好き）",
+        tags: ["humanities", "culture", "interdisciplinary", "social"],
       },
       {
         value: "d",
-        label: "体育・芸術・音楽・家庭・情報実習（実技系）",
+        label: "体育・家庭科・芸術・音楽など実技系科目（体を動かしたり作ったりするのが好き）",
         tags: ["hands-on", "practical", "community", "welfare"],
       },
     ],
   },
   {
-    id: "q4",
-    category: "info_gathering",
-    text: "YouTubeや本で「つい見てしまう・読んでしまう」コンテンツのジャンルは？",
+    id: "q2",
+    category: "career",
+    text: "将来、社会のどんな問題・課題を解決したいと思いますか？",
     options: [
       {
         value: "a",
-        label: "テック・AI・プログラミング・科学・宇宙系",
-        tags: ["tech", "stem", "engineering", "innovation"],
+        label: "気候変動・エネルギー・AI・テクノロジーなど地球規模の問題を科学や技術で解決したい",
+        tags: ["stem", "engineering", "global", "innovation"],
       },
       {
         value: "b",
-        label: "ビジネス・起業家・自己啓発・社会の仕組みを変える話",
-        tags: ["business", "entrepreneurship", "leadership", "innovation"],
+        label: "地域の過疎化・若者が戻れる町づくり・地元の経済や文化を守る活動に関わりたい",
+        tags: ["community", "social", "kyushu", "fieldwork"],
       },
       {
         value: "c",
-        label: "社会問題・環境・ドキュメンタリー・地域の取り組み",
-        tags: ["community", "social", "welfare", "fieldwork"],
+        label: "医療格差・高齢化・子どもの貧困など、身近な社会的弱者を支える仕組みを作りたい",
+        tags: ["welfare", "medical", "community", "social"],
       },
       {
         value: "d",
-        label: "旅行・異文化・語学学習・海外の暮らし・グローバルな話題",
-        tags: ["global", "international", "english", "culture"],
+        label: "ビジネスや起業で新しい価値を生み出し、経済・産業・社会の仕組みを変えたい",
+        tags: ["business", "entrepreneurship", "innovation", "leadership"],
+      },
+    ],
+  },
+  {
+    id: "q3",
+    category: "campus_life",
+    text: "大学の4年間で、これだけは絶対やってみたいと思うことは？",
+    options: [
+      {
+        value: "a",
+        label: "海外留学・国際交流プログラム・外国人と一緒に学ぶ環境に飛び込む",
+        tags: ["global", "international", "english", "language"],
+      },
+      {
+        value: "b",
+        label: "研究室で専門的な実験・研究・論文執筆に取り組み、学問の最前線に触れる",
+        tags: ["stem", "tech", "engineering", "innovation"],
+      },
+      {
+        value: "c",
+        label: "インターンシップ・学生起業・社会課題解決プロジェクトに挑戦する",
+        tags: ["business", "entrepreneurship", "leadership", "practical"],
+      },
+      {
+        value: "d",
+        label: "ボランティア・地域連携・NPO活動など、現場で人や社会の役に立つ経験を積む",
+        tags: ["community", "welfare", "social", "fieldwork"],
+      },
+    ],
+  },
+
+  // ── 軸②：どう学びたいか（Q4〜Q6）──────────────────────────────
+
+  {
+    id: "q4",
+    category: "learning",
+    text: "新しいことを学ぶとき、一番「自分に合う」と感じる勉強スタイルは？",
+    options: [
+      {
+        value: "a",
+        label: "実験・実習・手を動かして試行錯誤しながら体験的に学ぶ",
+        tags: ["hands-on", "practical", "stem", "engineering"],
+      },
+      {
+        value: "b",
+        label: "グループでのディスカッション・発表・議論を通じて理解を深める",
+        tags: ["business", "collaborative", "leadership", "entrepreneurship"],
+      },
+      {
+        value: "c",
+        label: "現場に出てフィールドワーク・インタビュー・観察から学ぶ",
+        tags: ["fieldwork", "community", "social", "welfare"],
+      },
+      {
+        value: "d",
+        label: "一人で本や論文を読み込み、じっくり考えながら理解を積み上げる",
+        tags: ["humanities", "interdisciplinary", "culture", "tech"],
       },
     ],
   },
   {
     id: "q5",
-    category: "activity",
-    text: "高校で一番力を入れた（またはこれから入れたい）活動は？",
+    category: "personality",
+    text: "グループ作業と一人作業、あなたはどちらが得意（または好き）ですか？",
     options: [
       {
         value: "a",
-        label: "スポーツ・音楽・演劇など競技・発表系の部活動",
-        tags: ["hands-on", "collaborative", "leadership", "practical"],
+        label: "グループが得意・みんなで協力してひとつのものを作り上げるのが好き",
+        tags: ["collaborative", "community", "business", "social"],
       },
       {
         value: "b",
-        label: "プログラミング・ロボット・科学研究・探究活動",
-        tags: ["tech", "stem", "engineering", "innovation"],
+        label: "リーダーとしてチームを引っ張ったり、プロジェクトを仕切るのが好き",
+        tags: ["leadership", "entrepreneurship", "business", "innovation"],
       },
       {
         value: "c",
-        label: "ボランティア・地域活動・国際交流・環境活動",
-        tags: ["community", "welfare", "social", "global"],
+        label: "一人で黙々と作業・研究・制作に集中するのが得意",
+        tags: ["stem", "tech", "engineering", "humanities"],
       },
       {
         value: "d",
-        label: "生徒会・学校行事の企画・部活や委員会のリーダー",
-        tags: ["leadership", "entrepreneurship", "business", "collaborative"],
+        label: "どちらでもOK・状況や役割に合わせて柔軟に動ける",
+        tags: ["interdisciplinary", "global", "practical", "collaborative"],
+      },
+    ],
+  },
+  {
+    id: "q6",
+    category: "personality",
+    text: "何かに失敗したり、うまくいかなかったとき、あなたはどう対処しますか？",
+    options: [
+      {
+        value: "a",
+        label: "失敗の原因をデータや事実で分析して、論理的に次の改善策を考える",
+        tags: ["stem", "tech", "engineering", "math"],
+      },
+      {
+        value: "b",
+        label: "気持ちを素早く切り替えて、すぐに次の行動・チャレンジに移る",
+        tags: ["entrepreneurship", "leadership", "business", "innovation"],
+      },
+      {
+        value: "c",
+        label: "信頼できる人に相談し、周りの意見を聞きながら一緒に解決策を探す",
+        tags: ["community", "welfare", "social", "collaborative"],
+      },
+      {
+        value: "d",
+        label: "じっくり振り返り、自分なりの気づきや教訓を言葉にして整理する",
+        tags: ["humanities", "interdisciplinary", "culture", "global"],
       },
     ],
   },
 
-  // ── ② 中間・学習スタイル・条件系（Q6〜Q10）────────────────────
-  {
-    // ⚠️ このIDはmatchingEngine.ts（calcReadinessLevel）で参照されています
-    // a=high-academic, b=mid-high-academic の順序を変えないでください
-    id: "q6",
-    category: "academic",
-    text: "現在の成績・評定について率直に教えてください",
-    options: [
-      {
-        value: "a",
-        label: "評定平均4.0以上・成績は上位",
-        tags: ["high-academic"],
-      },
-      {
-        value: "b",
-        label: "評定平均3.5〜4.0・平均より上",
-        tags: ["mid-high-academic"],
-      },
-      {
-        value: "c",
-        label: "評定平均3.0〜3.5・平均的",
-        tags: ["mid-academic"],
-      },
-      {
-        value: "d",
-        label: "評定は気にしていない・得意なことに特化している",
-        tags: ["specialty-academic"],
-      },
-    ],
-  },
+  // ── 軸③：どこで・どんな環境で学びたいか（Q7〜Q9）──────────────
+
   {
     id: "q7",
-    category: "learning",
-    text: "新しいことを学ぶとき、一番「自分に合う」と感じる方法は？",
+    category: "campus_life",
+    text: "大学のキャンパスや学習環境として、一番魅力的だと思うのは？",
     options: [
       {
         value: "a",
-        label: "実際に手を動かし、試行錯誤しながら体験して身につける",
-        tags: ["hands-on", "practical", "stem", "engineering"],
+        label: "最新の研究設備・実験室・専門機器が充実した理系・研究重視の環境",
+        tags: ["stem", "tech", "engineering", "innovation"],
       },
       {
         value: "b",
-        label: "みんなでディスカッションし、意見をぶつけ合いながら深める",
-        tags: ["business", "collaborative", "entrepreneurship", "leadership"],
+        label: "留学生・外国人教員が多く、英語でも授業が受けられる国際的な環境",
+        tags: ["global", "international", "english", "language"],
       },
       {
         value: "c",
-        label: "現場に出て、実際の人や地域と関わりながら学ぶ",
-        tags: ["fieldwork", "community", "social", "welfare"],
+        label: "地域や企業・NPOとの連携が活発で、フィールドワークや実践活動が多い環境",
+        tags: ["community", "fieldwork", "social", "welfare"],
       },
       {
         value: "d",
-        label: "英語や海外の情報・視点を取り入れながら広く学ぶ",
-        tags: ["global", "international", "english", "language"],
+        label: "ビジネスコンテスト・インターン・起業支援など実践的なチャンスが多い環境",
+        tags: ["business", "entrepreneurship", "leadership", "practical"],
       },
     ],
   },
   {
     id: "q8",
-    category: "personality",
-    text: "困っている人を見かけたとき、自然と出てくる行動に一番近いのは？",
+    category: "location",
+    text: "大学を選ぶうえで、住む場所・地域についてどう考えていますか？",
     options: [
       {
         value: "a",
-        label: "すぐに声をかけて、直接助けに行く",
-        tags: ["welfare", "community", "social", "collaborative"],
+        label: "地元（九州・沖縄内）で学びたい・家から通える範囲を優先したい",
+        tags: ["kyushu", "local", "community", "national"],
       },
       {
         value: "b",
-        label: "状況を分析して、一番効率的な解決方法を考える",
-        tags: ["stem", "tech", "engineering", "math"],
+        label: "東京・大阪・名古屋などの大都市に出て、刺激的な環境で学びたい",
+        tags: ["nationwide", "business", "innovation", "leadership"],
       },
       {
         value: "c",
-        label: "仕組みや制度の問題だと感じ、根本から変えたいと思う",
-        tags: ["entrepreneurship", "innovation", "business", "leadership"],
+        label: "国内ならどこでもOK・学びの質や大学の環境を最優先に選びたい",
+        tags: ["nationwide", "stem", "global", "interdisciplinary"],
       },
       {
         value: "d",
-        label: "じっくり観察して、背景・文脈を理解しようとする",
-        tags: ["humanities", "interdisciplinary", "culture", "social"],
+        label: "海外への留学や、海外大学への進学も積極的に視野に入れている",
+        tags: ["global", "international", "english", "language"],
       },
     ],
   },
@@ -234,78 +242,79 @@ export const quizQuestions: QuizQuestion[] = [
     options: [
       {
         value: "a",
-        label: "国公立を第一志望にしたい",
-        tags: ["national", "public"],
+        label: "国公立大学を第一志望にしたい（学費・研究環境・ブランドを重視）",
+        tags: ["national", "public", "stem"],
       },
       {
         value: "b",
-        label: "国公立が希望だが、私立も視野に入れている",
+        label: "国公立が第一希望だが、私立の特色ある学部も視野に入れている",
         tags: ["national", "public", "private"],
       },
       {
         value: "c",
-        label: "私立でもよい・大学の特色や環境を重視して選びたい",
-        tags: ["private"],
+        label: "私立でもよい・大学の個性・専門性・キャンパスの雰囲気を重視したい",
+        tags: ["private", "business", "global"],
       },
       {
         value: "d",
-        label: "国公立・私立にこだわらず、自分に合う大学を選びたい",
-        tags: ["national", "public", "private"],
-      },
-    ],
-  },
-  {
-    id: "q10",
-    category: "finance",
-    text: "大学の学費や通学スタイルについて、優先したいのは？",
-    options: [
-      {
-        value: "a",
-        label: "学費をできるだけ抑えたい（奨学金も検討中）",
-        tags: ["national", "public", "kyushu"],
-      },
-      {
-        value: "b",
-        label: "一人暮らし可・費用より環境・大学の質を優先",
-        tags: ["nationwide", "private", "global"],
-      },
-      {
-        value: "c",
-        label: "自宅から通える範囲で選びたい",
-        tags: ["local", "kyushu"],
-      },
-      {
-        value: "d",
-        label: "費用よりも大学の充実度・サポート体制を最優先",
-        tags: ["private", "national", "global"],
+        label: "国公立・私立にこだわらず、自分に一番合う大学を総合的に選びたい",
+        tags: ["national", "public", "private", "interdisciplinary"],
       },
     ],
   },
 
-  // ── ③ 深い価値観・将来ビジョン系（Q11〜Q15）──────────────────
+  // ── 軸④：卒業後どうなりたいか（Q10〜Q12）──────────────────────
+
   {
-    id: "q11",
+    id: "q10",
     category: "graduation_vision",
     text: "10年後、どんな場面で活躍している自分を想像しますか？",
     options: [
       {
         value: "a",
-        label: "テクノロジー・研究・開発の最前線で革新的なプロダクトを作っている",
+        label: "AIや最先端テクノロジー・研究開発の現場で革新的なプロダクトを生み出している",
         tags: ["tech", "stem", "engineering", "innovation"],
       },
       {
         value: "b",
-        label: "起業・経営・ビジネスで組織や社会に新しい価値をもたらしている",
+        label: "起業家・経営者として自分のビジネスや組織を率い、社会に新しい価値を届けている",
         tags: ["business", "entrepreneurship", "leadership", "innovation"],
       },
       {
         value: "c",
-        label: "医療・福祉・教育の現場で、目の前の人の生活を支えている",
+        label: "医療・教育・福祉・地域の現場で、目の前の人の生活や人生を支えている",
         tags: ["welfare", "medical", "community", "social"],
       },
       {
         value: "d",
-        label: "海外を舞台に、グローバルな課題に取り組む仕事をしている",
+        label: "海外の組織・国際機関・グローバルなプロジェクトで世界を相手に仕事している",
+        tags: ["global", "international", "english", "language"],
+      },
+    ],
+  },
+  {
+    id: "q11",
+    category: "graduation_vision",
+    text: "卒業後、どんな場所・組織で働くイメージを持っていますか？",
+    options: [
+      {
+        value: "a",
+        label: "大企業・官公庁・研究機関など安定した組織で専門性を活かしたい",
+        tags: ["national", "public", "stem", "humanities"],
+      },
+      {
+        value: "b",
+        label: "スタートアップ・社会起業・NPO・自分で立ち上げた組織で働きたい",
+        tags: ["business", "entrepreneurship", "innovation", "leadership"],
+      },
+      {
+        value: "c",
+        label: "地域・コミュニティ・医療・福祉の現場に密着した職場で働きたい",
+        tags: ["community", "welfare", "social", "fieldwork"],
+      },
+      {
+        value: "d",
+        label: "海外・国際機関・外資系・国を超えたプロジェクトの現場で働きたい",
         tags: ["global", "international", "english", "language"],
       },
     ],
@@ -313,135 +322,113 @@ export const quizQuestions: QuizQuestion[] = [
   {
     id: "q12",
     category: "career",
-    text: "将来の仕事を選ぶとき、一番大切にしたいのは？",
+    text: "仕事を選ぶとき、「お金・やりがい・安定」のどれを最も優先しますか？",
     options: [
       {
         value: "a",
-        label: "専門性・スキル（その分野のプロになりたい）",
-        tags: ["stem", "tech", "engineering", "humanities"],
+        label: "安定・将来の安心を最優先（公務員・大手企業・年金が安心な職業）",
+        tags: ["national", "public", "humanities", "community"],
       },
       {
         value: "b",
-        label: "影響力・規模（多くの人・社会に届く仕事をしたい）",
-        tags: ["entrepreneurship", "innovation", "business", "global"],
+        label: "やりがい・使命感を最優先（多少収入が低くても自分が信じる仕事がしたい）",
+        tags: ["welfare", "community", "social", "fieldwork"],
       },
       {
         value: "c",
-        label: "つながり・人（人と深く関わり、支え合う仕事がしたい）",
-        tags: ["community", "welfare", "social", "collaborative"],
+        label: "高収入・キャリアアップを最優先（成果を出して稼ぎ、どんどん上を目指したい）",
+        tags: ["business", "entrepreneurship", "leadership", "innovation"],
       },
       {
         value: "d",
-        label: "自由・裁量（自分のペースや判断で動ける仕事がしたい）",
-        tags: ["interdisciplinary", "innovation", "global", "leadership"],
+        label: "自由・裁量を最優先（自分のペースや判断で動ける働き方・フリーランスも視野）",
+        tags: ["interdisciplinary", "global", "tech", "humanities"],
       },
     ],
   },
+
+  // ── 軸⑤：今の自分の状況（Q13〜Q15）────────────────────────────
+
   {
+    // ⚠️ このIDはmatchingEngine.ts（calcReadinessLevel）で参照されています
+    // a=hensachi-high, b=hensachi-mid-high の順序を変えないでください
     id: "q13",
-    category: "interest",
-    text: "今の世の中で「これは変えたい・解決したい」と感じる問題に近いのは？",
+    category: "academic",
+    text: "今の自分の学力・偏差値はどのくらいだと思いますか？",
     options: [
       {
         value: "a",
-        label: "テクノロジー格差・AI活用の遅れ・デジタル社会の課題",
-        tags: ["tech", "stem", "engineering", "innovation"],
+        label: "模試の偏差値が60以上・学校内でも上位の成績（難関大も視野に入る）",
+        tags: ["hensachi-high", "high-academic"],
       },
       {
         value: "b",
-        label: "地域の過疎化・地元の活性化・若者が戻れる町づくり",
-        tags: ["community", "social", "kyushu", "fieldwork"],
+        label: "模試の偏差値が53〜59・平均より上（中堅上位〜難関を目指している）",
+        tags: ["hensachi-mid-high", "mid-high-academic"],
       },
       {
         value: "c",
-        label: "環境問題・国際的な格差・難民・国境を越えた支援",
-        tags: ["global", "international", "community", "social"],
+        label: "模試の偏差値が46〜52・平均的なレベル（中堅大学を中心に考えている）",
+        tags: ["hensachi-mid", "mid-academic"],
       },
       {
         value: "d",
-        label: "貧困・医療アクセス・福祉・教育の不平等",
-        tags: ["welfare", "medical", "community", "humanities"],
+        label: "模試の偏差値が45以下、またはまだよく分からない（挑戦しやすい大学も見ている）",
+        tags: ["hensachi-low", "specialty-academic"],
       },
     ],
   },
   {
     id: "q14",
-    category: "personality",
-    text: "初めての挑戦に向き合うとき、自分に一番近いスタイルは？",
+    category: "activity",
+    text: "高校でこれまで一番力を入れたこと（またはこれから力を入れたいこと）は？",
     options: [
       {
         value: "a",
-        label: "仕組みや理論を調べて、計画を立ててから一歩ずつ進む",
-        tags: ["stem", "tech", "engineering", "math"],
+        label: "スポーツ・音楽・演劇など、競技や発表系の部活動（大会・コンクールに向け本気で取り組んだ）",
+        tags: ["hands-on", "collaborative", "leadership", "practical"],
       },
       {
         value: "b",
-        label: "とにかく飛び込んで行動し、やりながら改善していく",
-        tags: ["entrepreneurship", "leadership", "business", "innovation"],
+        label: "プログラミング・科学研究・数学・ロボット系の活動（コンテストや探究活動に挑戦した）",
+        tags: ["tech", "stem", "engineering", "innovation"],
       },
       {
         value: "c",
-        label: "実際にやっている人に話を聞いて、現場感を掴んでから動く",
-        tags: ["community", "social", "welfare", "fieldwork"],
+        label: "ボランティア・地域活動・国際交流・環境問題への取り組み（社会と関わる活動をした）",
+        tags: ["community", "welfare", "social", "global"],
       },
       {
         value: "d",
-        label: "複数の選択肢を比較・検討し、最善の方法を慎重に選ぶ",
-        tags: ["humanities", "interdisciplinary", "global", "culture"],
+        label: "生徒会・学校行事の企画・部活や委員会のリーダー（人をまとめる立場を経験した）",
+        tags: ["leadership", "entrepreneurship", "business", "collaborative"],
       },
     ],
   },
   {
     id: "q15",
-    category: "campus_life",
-    text: "大学の4年間で一番「手に入れたい」ものは？",
-    options: [
-      {
-        value: "a",
-        label: "最先端の知識・研究スキル（専門的な強みを徹底的に磨く）",
-        tags: ["tech", "stem", "engineering", "innovation", "humanities"],
-      },
-      {
-        value: "b",
-        label: "起業・プロジェクト経験・社会で即戦力になる実践スキル",
-        tags: ["entrepreneurship", "business", "leadership", "practical"],
-      },
-      {
-        value: "c",
-        label: "多様な人とのネットワーク・コミュニティ・仲間",
-        tags: ["community", "collaborative", "global", "interdisciplinary"],
-      },
-      {
-        value: "d",
-        label: "留学・異文化体験・グローバルな視野と語学力",
-        tags: ["global", "international", "english", "language"],
-      },
-    ],
-  },
-  {
-    id: "q16",
     category: "academic",
-    text: "今の自分の学力・成績はどのくらいだと思いますか？",
+    text: "総合型選抜（AO入試）に向けた準備は、今どのくらい進んでいますか？",
     options: [
       {
         value: "a",
-        label: "模試偏差値60以上",
-        tags: ["hensachi-high"],
+        label: "志望理由や自己PRをすでに考えている・書いたことがある（かなり準備が進んでいる）",
+        tags: ["high-academic", "practical", "humanities"],
       },
       {
         value: "b",
-        label: "模試偏差値53〜59",
-        tags: ["hensachi-mid-high"],
+        label: "学びたいことや将来像はあるが、まだ言葉にできていない（これから本格的に動く）",
+        tags: ["mid-high-academic", "interdisciplinary", "global"],
       },
       {
         value: "c",
-        label: "模試偏差値46〜52",
-        tags: ["hensachi-mid"],
+        label: "何から始めればいいかよく分からない・情報収集を始めたばかり",
+        tags: ["mid-academic", "community", "social"],
       },
       {
         value: "d",
-        label: "模試偏差値45以下・まだよく分からない",
-        tags: ["hensachi-low"],
+        label: "総合型より一般入試のほうが向いていると思っている・学力重視で進む予定",
+        tags: ["specialty-academic", "stem", "tech"],
       },
     ],
   },
