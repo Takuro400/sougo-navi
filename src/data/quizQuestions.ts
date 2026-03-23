@@ -425,22 +425,22 @@ export const quizQuestions: QuizQuestion[] = [
     options: [
       {
         value: "a",
-        label: "学校でトップクラス・模試偏差値65以上",
+        label: "模試偏差値60以上",
         tags: ["hensachi-high"],
       },
       {
         value: "b",
-        label: "平均より上・模試偏差値60〜65",
+        label: "模試偏差値53〜59",
         tags: ["hensachi-mid-high"],
       },
       {
         value: "c",
-        label: "平均的・模試偏差値55〜60",
+        label: "模試偏差値46〜52",
         tags: ["hensachi-mid"],
       },
       {
         value: "d",
-        label: "平均より下・まだよく分からない",
+        label: "模試偏差値45以下・まだよく分からない",
         tags: ["hensachi-low"],
       },
     ],
