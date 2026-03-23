@@ -314,6 +314,121 @@ export const universities: University[] = [
     },
     mentorCount: 2,
   },
+  // ===========================
+  // 北海道・東北
+  // ===========================
+  {
+    id: "hokkaido",
+    name: "北海道大学",
+    faculty: "文学部・理学部・工学部・農学部・医学部他",
+    department: "各学科",
+    region: "北海道",
+    prefecture: "北海道",
+    type: "国立",
+    description:
+      "札幌に本部を置く旧帝国大学。広大なキャンパスと豊かな自然環境の中で、農学・水産・環境・医学など幅広い分野の研究が盛ん。国際連携が活発でグローバル人材の育成にも力を入れている。総合型選抜では学問への深い探究心と主体的な学びの姿勢が問われる。",
+    features: ["旧帝大", "総合大学", "農学・環境が強い", "国立", "広大なキャンパス"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "特定の学問分野に強い探究心を持ち、広大な自然環境の中で主体的に研究・学習に取り組みたい学生。グローバルな視野も持つ人。",
+    requiredActivities: [
+      "志望分野に関する探究活動や自主研究",
+      "学外コンテスト・研究発表への参加",
+      "英語学習や国際交流の経験",
+    ],
+    matchTags: ["academic", "research", "agriculture", "environment", "national", "global", "stem", "prestigious"],
+    links: {
+      official: "https://www.hokudai.ac.jp/",
+      admissions: "https://www.hokudai.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%8C%97%E6%B5%B7%E9%81%93%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.hokudai.ac.jp/event/",
+    },
+    mentorCount: 4,
+  },
+  {
+    id: "tohoku",
+    name: "東北大学",
+    faculty: "文学部・理学部・工学部・医学部・農学部他",
+    department: "各学科",
+    region: "東北",
+    prefecture: "宮城県",
+    type: "国立",
+    description:
+      "「研究第一」「門戸開放」「実学尊重」を建学の精神に掲げる旧帝国大学。理工系・医学系の研究水準が特に高く、世界トップレベルの研究機関として知られる。総合型選抜（AO入試）の先駆け的存在で、学力だけでなく個性・意欲を重視した選考が特徴。",
+    features: ["旧帝大", "研究力トップレベル", "AO入試の先駆け", "国立", "理工・医学が強い"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "研究・探究活動に強い情熱を持ち、自ら課題を設定して取り組める学生。学力だけでなく、個性や意欲・体験を持ち合わせた人。",
+    requiredActivities: [
+      "自主研究・探究活動の実績（レポート・論文など）",
+      "科学系コンテストや発表会への参加",
+      "志望分野に関する深い学習と言語化",
+    ],
+    matchTags: ["academic", "research", "stem", "medicine", "national", "prestigious", "innovation", "hands-on"],
+    links: {
+      official: "https://www.tohoku.ac.jp/",
+      admissions: "https://www.tohoku.ac.jp/japanese/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E6%9D%B1%E5%8C%97%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.tohoku.ac.jp/japanese/event/",
+    },
+    mentorCount: 5,
+  },
+  {
+    id: "otaru_shoka",
+    name: "小樽商科大学",
+    faculty: "商学部",
+    department: "各学科",
+    region: "北海道",
+    prefecture: "北海道",
+    type: "国立",
+    description:
+      "商学・経営・経済に特化した国立大学。少人数で専門性の高い教育が受けられ、ビジネス・会計・情報システムなど実践的なカリキュラムが充実。学生と教員の距離が近く、就職支援も手厚い。北海道内外から商学を学びたい学生が集まる。",
+    features: ["商学特化", "少人数教育", "高い就職実績", "国立", "コスパが高い"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "ビジネス・経営・会計・経済に明確な関心を持ち、専門性を高めてキャリアに活かしたいと考える学生。",
+    requiredActivities: [
+      "ビジネスコンテストや経済系の課外活動への参加",
+      "簿記・ITパスポートなど関連資格の取得",
+      "志望理由を具体的に言語化する練習",
+    ],
+    matchTags: ["business", "academic", "career-focused", "national", "leadership", "entrepreneurship", "math"],
+    links: {
+      official: "https://www.otaru-uc.ac.jp/",
+      admissions: "https://www.otaru-uc.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%B0%8F%E6%A8%BD%E5%95%86%E7%A7%91%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.otaru-uc.ac.jp/event/",
+    },
+    mentorCount: 2,
+  },
+  {
+    id: "sapporo_city",
+    name: "札幌市立大学",
+    faculty: "デザイン学部・看護学部",
+    department: "各学科",
+    region: "北海道",
+    prefecture: "北海道",
+    type: "公立",
+    description:
+      "デザインと看護の2学部を擁する札幌市の公立大学。デザイン学部では社会課題をデザインで解決する実践的な教育が特徴で、プロダクト・コミュニケーション・環境デザインなど幅広い領域を学べる。少人数制で学生一人ひとりへのサポートが充実している。",
+    features: ["デザイン特化", "看護学部", "少人数教育", "公立", "実践的なカリキュラム"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "デザインや医療・看護に強い関心を持ち、実践的な制作・実習を通じて専門スキルを身につけたい学生。",
+    requiredActivities: [
+      "デザイン・アート作品の制作やポートフォリオの作成",
+      "医療・福祉ボランティアや看護体験",
+      "社会課題への関心をデザインや看護と結びつけて言語化する",
+    ],
+    matchTags: ["design", "arts", "welfare", "community", "hands-on", "creative", "medicine", "local"],
+    links: {
+      official: "https://www.scu.ac.jp/",
+      admissions: "https://www.scu.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E6%9C%AD%E5%B9%8C%E5%B8%82%E7%AB%8B%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.scu.ac.jp/event/",
+    },
+    mentorCount: 1,
+  },
 ];
 
 /** IDで大学を取得 */
