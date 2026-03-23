@@ -227,6 +227,7 @@ export default function ResultPage() {
       <div className="absolute -top-32 right-0 w-[700px] h-[700px] bg-gradient-to-bl from-violet-100/35 to-transparent rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 -left-20 w-[500px] h-[500px] bg-gradient-to-tr from-sky-100/30 to-transparent rounded-full blur-3xl pointer-events-none" />
 
+      <div className="relative">
       <Header variant="light" />
 
       <Suspense fallback={
@@ -246,6 +247,7 @@ export default function ResultPage() {
         <ResultContent />
       </Suspense>
       <Footer />
+      </div>
     </div>
   );
 }

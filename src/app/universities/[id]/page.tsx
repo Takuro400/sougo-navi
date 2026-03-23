@@ -79,6 +79,7 @@ export default function UniversityDetailPage() {
       <div className="absolute inset-0 bg-gradient-to-br from-violet-50/70 via-white to-sky-50/50 pointer-events-none" />
       <div className="absolute -top-32 right-0 w-[700px] h-[700px] bg-gradient-to-bl from-violet-100/35 to-transparent rounded-full blur-3xl pointer-events-none" />
 
+      <div className="relative">
       <Header variant="light" />
 
       {/* ページヘッダー */}
@@ -251,6 +252,7 @@ export default function UniversityDetailPage() {
       )}
 
       <Footer />
+      </div>
     </div>
   );
 }
