@@ -8,7 +8,9 @@ import Footer from "@/components/layout/Footer";
 import UniversityCard from "@/components/university/UniversityCard";
 import { generateMatchResults } from "@/lib/matchingEngine";
 import { MatchResult, QuizAnswers, UserTypeInfo } from "@/types";
+import { universities } from "@/data/universities";
 import type { AiAnalysisResponse } from "@/app/api/ai-analysis/route";
+import type { AiMatchingResponse } from "@/app/api/ai-matching/route";
 
 // ユーザータイプごとのカラー（ライト版）
 const typeGradients: Record<string, string> = {
@@ -37,11 +39,17 @@ function ResultContent() {
   const [savedIds, setSavedIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [rawAnswers, setRawAnswers] = useState<QuizAnswers>({});
+  const [rawRegion, setRawRegion] = useState<string>("");
+  const [isAiMatched, setIsAiMatched] = useState(false);
 
-  // AI分析
+  // 既存AI分析
   const [aiLoading, setAiLoading] = useState(false);
   const [aiResult, setAiResult] = useState<AiAnalysisResponse | null>(null);
   const [aiError, setAiError] = useState<string | null>(null);
+
+  // 新AIマッチング
+  const [aiMatchLoading, setAiMatchLoading] = useState(false);
+  const [aiMatchError, setAiMatchError] = useState<string | null>(null);
 
   useEffect(() => {
     const raw = searchParams.get("answers");
@@ -49,11 +57,12 @@ function ResultContent() {
       try {
         const saved = localStorage.getItem("sougo_navi_result");
         if (saved) {
-          const { matchResults, userType, answers: savedAnswers } = JSON.parse(saved);
+          const { matchResults, userType, answers: savedAnswers, region: savedRegion } = JSON.parse(saved);
           if (matchResults?.length) {
             setResults(matchResults.slice(0, 5));
             setUserType(userType);
             if (savedAnswers) setRawAnswers(savedAnswers);
+            if (savedRegion) setRawRegion(savedRegion);
           }
         }
       } catch (e) {
@@ -69,8 +78,9 @@ function ResultContent() {
       setResults(matched.slice(0, 5));
       setUserType(type);
       setRawAnswers(answers);
+      setRawRegion(region);
       localStorage.setItem("sougo_navi_result", JSON.stringify({
-        matchResults: matched, userType: type, answers, savedAt: new Date().toISOString(),
+        matchResults: matched, userType: type, answers, region, savedAt: new Date().toISOString(),
       }));
     } catch (e) {
       console.error("回答データの解析に失敗しました", e);
@@ -109,6 +119,52 @@ function ResultContent() {
       setAiError("ネットワークエラーが発生しました。もう一度お試しください");
     } finally {
       setAiLoading(false);
+    }
+  };
+
+  /** AIマッチング: 大学リストをAI選定結果に置き換える */
+  const handleAiMatching = async () => {
+    if (!userType) return;
+    setAiMatchLoading(true);
+    setAiMatchError(null);
+    try {
+      const res = await fetch("/api/ai-matching", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ answers: rawAnswers, region: rawRegion }),
+      });
+      const data: AiMatchingResponse & { error?: string } = await res.json();
+      if (!res.ok) {
+        setAiMatchError(data.error ?? "AIマッチング中にエラーが発生しました");
+        return;
+      }
+
+      // AI結果をMatchResult形式に変換
+      const newResults: MatchResult[] = data.results
+        .flatMap((item): MatchResult[] => {
+          const univ = universities.find((u) => u.id === item.universityId);
+          if (!univ) return [];
+          return [{
+            university: univ,
+            score: item.score,
+            matchReasons: item.matchReasons,
+            readinessLevel: item.readinessLevel,
+            requiredActions: item.requiredActions,
+            userType: userType,
+            aiComment: item.aiComment,
+          }];
+        });
+
+      if (newResults.length > 0) {
+        setResults(newResults);
+        setIsAiMatched(true);
+      } else {
+        setAiMatchError("AIが大学を特定できませんでした。もう一度お試しください");
+      }
+    } catch {
+      setAiMatchError("ネットワークエラーが発生しました。もう一度お試しください");
+    } finally {
+      setAiMatchLoading(false);
     }
   };
 
@@ -161,13 +217,15 @@ function ResultContent() {
       <div className="text-center mb-8">
         <span className="inline-flex items-center gap-2 bg-indigo-50 border border-indigo-200 text-indigo-600 text-xs font-bold px-4 py-1.5 rounded-full mb-4">
           <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
-          診断完了！
+          {isAiMatched ? "AI診断完了！" : "診断完了！"}
         </span>
         <h1 className="font-mincho font-bold text-2xl text-slate-800 mb-2">
           あなたにおすすめの大学が見つかりました
         </h1>
         <p className="text-sm text-slate-500 leading-relaxed">
-          回答をもとに、相性の良い大学・学部を表示しています。
+          {isAiMatched
+            ? "AIが回答を分析し、最適な大学・学部を選びました。"
+            : "回答をもとに、相性の良い大学・学部を表示しています。"}
         </p>
       </div>
 
@@ -193,6 +251,11 @@ function ResultContent() {
       {/* 1位ピックアップ */}
       <div className="relative bg-gradient-to-br from-indigo-500 to-violet-600 rounded-2xl p-5 mb-5 overflow-hidden shadow-lg shadow-indigo-200/60">
         <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/5 rounded-full pointer-events-none" />
+        {isAiMatched && (
+          <span className="inline-flex items-center gap-1 bg-white/20 text-white text-xs font-bold px-2.5 py-1 rounded-full mb-2">
+            ✨ AI選定
+          </span>
+        )}
         <p className="text-xs font-bold text-white/70 mb-2">🏆 最もおすすめの大学</p>
         <p className="font-mincho font-bold text-xl text-white">{top.university.name}</p>
         <p className="text-sm text-white/70 mt-0.5">{top.university.faculty}</p>
@@ -219,7 +282,7 @@ function ResultContent() {
 
       {/* 上位5件リスト */}
       <h2 className="font-mincho font-bold text-slate-800 text-base mb-3">
-        あなたにおすすめの大学 TOP5
+        {isAiMatched ? "✨ AIが選んだおすすめ大学 TOP5" : "あなたにおすすめの大学 TOP5"}
       </h2>
       <div className="space-y-4 mb-6">
         {results.map((result, i) => (
@@ -231,6 +294,70 @@ function ResultContent() {
             onSave={handleSave}
           />
         ))}
+      </div>
+
+      {/* ── AIマッチングセクション ── */}
+      <div className="mb-6">
+        {!isAiMatched ? (
+          <>
+            {/* AIマッチングボタン */}
+            <button
+              onClick={handleAiMatching}
+              disabled={aiMatchLoading}
+              className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl font-bold text-sm
+                bg-gradient-to-r from-fuchsia-600 to-violet-600 text-white shadow-md shadow-violet-200/60
+                hover:from-fuchsia-700 hover:to-violet-700 active:scale-[.98] transition-all
+                disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {aiMatchLoading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  AIが分析中…約10秒かかります
+                </>
+              ) : (
+                <>
+                  <span className="text-lg">✨</span>
+                  AIが大学をもう一度分析する
+                </>
+              )}
+            </button>
+            {aiMatchLoading && (
+              <p className="text-center text-xs text-slate-400 mt-2">
+                Claude AIが診断回答を分析し、最適な大学を選定しています
+              </p>
+            )}
+            {aiMatchError && (
+              <div className="mt-3 bg-red-50 border border-red-200 rounded-xl p-3 text-xs text-red-600">
+                ⚠️ {aiMatchError}
+              </div>
+            )}
+          </>
+        ) : (
+          /* AI選定済み：タグ結果に戻すオプション */
+          <div className="text-center">
+            <p className="text-xs text-slate-400 mb-2">⚠️ AIによる参考情報です。合格を保証するものではありません。</p>
+            <button
+              onClick={() => {
+                // localStorageから元のタグマッチング結果を復元
+                try {
+                  const saved = localStorage.getItem("sougo_navi_result");
+                  if (saved) {
+                    const { matchResults } = JSON.parse(saved);
+                    if (matchResults?.length) {
+                      setResults(matchResults.slice(0, 5));
+                      setIsAiMatched(false);
+                    }
+                  }
+                } catch {
+                  setIsAiMatched(false);
+                }
+              }}
+              className="text-xs text-slate-400 hover:text-slate-600 underline transition-colors"
+            >
+              タグマッチング結果に戻す
+            </button>
+          </div>
+        )}
       </div>
 
       {/* 再診断促進 */}
