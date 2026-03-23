@@ -381,12 +381,26 @@ export function generateMatchResults(answers: QuizAnswers, region = ""): Diagnos
   const regionNames = REGION_MAP[region] ?? [];
   const userType = determineUserType(tagFreq);
 
+  // 偏差値帯ボーナス用マッピング
+  const hensachiBonus: Record<string, string[]> = {
+    "hensachi-high":     ["最難関", "難関"],
+    "hensachi-mid-high": ["難関", "中堅上位"],
+    "hensachi-mid":      ["中堅上位", "中堅"],
+    "hensachi-low":      ["中堅", "挑戦しやすい"],
+  };
+  const hensachiTag = Object.keys(hensachiBonus).find((tag) => (tagFreq[tag] || 0) > 0) ?? null;
+
   const matchResults: MatchResult[] = universities.map((univ) => {
     let score = calcScore(univ, tagFreq);
 
     // 地域ボーナス（選択地域と一致する大学を優遇）
     if (regionNames.length > 0 && regionNames.includes(univ.region)) {
       score = Math.min(100, score + 20);
+    }
+
+    // 偏差値帯ボーナス
+    if (hensachiTag && univ.hensachiRange && hensachiBonus[hensachiTag].includes(univ.hensachiRange)) {
+      score = Math.min(100, score + 15);
     }
 
     const matchReasons    = buildMatchReasons(univ, tagFreq);

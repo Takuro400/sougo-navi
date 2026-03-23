@@ -148,6 +148,71 @@ export default function UniversityDetailPage() {
           <p className="text-sm text-slate-600 leading-relaxed">{university.idealStudent}</p>
         </div>
 
+        {/* 偏差値・総合型選抜情報 */}
+        {university.hensachi && (
+          <div className="card">
+            <h2 className="font-mincho font-bold text-slate-800 mb-3 flex items-center gap-2">
+              <span className="text-violet-500">📊</span> 偏差値目安・総合型選抜情報
+            </h2>
+
+            {/* 偏差値 */}
+            <div className="flex items-center gap-3 mb-2">
+              <span className="text-3xl font-black text-slate-800">{university.hensachi}</span>
+              <span className={`badge text-sm font-bold ${
+                university.hensachiRange === "最難関" ? "bg-red-100 text-red-700 border border-red-200" :
+                university.hensachiRange === "難関"   ? "bg-orange-100 text-orange-700 border border-orange-200" :
+                university.hensachiRange === "中堅上位" ? "bg-yellow-100 text-yellow-700 border border-yellow-200" :
+                university.hensachiRange === "中堅"   ? "bg-green-100 text-green-700 border border-green-200" :
+                "bg-blue-100 text-blue-700 border border-blue-200"
+              }`}>{university.hensachiRange}</span>
+            </div>
+            <p className="text-xs text-slate-400 mb-4">
+              ※ 偏差値は参考値です。年度により変動があります。必ず各大学の最新情報をご確認ください。
+            </p>
+
+            {/* 総合型選抜情報 */}
+            {university.sougouAdmission && (
+              <div className="bg-indigo-50/60 border border-indigo-200 rounded-xl p-4 space-y-3">
+                <p className="text-xs font-bold text-indigo-600 uppercase tracking-wider">総合型選抜</p>
+
+                <div className="grid grid-cols-2 gap-3 text-sm">
+                  <div>
+                    <p className="text-xs text-slate-400 mb-0.5">出願時期</p>
+                    <p className="font-bold text-slate-700">{university.sougouAdmission.timing}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-400 mb-0.5">募集人数</p>
+                    <p className="font-bold text-slate-700">{university.sougouAdmission.quota}</p>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-xs text-slate-400 mb-1.5">選考方法</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {university.sougouAdmission.selectionMethod.map((m, i) => (
+                      <span key={i} className="badge bg-white text-indigo-700 border border-indigo-200">{m}</span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <p className="text-xs text-slate-400">難易度</p>
+                  <span className={`badge font-bold ${
+                    university.sougouAdmission.difficulty === "高" ? "bg-red-100 text-red-700 border border-red-200" :
+                    university.sougouAdmission.difficulty === "中" ? "bg-amber-100 text-amber-700 border border-amber-200" :
+                    "bg-emerald-100 text-emerald-700 border border-emerald-200"
+                  }`}>{university.sougouAdmission.difficulty}</span>
+                </div>
+
+                <div className="bg-white rounded-lg p-3 border border-indigo-100">
+                  <p className="text-xs font-bold text-slate-500 mb-1">総合型選抜のポイント</p>
+                  <p className="text-sm text-slate-600 leading-relaxed">{university.sougouAdmission.point}</p>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
         {/* 必要になりそうな活動 */}
         <div className="card">
           <h2 className="font-mincho font-bold text-slate-800 mb-3 flex items-center gap-2">
