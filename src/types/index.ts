@@ -62,6 +62,16 @@ export type MajorField =
   | "教育"
   | "国際";
 
+/** 総合型選抜情報 */
+export interface SougouAdmission {
+  available: boolean;           // 総合型選抜があるか
+  timing: string;               // 出願時期（例："9月出願・11月選考"）
+  selectionMethod: string[];    // 選考方法（例：["志望理由書", "面接", "小論文"]）
+  quota: string;                // 募集人数目安（例："若干名"）
+  difficulty: "高" | "中" | "低"; // 総合型の難易度
+  point: string;                // 総合型選抜の特徴・ポイント（1〜2文）
+}
+
 /** 大学データ（大学×学部で1レコード） */
 export interface University {
   id: string;
@@ -81,6 +91,9 @@ export interface University {
   matchTags: string[];    // マッチングタグ
   links: UniversityLinks;
   mentorCount: number;    // 相談可能な先輩数
+  hensachi?: number;       // 一般入試の偏差値目安
+  hensachiRange?: "最難関" | "難関" | "中堅上位" | "中堅" | "挑戦しやすい"; // 偏差値帯（最難関:70以上 難関:65〜69 中堅上位:60〜64 中堅:55〜59 挑戦しやすい:54以下）
+  sougouAdmission?: SougouAdmission; // 総合型選抜情報
 }
 
 export interface UniversityLinks {

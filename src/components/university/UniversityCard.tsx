@@ -52,6 +52,14 @@ export default function UniversityCard({ result, rank, isSaved, onSave }: Props)
     低: "bg-slate-50 text-slate-500 border border-slate-200",
   };
 
+  const hensachiRangeConfig: Record<string, string> = {
+    最難関: "bg-red-50 text-red-700 border border-red-200",
+    難関:   "bg-orange-50 text-orange-700 border border-orange-200",
+    中堅上位: "bg-yellow-50 text-yellow-700 border border-yellow-200",
+    中堅:   "bg-green-50 text-green-700 border border-green-200",
+    挑戦しやすい: "bg-blue-50 text-blue-700 border border-blue-200",
+  };
+
   const typeConfig = {
     国立: "bg-purple-50 text-purple-700 border border-purple-200",
     公立: "bg-teal-50 text-teal-700 border border-teal-200",
@@ -96,6 +104,11 @@ export default function UniversityCard({ result, rank, isSaved, onSave }: Props)
       <div className="flex flex-wrap gap-1.5 mb-4">
         <span className={`badge ${typeConfig[univ.type]}`}>{univ.type}</span>
         <span className="badge bg-slate-50 text-slate-600 border border-slate-200">{univ.prefecture}</span>
+        {univ.hensachiRange && (
+          <span className={`badge ${hensachiRangeConfig[univ.hensachiRange] ?? "bg-slate-50 text-slate-500 border border-slate-200"}`}>
+            {univ.hensachiRange}
+          </span>
+        )}
         <span className={`badge ${sougoConfig[univ.sougoCompatibility]}`}>
           総合型選抜：{univ.sougoCompatibility}
         </span>

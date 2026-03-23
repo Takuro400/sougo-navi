@@ -418,4 +418,31 @@ export const quizQuestions: QuizQuestion[] = [
       },
     ],
   },
+  {
+    id: "q16",
+    category: "academic",
+    text: "今の自分の学力・成績はどのくらいだと思いますか？",
+    options: [
+      {
+        value: "a",
+        label: "学校でトップクラス・模試偏差値65以上",
+        tags: ["hensachi-high"],
+      },
+      {
+        value: "b",
+        label: "平均より上・模試偏差値60〜65",
+        tags: ["hensachi-mid-high"],
+      },
+      {
+        value: "c",
+        label: "平均的・模試偏差値55〜60",
+        tags: ["hensachi-mid"],
+      },
+      {
+        value: "d",
+        label: "平均より下・まだよく分からない",
+        tags: ["hensachi-low"],
+      },
+    ],
+  },
 ];
