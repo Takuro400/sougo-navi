@@ -31,7 +31,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kyushu-u.ac.jp/",
       admissions: "https://www.kyushu-u.ac.jp/ja/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E4%B9%9D%E5%B7%9E%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0820/top/",
       openCampus: "https://www.kyushu-u.ac.jp/ja/events/",
     },
     mentorCount: 2,
@@ -61,7 +61,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kyushu-u.ac.jp/",
       admissions: "https://www.kyushu-u.ac.jp/ja/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E4%B9%9D%E5%B7%9E%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0820/top/",
       openCampus: "https://www.kyushu-u.ac.jp/ja/events/",
     },
     mentorCount: 2,
@@ -91,7 +91,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kyushu-u.ac.jp/",
       admissions: "https://www.kyushu-u.ac.jp/ja/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E4%B9%9D%E5%B7%9E%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0820/top/",
       openCampus: "https://www.kyushu-u.ac.jp/ja/events/",
     },
     mentorCount: 3,
@@ -121,7 +121,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kyushu-u.ac.jp/",
       admissions: "https://www.kyushu-u.ac.jp/ja/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E4%B9%9D%E5%B7%9E%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0820/top/",
       openCampus: "https://www.kyushu-u.ac.jp/ja/events/",
     },
     mentorCount: 1,
@@ -151,7 +151,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kyushu-u.ac.jp/",
       admissions: "https://www.kyushu-u.ac.jp/ja/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E4%B9%9D%E5%B7%9E%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0820/top/",
       openCampus: "https://www.kyushu-u.ac.jp/ja/events/",
     },
     mentorCount: 1,
@@ -181,7 +181,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kyushu-u.ac.jp/",
       admissions: "https://www.kyushu-u.ac.jp/ja/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E4%B9%9D%E5%B7%9E%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0820/top/",
       openCampus: "https://www.kyushu-u.ac.jp/ja/events/",
     },
     mentorCount: 1,
@@ -211,7 +211,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kumamoto-u.ac.jp/",
       admissions: "https://www.kumamoto-u.ac.jp/daigakujouhou/nyuugakuannai/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E7%86%8A%E6%9C%AC%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0880/top/",
       openCampus: "https://www.kumamoto-u.ac.jp/daigakujouhou/campus/",
     },
     mentorCount: 1,
@@ -241,7 +241,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kumamoto-u.ac.jp/",
       admissions: "https://www.kumamoto-u.ac.jp/daigakujouhou/nyuugakuannai/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E7%86%8A%E6%9C%AC%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0880/top/",
       openCampus: "https://www.kumamoto-u.ac.jp/daigakujouhou/campus/",
     },
     mentorCount: 1,
@@ -271,7 +271,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kumamoto-u.ac.jp/",
       admissions: "https://www.kumamoto-u.ac.jp/daigakujouhou/nyuugakuannai/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E7%86%8A%E6%9C%AC%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0880/top/",
       openCampus: "https://www.kumamoto-u.ac.jp/daigakujouhou/campus/",
     },
     mentorCount: 1,
@@ -301,7 +301,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kumamoto-u.ac.jp/",
       admissions: "https://www.kumamoto-u.ac.jp/daigakujouhou/nyuugakuannai/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E7%86%8A%E6%9C%AC%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0880/top/",
       openCampus: "https://www.kumamoto-u.ac.jp/daigakujouhou/campus/",
     },
     mentorCount: 1,
@@ -331,7 +331,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.nagasaki-u.ac.jp/",
       admissions: "https://www.nagasaki-u.ac.jp/ja/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E9%95%B7%E5%B4%8E%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0870/top/",
       openCampus: "https://www.nagasaki-u.ac.jp/ja/events/",
     },
     mentorCount: 1,
@@ -361,7 +361,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.nagasaki-u.ac.jp/",
       admissions: "https://www.nagasaki-u.ac.jp/ja/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E9%95%B7%E5%B4%8E%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0870/top/",
       openCampus: "https://www.nagasaki-u.ac.jp/ja/events/",
     },
     mentorCount: 1,
@@ -391,7 +391,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.nagasaki-u.ac.jp/",
       admissions: "https://www.nagasaki-u.ac.jp/ja/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E9%95%B7%E5%B4%8E%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0870/top/",
       openCampus: "https://www.nagasaki-u.ac.jp/ja/events/",
     },
     mentorCount: 1,
@@ -421,7 +421,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.nagasaki-u.ac.jp/",
       admissions: "https://www.nagasaki-u.ac.jp/ja/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E9%95%B7%E5%B4%8E%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0870/top/",
       openCampus: "https://www.nagasaki-u.ac.jp/ja/events/",
     },
     mentorCount: 1,
@@ -451,7 +451,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.nagasaki-u.ac.jp/",
       admissions: "https://www.nagasaki-u.ac.jp/ja/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E9%95%B7%E5%B4%8E%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0870/top/",
       openCampus: "https://www.nagasaki-u.ac.jp/ja/events/",
     },
     mentorCount: 1,
@@ -481,7 +481,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.saga-u.ac.jp/",
       admissions: "https://www.saga-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E4%BD%90%E8%B3%80%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0850/top/",
       openCampus: "https://www.saga-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -511,7 +511,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.saga-u.ac.jp/",
       admissions: "https://www.saga-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E4%BD%90%E8%B3%80%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0850/top/",
       openCampus: "https://www.saga-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -541,7 +541,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.saga-u.ac.jp/",
       admissions: "https://www.saga-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E4%BD%90%E8%B3%80%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0850/top/",
       openCampus: "https://www.saga-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -571,7 +571,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.saga-u.ac.jp/",
       admissions: "https://www.saga-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E4%BD%90%E8%B3%80%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0850/top/",
       openCampus: "https://www.saga-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -601,7 +601,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.oita-u.ac.jp/",
       admissions: "https://www.oita-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%A4%A7%E5%88%86%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0890/top/",
       openCampus: "https://www.oita-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -631,7 +631,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.oita-u.ac.jp/",
       admissions: "https://www.oita-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%A4%A7%E5%88%86%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0890/top/",
       openCampus: "https://www.oita-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -661,7 +661,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.oita-u.ac.jp/",
       admissions: "https://www.oita-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%A4%A7%E5%88%86%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0890/top/",
       openCampus: "https://www.oita-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -691,7 +691,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.oita-u.ac.jp/",
       admissions: "https://www.oita-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%A4%A7%E5%88%86%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0890/top/",
       openCampus: "https://www.oita-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -721,7 +721,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.miyazaki-u.ac.jp/",
       admissions: "https://www.miyazaki-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%AE%AE%E5%B4%8E%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0910/top/",
       openCampus: "https://www.miyazaki-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -751,7 +751,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.miyazaki-u.ac.jp/",
       admissions: "https://www.miyazaki-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%AE%AE%E5%B4%8E%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0910/top/",
       openCampus: "https://www.miyazaki-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -781,7 +781,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.miyazaki-u.ac.jp/",
       admissions: "https://www.miyazaki-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%AE%AE%E5%B4%8E%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0910/top/",
       openCampus: "https://www.miyazaki-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -811,7 +811,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.miyazaki-u.ac.jp/",
       admissions: "https://www.miyazaki-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%AE%AE%E5%B4%8E%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0910/top/",
       openCampus: "https://www.miyazaki-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -841,7 +841,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kagoshima-u.ac.jp/",
       admissions: "https://www.kagoshima-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E9%B9%BF%E5%85%90%E5%B3%B6%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0930/top/",
       openCampus: "https://www.kagoshima-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -871,7 +871,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kagoshima-u.ac.jp/",
       admissions: "https://www.kagoshima-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E9%B9%BF%E5%85%90%E5%B3%B6%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0930/top/",
       openCampus: "https://www.kagoshima-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -901,7 +901,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kagoshima-u.ac.jp/",
       admissions: "https://www.kagoshima-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E9%B9%BF%E5%85%90%E5%B3%B6%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0930/top/",
       openCampus: "https://www.kagoshima-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -931,7 +931,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kagoshima-u.ac.jp/",
       admissions: "https://www.kagoshima-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E9%B9%BF%E5%85%90%E5%B3%B6%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0930/top/",
       openCampus: "https://www.kagoshima-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -961,7 +961,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.fukuoka-u.ac.jp/",
       admissions: "https://www.fukuoka-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E7%A6%8F%E5%B2%A1%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/5020/top/",
       openCampus: "https://www.fukuoka-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -991,7 +991,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.fukuoka-u.ac.jp/",
       admissions: "https://www.fukuoka-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E7%A6%8F%E5%B2%A1%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/5020/top/",
       openCampus: "https://www.fukuoka-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -1021,7 +1021,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.fukuoka-u.ac.jp/",
       admissions: "https://www.fukuoka-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E7%A6%8F%E5%B2%A1%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/5020/top/",
       openCampus: "https://www.fukuoka-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -1051,7 +1051,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.fukuoka-u.ac.jp/",
       admissions: "https://www.fukuoka-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E7%A6%8F%E5%B2%A1%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/5020/top/",
       openCampus: "https://www.fukuoka-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -1081,7 +1081,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.seinan-gu.ac.jp/",
       admissions: "https://www.seinan-gu.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E8%A5%BF%E5%8D%97%E5%AD%A6%E9%99%A2%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/4950/top/",
       openCampus: "https://www.seinan-gu.ac.jp/event/",
     },
     mentorCount: 2,
@@ -1111,7 +1111,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.seinan-gu.ac.jp/",
       admissions: "https://www.seinan-gu.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E8%A5%BF%E5%8D%97%E5%AD%A6%E9%99%A2%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/4950/top/",
       openCampus: "https://www.seinan-gu.ac.jp/event/",
     },
     mentorCount: 1,
@@ -1141,7 +1141,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.seinan-gu.ac.jp/",
       admissions: "https://www.seinan-gu.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E8%A5%BF%E5%8D%97%E5%AD%A6%E9%99%A2%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/4950/top/",
       openCampus: "https://www.seinan-gu.ac.jp/event/",
     },
     mentorCount: 1,
@@ -1171,7 +1171,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.seinan-gu.ac.jp/",
       admissions: "https://www.seinan-gu.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E8%A5%BF%E5%8D%97%E5%AD%A6%E9%99%A2%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/4950/top/",
       openCampus: "https://www.seinan-gu.ac.jp/event/",
     },
     mentorCount: 1,
@@ -1201,7 +1201,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kurume-u.ac.jp/",
       admissions: "https://www.kurume-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E4%B9%85%E7%95%99%E7%B1%B3%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/4930/top/",
       openCampus: "https://www.kurume-u.ac.jp/event/",
     },
     mentorCount: 2,
@@ -1231,7 +1231,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kurume-u.ac.jp/",
       admissions: "https://www.kurume-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E4%B9%85%E7%95%99%E7%B1%B3%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/4930/top/",
       openCampus: "https://www.kurume-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -1261,7 +1261,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kurume-u.ac.jp/",
       admissions: "https://www.kurume-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E4%B9%85%E7%95%99%E7%B1%B3%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/4930/top/",
       openCampus: "https://www.kurume-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -1291,7 +1291,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kurume-u.ac.jp/",
       admissions: "https://www.kurume-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E4%B9%85%E7%95%99%E7%B1%B3%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/4930/top/",
       openCampus: "https://www.kurume-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -1321,7 +1321,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kyusan-u.ac.jp/",
       admissions: "https://www.kyusan-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E4%B9%9D%E5%B7%9E%E7%94%A3%E6%A5%AD%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/4910/top/",
       openCampus: "https://www.kyusan-u.ac.jp/event/",
     },
     mentorCount: 2,
@@ -1351,7 +1351,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.fit.ac.jp/",
       admissions: "https://www.fit.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E7%A6%8F%E5%B2%A1%E5%B7%A5%E6%A5%AD%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/5030/top/",
       openCampus: "https://www.fit.ac.jp/event/",
     },
     mentorCount: 2,
@@ -1384,7 +1384,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.hokudai.ac.jp/",
       admissions: "https://www.hokudai.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%8C%97%E6%B5%B7%E9%81%93%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0010/top/",
       openCampus: "https://www.hokudai.ac.jp/event/",
     },
     mentorCount: 4,
@@ -1414,7 +1414,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.tohoku.ac.jp/",
       admissions: "https://www.tohoku.ac.jp/japanese/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E6%9D%B1%E5%8C%97%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0100/top/",
       openCampus: "https://www.tohoku.ac.jp/japanese/event/",
     },
     mentorCount: 5,
@@ -1444,7 +1444,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.otaru-uc.ac.jp/",
       admissions: "https://www.otaru-uc.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%B0%8F%E6%A8%BD%E5%95%86%E7%A7%91%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0040/top/",
       openCampus: "https://www.otaru-uc.ac.jp/event/",
     },
     mentorCount: 2,
@@ -1474,7 +1474,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.scu.ac.jp/",
       admissions: "https://www.scu.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E6%9C%AD%E5%B9%8C%E5%B8%82%E7%AB%8B%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/1018/top/",
       openCampus: "https://www.scu.ac.jp/event/",
     },
     mentorCount: 1,
@@ -1507,7 +1507,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.nagoya-u.ac.jp/",
       admissions: "https://www.nagoya-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0490/top/",
       openCampus: "https://www.nagoya-u.ac.jp/event/",
     },
     mentorCount: 4,
@@ -1537,7 +1537,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kanazawa-u.ac.jp/",
       admissions: "https://www.kanazawa-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E9%87%91%E6%B2%A2%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0400/top/",
       openCampus: "https://www.kanazawa-u.ac.jp/event/",
     },
     mentorCount: 2,
@@ -1567,7 +1567,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.u-toyama.ac.jp/",
       admissions: "https://www.u-toyama.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%AF%8C%E5%B1%B1%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0380/top/",
       openCampus: "https://www.u-toyama.ac.jp/event/",
     },
     mentorCount: 1,
@@ -1597,7 +1597,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.shizuoka.ac.jp/",
       admissions: "https://www.shizuoka.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E9%9D%99%E5%B2%A1%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0470/top/",
       openCampus: "https://www.shizuoka.ac.jp/event/",
     },
     mentorCount: 2,
@@ -1627,7 +1627,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.nanzan-u.ac.jp/",
       admissions: "https://www.nanzan-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%8D%97%E5%B1%B1%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/3820/top/",
       openCampus: "https://www.nanzan-u.ac.jp/event/",
     },
     mentorCount: 2,
@@ -1657,7 +1657,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.hiroshima-u.ac.jp/",
       admissions: "https://www.hiroshima-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%BA%83%E5%B3%B6%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0720/top/",
       openCampus: "https://www.hiroshima-u.ac.jp/event/",
     },
     mentorCount: 3,
@@ -1687,7 +1687,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.okayama-u.ac.jp/",
       admissions: "https://www.okayama-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%B2%A1%E5%B1%B1%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0710/top/",
       openCampus: "https://www.okayama-u.ac.jp/event/",
     },
     mentorCount: 2,
@@ -1717,7 +1717,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.yamaguchi-u.ac.jp/",
       admissions: "https://www.yamaguchi-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%B1%B1%E5%8F%A3%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0730/top/",
       openCampus: "https://www.yamaguchi-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -1747,7 +1747,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.ehime-u.ac.jp/",
       admissions: "https://www.ehime-u.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E6%84%9B%E5%AA%9B%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0780/top/",
       openCampus: "https://www.ehime-u.ac.jp/event/",
     },
     mentorCount: 1,
@@ -1777,7 +1777,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.u-ryukyu.ac.jp/",
       admissions: "https://www.u-ryukyu.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E7%90%89%E7%90%83%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0950/top/",
       openCampus: "https://www.u-ryukyu.ac.jp/event/",
     },
     mentorCount: 1,
@@ -1810,7 +1810,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.fun.ac.jp/",
       admissions: "https://www.fun.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E3%81%AF%E3%81%93%E3%81%A0%E3%81%A6%E6%9C%AA%E6%9D%A5%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/1015/top/",
       openCampus: "https://www.fun.ac.jp/event/",
     },
     mentorCount: 1,
@@ -1840,7 +1840,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.kochi-tech.ac.jp/",
       admissions: "https://www.kochi-tech.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E9%AB%98%E7%9F%A5%E5%B7%A5%E7%A7%91%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/1309/top/",
       openCampus: "https://www.kochi-tech.ac.jp/event/",
     },
     mentorCount: 1,
@@ -1870,7 +1870,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.tsuru.ac.jp/",
       admissions: "https://www.tsuru.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E9%83%BD%E7%95%99%E6%96%87%E7%A7%91%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/1100/top/",
       openCampus: "https://www.tsuru.ac.jp/event/",
     },
     mentorCount: 1,
@@ -1900,7 +1900,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.tufs.ac.jp/",
       admissions: "https://www.tufs.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E6%9D%B1%E4%BA%AC%E5%A4%96%E5%9B%BD%E8%AA%9E%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0240/top/",
       openCampus: "https://www.tufs.ac.jp/event/",
     },
     mentorCount: 2,
@@ -1930,7 +1930,7 @@ export const universities: University[] = [
     links: {
       official: "https://www.meijigakuin.ac.jp/",
       admissions: "https://www.meijigakuin.ac.jp/admission/",
-      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E6%98%8E%E6%B2%BB%E5%AD%A6%E9%99%A2%E5%A4%A7%E5%AD%A6",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/3130/top/",
       openCampus: "https://www.meijigakuin.ac.jp/event/",
     },
     mentorCount: 2,
