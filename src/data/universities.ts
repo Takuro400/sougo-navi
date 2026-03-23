@@ -45,6 +45,9 @@ export const universities: University[] = [
       difficulty: "高",
       point: "学術的な探究心と明確な志望理由が求められる。研究実績があると有利。",
     },
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "九大オープンキャンパス2025", url: "https://www.kyushu-u.ac.jp/ja/events/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "kyudai-keizai",
@@ -85,6 +88,9 @@ export const universities: University[] = [
       difficulty: "高",
       point: "学術的な探究心と明確な志望理由が求められる。研究実績があると有利。",
     },
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "九大オープンキャンパス2025", url: "https://www.kyushu-u.ac.jp/ja/events/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "kyudai-ko",
@@ -125,6 +131,9 @@ export const universities: University[] = [
       difficulty: "高",
       point: "学術的な探究心と明確な志望理由が求められる。研究実績があると有利。",
     },
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "九大オープンキャンパス2025", url: "https://www.kyushu-u.ac.jp/ja/events/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "kyudai-ho",
@@ -165,6 +174,9 @@ export const universities: University[] = [
       difficulty: "高",
       point: "学術的な探究心と明確な志望理由が求められる。研究実績があると有利。",
     },
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "九大オープンキャンパス2025", url: "https://www.kyushu-u.ac.jp/ja/events/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "kyudai-no",
@@ -205,6 +217,9 @@ export const universities: University[] = [
       difficulty: "高",
       point: "学術的な探究心と明確な志望理由が求められる。研究実績があると有利。",
     },
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "九大オープンキャンパス2025", url: "https://www.kyushu-u.ac.jp/ja/events/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "kyudai-i",
@@ -245,6 +260,9 @@ export const universities: University[] = [
       difficulty: "高",
       point: "学術的な探究心と明確な志望理由が求められる。研究実績があると有利。",
     },
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "九大オープンキャンパス2025", url: "https://www.kyushu-u.ac.jp/ja/events/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "kumamoto-bun",
@@ -285,6 +303,9 @@ export const universities: University[] = [
       difficulty: "中",
       point: "地域医療・地域貢献への関心をアピールすることが重要。",
     },
+    openCampusEvents: [
+      { date: "2025年8月9日（土）", title: "熊大オープンキャンパス2025", url: "https://www.kumamoto-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "kumamoto-ho",
@@ -325,6 +346,9 @@ export const universities: University[] = [
       difficulty: "中",
       point: "地域医療・地域貢献への関心をアピールすることが重要。",
     },
+    openCampusEvents: [
+      { date: "2025年8月9日（土）", title: "熊大オープンキャンパス2025", url: "https://www.kumamoto-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "kumamoto-ko",
@@ -365,6 +389,9 @@ export const universities: University[] = [
       difficulty: "中",
       point: "地域医療・地域貢献への関心をアピールすることが重要。",
     },
+    openCampusEvents: [
+      { date: "2025年8月9日（土）", title: "熊大オープンキャンパス2025", url: "https://www.kumamoto-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "kumamoto-i",
@@ -405,6 +432,9 @@ export const universities: University[] = [
       difficulty: "中",
       point: "地域医療・地域貢献への関心をアピールすることが重要。",
     },
+    openCampusEvents: [
+      { date: "2025年8月9日（土）", title: "熊大オープンキャンパス2025", url: "https://www.kumamoto-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "nagasaki-keizai",
@@ -445,6 +475,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "地域経済・国際交流への関心と明確な志望動機が評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "長大オープンキャンパス2025", url: "https://www.nagasaki-u.ac.jp/ja/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "nagasaki-kankyo",
@@ -485,6 +518,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "環境問題・離島・海洋への関心と探究活動の実績が評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "長大オープンキャンパス2025", url: "https://www.nagasaki-u.ac.jp/ja/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "nagasaki-ko",
@@ -525,6 +561,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "理工系の学習意欲と地域課題解決への関心が重視される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "長大オープンキャンパス2025", url: "https://www.nagasaki-u.ac.jp/ja/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "nagasaki-i",
@@ -565,6 +604,9 @@ export const universities: University[] = [
       difficulty: "高",
       point: "地域医療・僻地医療への強い志望動機が必要。人物重視の選考。",
     },
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "長大オープンキャンパス2025", url: "https://www.nagasaki-u.ac.jp/ja/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "nagasaki-suisan",
@@ -605,6 +647,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "水産・海洋への関心とフィールドワーク経験が評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "長大オープンキャンパス2025", url: "https://www.nagasaki-u.ac.jp/ja/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "saga-keizai",
@@ -645,6 +690,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "地域経済・地域産業への関心と明確な志望動機を示すことが重要。",
     },
+    openCampusEvents: [
+      { date: "2025年8月9日（土）", title: "佐大オープンキャンパス2025", url: "https://www.saga-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "saga-no",
@@ -685,6 +733,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "農業・食・環境への関心と実践体験（農業体験等）が評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月9日（土）", title: "佐大オープンキャンパス2025", url: "https://www.saga-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "saga-i",
@@ -725,6 +776,9 @@ export const universities: University[] = [
       difficulty: "高",
       point: "地域医療への強い志望動機と高い学業成績が求められる。",
     },
+    openCampusEvents: [
+      { date: "2025年8月9日（土）", title: "佐大オープンキャンパス2025", url: "https://www.saga-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "saga-riko",
@@ -765,6 +819,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "理工系の探究活動実績と地域課題への関心が評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月9日（土）", title: "佐大オープンキャンパス2025", url: "https://www.saga-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "oita-keizai",
@@ -805,6 +862,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "地域経済・観光産業への関心と探究的な学習姿勢が評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年7月26日（土）", title: "大分大オープンキャンパス2025", url: "https://www.oita-u.ac.jp/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "oita-i",
@@ -845,6 +905,9 @@ export const universities: University[] = [
       difficulty: "高",
       point: "地域医療への強い志望動機と高い学業成績が求められる。",
     },
+    openCampusEvents: [
+      { date: "2025年7月26日（土）", title: "大分大オープンキャンパス2025", url: "https://www.oita-u.ac.jp/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "oita-riko",
@@ -885,6 +948,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "理工系の探究活動と地域の課題解決への関心が重視される。",
     },
+    openCampusEvents: [
+      { date: "2025年7月26日（土）", title: "大分大オープンキャンパス2025", url: "https://www.oita-u.ac.jp/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "oita-fukushi",
@@ -925,6 +991,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "福祉・健康支援への関心とボランティア・介護体験が強くアピールできる。",
     },
+    openCampusEvents: [
+      { date: "2025年7月26日（土）", title: "大分大オープンキャンパス2025", url: "https://www.oita-u.ac.jp/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "miyazaki-chiiki",
@@ -965,6 +1034,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "地域創生・地域おこしへの関心と地域活動の実績が評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "宮大オープンキャンパス2025", url: "https://www.miyazaki-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "miyazaki-no",
@@ -1005,6 +1077,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "農業・畜産・食の課題への関心と実践体験が評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "宮大オープンキャンパス2025", url: "https://www.miyazaki-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "miyazaki-ko",
@@ -1045,6 +1120,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "理工系の学習意欲とものづくり・プログラミングの実績が重視される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "宮大オープンキャンパス2025", url: "https://www.miyazaki-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "miyazaki-i",
@@ -1085,6 +1163,9 @@ export const universities: University[] = [
       difficulty: "高",
       point: "地域医療・僻地医療への強い志望動機が不可欠。高い学業成績と人物評価を重視。",
     },
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "宮大オープンキャンパス2025", url: "https://www.miyazaki-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "kagoshima-hobun",
@@ -1125,6 +1206,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "南九州の地域課題への関心と探究心をアピールすることが重要。",
     },
+    openCampusEvents: [
+      { date: "2025年8月9日（土）", title: "鹿大オープンキャンパス2025", url: "https://www.kagoshima-u.ac.jp/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "kagoshima-ko",
@@ -1165,6 +1249,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "理工系の学習意欲と地域のものづくり・産業への関心が評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月9日（土）", title: "鹿大オープンキャンパス2025", url: "https://www.kagoshima-u.ac.jp/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "kagoshima-no",
@@ -1205,6 +1292,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "農業・畜産・食品への関心と農業体験・フィールドワーク実績が評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月9日（土）", title: "鹿大オープンキャンパス2025", url: "https://www.kagoshima-u.ac.jp/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "kagoshima-suisan",
@@ -1245,6 +1335,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "海・水産・海洋環境への関心とフィールドワーク体験が強みになる。",
     },
+    openCampusEvents: [
+      { date: "2025年8月9日（土）", title: "鹿大オープンキャンパス2025", url: "https://www.kagoshima-u.ac.jp/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "fukuoka-sho",
@@ -1285,6 +1378,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "課外活動・リーダーシップ経験を重視。部活や生徒会経験が評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月3日（日）", title: "福大オープンキャンパス2025", url: "https://www.fukuoka-u.ac.jp/event/opencampus/", isOnline: false, note: "予約不要" },
+    ],
   },
   {
     id: "fukuoka-ho",
@@ -1325,6 +1421,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "課外活動・リーダーシップ経験を重視。部活や生徒会経験が評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月3日（日）", title: "福大オープンキャンパス2025", url: "https://www.fukuoka-u.ac.jp/event/opencampus/", isOnline: false, note: "予約不要" },
+    ],
   },
   {
     id: "fukuoka-jinbun",
@@ -1365,6 +1464,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "課外活動・リーダーシップ経験を重視。部活や生徒会経験が評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月3日（日）", title: "福大オープンキャンパス2025", url: "https://www.fukuoka-u.ac.jp/event/opencampus/", isOnline: false, note: "予約不要" },
+    ],
   },
   {
     id: "fukuoka-ko",
@@ -1405,6 +1507,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "課外活動・リーダーシップ経験を重視。部活や生徒会経験が評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月3日（日）", title: "福大オープンキャンパス2025", url: "https://www.fukuoka-u.ac.jp/event/opencampus/", isOnline: false, note: "予約不要" },
+    ],
   },
   {
     id: "seinan-kokusai",
@@ -1445,6 +1550,9 @@ export const universities: University[] = [
       difficulty: "中",
       point: "英語力と国際的な活動経験が重視される。ボランティア経験も評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月3日（日）", title: "西南学院大オープンキャンパス2025", url: "https://www.seinan-gu.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "seinan-ho",
@@ -1485,6 +1593,9 @@ export const universities: University[] = [
       difficulty: "中",
       point: "英語力と国際的な活動経験が重視される。ボランティア経験も評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月3日（日）", title: "西南学院大オープンキャンパス2025", url: "https://www.seinan-gu.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "seinan-keizai",
@@ -1525,6 +1636,9 @@ export const universities: University[] = [
       difficulty: "中",
       point: "英語力と国際的な活動経験が重視される。ボランティア経験も評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月3日（日）", title: "西南学院大オープンキャンパス2025", url: "https://www.seinan-gu.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "seinan-ningen",
@@ -1565,6 +1679,9 @@ export const universities: University[] = [
       difficulty: "中",
       point: "英語力と国際的な活動経験が重視される。ボランティア経験も評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月3日（日）", title: "西南学院大オープンキャンパス2025", url: "https://www.seinan-gu.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "kurume-i",
@@ -1605,6 +1722,9 @@ export const universities: University[] = [
       difficulty: "中",
       point: "医学部は地域医療への強い志望動機が必要。他学部は課外活動実績が重視される。",
     },
+    openCampusEvents: [
+      { date: "2025年7月27日（日）", title: "久留米大オープンキャンパス2025", url: "https://www.kurume-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "kurume-keizai",
@@ -1645,6 +1765,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "ビジネス・経済への関心と課外活動（部活・生徒会等）の実績が評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年7月27日（日）", title: "久留米大オープンキャンパス2025", url: "https://www.kurume-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "kurume-ho",
@@ -1685,6 +1808,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "法律・社会正義への関心と課外活動の実績が評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年7月27日（日）", title: "久留米大オープンキャンパス2025", url: "https://www.kurume-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "kurume-kenko",
@@ -1725,6 +1851,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "健康・スポーツ・福祉への関心とボランティア・スポーツ活動の実績が強みになる。",
     },
+    openCampusEvents: [
+      { date: "2025年7月27日（日）", title: "久留米大オープンキャンパス2025", url: "https://www.kurume-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "kyusanko",
@@ -1765,6 +1894,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "デザイン・アートの実績やポートフォリオが評価される。創作活動経験が強みになる。",
     },
+    openCampusEvents: [
+      { date: "2025年8月3日（日）", title: "九産大オープンキャンパス2025", url: "https://www.kyusan-u.ac.jp/event/", isOnline: false, note: "予約不要" },
+    ],
   },
   {
     id: "fit",
@@ -1805,6 +1937,9 @@ export const universities: University[] = [
       difficulty: "低",
       point: "理工系・IT分野への関心と実践的なスキル（プログラミング等）の実績が評価される。",
     },
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "FITオープンキャンパス2025", url: "https://www.fit.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   // ===========================
   // 北海道・東北
@@ -1838,6 +1973,9 @@ export const universities: University[] = [
       openCampus: "https://www.hokudai.ac.jp/event/",
     },
     mentorCount: 4,
+    openCampusEvents: [
+      { date: "2025年8月9日（土）", title: "北大オープンキャンパス2025", url: "https://www.hokudai.ac.jp/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "tohoku",
@@ -1868,6 +2006,9 @@ export const universities: University[] = [
       openCampus: "https://www.tohoku.ac.jp/japanese/event/",
     },
     mentorCount: 5,
+    openCampusEvents: [
+      { date: "2025年8月10日（日）", title: "東北大オープンキャンパス2025", url: "https://www.tohoku.ac.jp/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "otaru_shoka",
@@ -1898,6 +2039,9 @@ export const universities: University[] = [
       openCampus: "https://www.otaru-uc.ac.jp/event/",
     },
     mentorCount: 2,
+    openCampusEvents: [
+      { date: "2025年7月26日（土）", title: "小樽商大オープンキャンパス2025", url: "https://www.otaru-uc.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "sapporo_city",
@@ -1928,6 +2072,9 @@ export const universities: University[] = [
       openCampus: "https://www.scu.ac.jp/event/",
     },
     mentorCount: 1,
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "札幌市大オープンキャンパス2025", url: "https://www.scu.ac.jp/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   // ===========================
   // 中部・北陸
@@ -1961,6 +2108,9 @@ export const universities: University[] = [
       openCampus: "https://www.nagoya-u.ac.jp/event/",
     },
     mentorCount: 4,
+    openCampusEvents: [
+      { date: "2025年8月3日（日）", title: "名大オープンキャンパス2025", url: "https://www.nagoya-u.ac.jp/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "kanazawa",
@@ -1991,6 +2141,9 @@ export const universities: University[] = [
       openCampus: "https://www.kanazawa-u.ac.jp/event/",
     },
     mentorCount: 2,
+    openCampusEvents: [
+      { date: "2025年7月27日（日）", title: "金沢大オープンキャンパス2025", url: "https://www.kanazawa-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "toyama",
@@ -2021,6 +2174,9 @@ export const universities: University[] = [
       openCampus: "https://www.u-toyama.ac.jp/event/",
     },
     mentorCount: 1,
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "富山大オープンキャンパス2025", url: "https://www.u-toyama.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "shizuoka",
@@ -2051,6 +2207,9 @@ export const universities: University[] = [
       openCampus: "https://www.shizuoka.ac.jp/event/",
     },
     mentorCount: 2,
+    openCampusEvents: [
+      { date: "2025年8月9日（土）", title: "静岡大オープンキャンパス2025", url: "https://www.shizuoka.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "nanzan",
@@ -2081,6 +2240,9 @@ export const universities: University[] = [
       openCampus: "https://www.nanzan-u.ac.jp/event/",
     },
     mentorCount: 2,
+    openCampusEvents: [
+      { date: "2025年8月3日（日）", title: "南山大オープンキャンパス2025", url: "https://www.nanzan-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "hiroshima",
@@ -2111,6 +2273,9 @@ export const universities: University[] = [
       openCampus: "https://www.hiroshima-u.ac.jp/event/",
     },
     mentorCount: 3,
+    openCampusEvents: [
+      { date: "2025年8月9日（土）", title: "広島大オープンキャンパス2025", url: "https://www.hiroshima-u.ac.jp/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "okayama",
@@ -2141,6 +2306,9 @@ export const universities: University[] = [
       openCampus: "https://www.okayama-u.ac.jp/event/",
     },
     mentorCount: 2,
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "岡山大オープンキャンパス2025", url: "https://www.okayama-u.ac.jp/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "yamaguchi",
@@ -2171,6 +2339,9 @@ export const universities: University[] = [
       openCampus: "https://www.yamaguchi-u.ac.jp/event/",
     },
     mentorCount: 1,
+    openCampusEvents: [
+      { date: "2025年8月9日（土）", title: "山口大オープンキャンパス2025", url: "https://www.yamaguchi-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "ehime",
@@ -2201,6 +2372,9 @@ export const universities: University[] = [
       openCampus: "https://www.ehime-u.ac.jp/event/",
     },
     mentorCount: 1,
+    openCampusEvents: [
+      { date: "2025年8月2日（土）", title: "愛媛大オープンキャンパス2025", url: "https://www.ehime-u.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "ryukyu",
@@ -2231,6 +2405,9 @@ export const universities: University[] = [
       openCampus: "https://www.u-ryukyu.ac.jp/event/",
     },
     mentorCount: 1,
+    openCampusEvents: [
+      { date: "2025年8月9日（土）", title: "琉球大オープンキャンパス2025", url: "https://www.u-ryukyu.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   // ===========================
   // 追加5校（実践・PBL重視）
@@ -2264,6 +2441,9 @@ export const universities: University[] = [
       openCampus: "https://www.fun.ac.jp/event/",
     },
     mentorCount: 1,
+    openCampusEvents: [
+      { date: "2025年8月3日（日）", title: "はこだて未来大オープンキャンパス2025", url: "https://www.fun.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "kochi_tech",
@@ -2294,6 +2474,9 @@ export const universities: University[] = [
       openCampus: "https://www.kochi-tech.ac.jp/event/",
     },
     mentorCount: 1,
+    openCampusEvents: [
+      { date: "2025年8月10日（日）", title: "高知工科大オープンキャンパス2025", url: "https://www.kochi-tech.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "tsuru_bunka",
@@ -2324,6 +2507,9 @@ export const universities: University[] = [
       openCampus: "https://www.tsuru.ac.jp/event/",
     },
     mentorCount: 1,
+    openCampusEvents: [
+      { date: "2025年7月27日（日）", title: "都留文大オープンキャンパス2025", url: "https://www.tsuru.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
   {
     id: "tufs",
@@ -2354,6 +2540,9 @@ export const universities: University[] = [
       openCampus: "https://www.tufs.ac.jp/event/",
     },
     mentorCount: 2,
+    openCampusEvents: [
+      { date: "2025年8月3日（日）", title: "東外大オープンキャンパス2025", url: "https://www.tufs.ac.jp/event/", isOnline: false, note: "要事前予約" },
+    ],
   },
   {
     id: "meijigakuin",
@@ -2384,6 +2573,9 @@ export const universities: University[] = [
       openCampus: "https://www.meijigakuin.ac.jp/event/",
     },
     mentorCount: 2,
+    openCampusEvents: [
+      { date: "2025年8月10日（日）", title: "明治学院大オープンキャンパス2025", url: "https://www.meijigakuin.ac.jp/event/", isOnline: false, note: "予約推奨" },
+    ],
   },
 ];
 
