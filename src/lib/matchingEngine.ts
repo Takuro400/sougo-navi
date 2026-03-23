@@ -3,35 +3,34 @@ import { universities } from "@/data/universities";
 import { quizQuestions } from "@/data/quizQuestions";
 
 // ===========================
-// マッチングエンジン
-// 診断回答 → 大学おすすめスコア算出 + ユーザータイプ判定
+// マッチングエンジン v2
 // ===========================
 
-/**
- * カテゴリごとのスコア重み
- * 高いほど大学マッチングに強く影響する
- */
+// ───────────────────────────────────────────────
+// 1. カテゴリ重み（spec 準拠）
+// ───────────────────────────────────────────────
 const CATEGORY_WEIGHTS: Record<QuizCategory, number> = {
-  interest:          2.0,  // 興味分野（最重要）
-  career:            2.0,  // 将来の目標（最重要）
-  graduation_vision: 2.0,  // 卒業後のなりたい姿（最重要）
-  learning:          1.5,  // 学び方の好み
-  campus_life:       1.5,  // 大学生活に求めること
-  personality:       1.5,  // 性格・行動特性
-  subject:           1.5,  // 得意科目
-  finance:           1.5,  // 学費・通学
-  location:          3.0,  // 地域志向（立地は特に重要）
+  career:            3.0,  // 将来の目標（最重要）
+  interest:          2.5,  // 興味分野
+  graduation_vision: 2.5,  // 卒業後のなりたい姿
+  learning:          2.0,  // 学び方の好み
+  location:          2.0,  // 地域志向
   school_type:       2.0,  // 国公立/私立
+  personality:       1.5,  // 性格・行動特性
+  academic:          1.5,  // 学力・評定
+  campus_life:       1.5,  // 大学生活に求めること
+  subject:           1.5,  // 得意科目
+  finance:           1.0,  // 学費・通学
   activity:          1.0,  // 高校での活動
   club:              1.0,  // 部活の種類
   info_gathering:    1.0,  // 情報収集の好み
-  academic:          0.5,  // 学力・評定（マッチングより準備度に使用）
 };
 
-/** 回答から全タグを収集して重み付き頻度マップを作る */
+// ───────────────────────────────────────────────
+// 2. 重み付きタグ頻度マップを構築
+// ───────────────────────────────────────────────
 function buildTagFrequency(answers: QuizAnswers): Record<string, number> {
   const freq: Record<string, number> = {};
-
   quizQuestions.forEach((q) => {
     const selectedValue = answers[q.id];
     if (!selectedValue) return;
@@ -42,77 +41,180 @@ function buildTagFrequency(answers: QuizAnswers): Record<string, number> {
       freq[tag] = (freq[tag] || 0) + weight;
     });
   });
-
   return freq;
 }
 
-/**
- * 1件の大学に対してスコアを計算 (0〜100)
- * 重み付きタグ頻度と大学のmatchTagsのマッチ度で算出
- */
-function calcScore(university: University, tagFreq: Record<string, number>): number {
+// ───────────────────────────────────────────────
+// 3. 学部タイプ別スコア乗数（学部レベルマッチング）
+// ───────────────────────────────────────────────
+function calcFacultyMultiplier(
+  university: University,
+  tagFreq: Record<string, number>
+): number {
+  // 理系スコア：tech / stem / engineering / math / hands-on タグの合計
+  const stemScore =
+    (tagFreq["tech"]       || 0) +
+    (tagFreq["stem"]       || 0) +
+    (tagFreq["engineering"]|| 0) +
+    (tagFreq["math"]       || 0) +
+    (tagFreq["hands-on"]   || 0);
+
+  // 文系スコア：humanities / culture / language / social タグの合計
+  const humanitiesScore =
+    (tagFreq["humanities"] || 0) +
+    (tagFreq["culture"]    || 0) +
+    (tagFreq["language"]   || 0) +
+    (tagFreq["social"]     || 0);
+
+  // 文理融合スコア：global / interdisciplinary / innovation / business タグの合計
+  const mixedScore =
+    (tagFreq["global"]          || 0) +
+    (tagFreq["interdisciplinary"]|| 0) +
+    (tagFreq["innovation"]       || 0) +
+    (tagFreq["business"]         || 0);
+
+  const maxScore = Math.max(stemScore, humanitiesScore, mixedScore);
+  if (maxScore === 0) return 1.0;
+
+  if (stemScore === maxScore && university.facultyType === "理系")    return 1.5;
+  if (humanitiesScore === maxScore && university.facultyType === "文系") return 1.5;
+  if (mixedScore === maxScore && university.facultyType === "文理融合") return 1.3;
+  return 1.0;
+}
+
+// ───────────────────────────────────────────────
+// 4. 大学スコア計算（0〜100）
+// 動的正規化：上位3カテゴリの重み合計をタグあたりの最大値とする
+// ───────────────────────────────────────────────
+const MAX_PER_TAG = (() => {
+  const top3 = Object.values(CATEGORY_WEIGHTS)
+    .sort((a, b) => b - a)
+    .slice(0, 3);
+  return top3.reduce((s, w) => s + w, 0); // 3.0 + 2.5 + 2.5 = 8.0
+})();
+
+function calcScore(
+  university: University,
+  tagFreq: Record<string, number>
+): number {
   let score = 0;
   let maxPossible = 0;
 
   university.matchTags.forEach((tag) => {
     score += tagFreq[tag] || 0;
-    // 重み付きシステムでの最大値: 平均重み(≒1.83) × 最大マッチ問数(3) ≈ 5.5
-    maxPossible += 5.5;
+    maxPossible += MAX_PER_TAG;
   });
 
   if (maxPossible === 0) return 0;
-  return Math.min(100, Math.round((score / maxPossible) * 100));
+
+  const baseScore = Math.min(100, Math.round((score / maxPossible) * 100));
+  const multiplier = calcFacultyMultiplier(university, tagFreq);
+  return Math.min(100, Math.round(baseScore * multiplier));
 }
 
-/** スコアに基づいておすすめ理由を生成 */
+// ───────────────────────────────────────────────
+// 5. 学部単位のおすすめ理由生成
+// ───────────────────────────────────────────────
+type MajorField = University["majorField"];
+
+const MAJOR_FIELD_REASON_FN: Record<
+  MajorField,
+  (tf: Record<string, number>, univ: University) => string | null
+> = {
+  "理工・情報": (tf) =>
+    (tf["tech"] || 0) + (tf["stem"] || 0) + (tf["engineering"] || 0) >= 2
+      ? "プログラミングや数理への関心がこの学部のカリキュラムと一致しています"
+      : null,
+
+  "経済・経営": (tf) =>
+    (tf["business"] || 0) + (tf["entrepreneurship"] || 0) >= 1.5
+      ? "ビジネス・経済への関心が学部の実践的なカリキュラムと合っています"
+      : null,
+
+  "文学・語学": (tf) =>
+    (tf["humanities"] || 0) + (tf["language"] || 0) + (tf["culture"] || 0) >= 1.5
+      ? "言語・文化・人文学への関心がこの学部の専門分野と一致しています"
+      : null,
+
+  "社会・福祉": (tf) =>
+    (tf["community"] || 0) + (tf["welfare"] || 0) + (tf["social"] || 0) >= 1.5
+      ? "社会課題・地域貢献への関心とこの学部のフィールドワーク型教育がマッチしています"
+      : null,
+
+  "医療・生命": (tf) =>
+    (tf["welfare"] || 0) + (tf["medical"] || 0) >= 1.5
+      ? "医療・生命科学への関心とこの学部の専門教育が合っています"
+      : null,
+
+  "国際": (tf) =>
+    (tf["global"] || 0) + (tf["international"] || 0) + (tf["english"] || 0) >= 2
+      ? "グローバルな視野と語学力を伸ばしたいあなたにこの学部の国際環境は最適です"
+      : null,
+
+  "法・政治": (tf) =>
+    (tf["social"] || 0) + (tf["humanities"] || 0) + (tf["leadership"] || 0) >= 1.5
+      ? "社会・制度への関心がこの学部の学びと合致しています"
+      : null,
+
+  "芸術・デザイン": (tf) =>
+    (tf["culture"] || 0) + (tf["hands-on"] || 0) >= 1.5
+      ? "表現・創造への関心がこの学部の実践的カリキュラムと合っています"
+      : null,
+
+  "農・環境": (tf) =>
+    (tf["community"] || 0) + (tf["fieldwork"] || 0) + (tf["stem"] || 0) >= 1.5
+      ? "自然・環境・地域への関心がこの学部のフィールドワーク重視の学びとマッチしています"
+      : null,
+
+  "教育": (tf) =>
+    (tf["community"] || 0) + (tf["social"] || 0) + (tf["welfare"] || 0) >= 1.5
+      ? "人を育てることへの関心がこの学部の教育者育成カリキュラムと合っています"
+      : null,
+};
+
 function buildMatchReasons(
   university: University,
   tagFreq: Record<string, number>
 ): string[] {
   const reasons: string[] = [];
 
-  // グローバル志向
+  // ── 学部単位の理由（最優先）
+  const majorReason = MAJOR_FIELD_REASON_FN[university.majorField]?.(tagFreq, university);
+  if (majorReason) reasons.push(majorReason);
+
+  // ── 汎用タグ理由
   if ((tagFreq["global"] || 0) >= 2 && university.matchTags.includes("global")) {
-    reasons.push("グローバルな環境や英語での学びを求めるあなたに合っています");
+    reasons.push("グローバルな環境・英語での学びを求めるあなたに合っています");
   }
-  // 理工系志向
-  if ((tagFreq["tech"] || 0) >= 1 && university.matchTags.includes("tech")) {
+  if ((tagFreq["tech"] || 0) >= 1.5 && university.matchTags.includes("tech")) {
     reasons.push("テクノロジー・エンジニアリング分野への関心が大学の強みと一致しています");
   }
-  // 地域志向
   if ((tagFreq["kyushu"] || 0) >= 1 && university.matchTags.includes("kyushu")) {
     reasons.push("九州・地元志向のあなたにとって通いやすい立地です");
   }
-  // 社会課題・コミュニティ志向
-  if ((tagFreq["community"] || 0) >= 1 && university.matchTags.includes("community")) {
+  if ((tagFreq["community"] || 0) >= 1.5 && university.matchTags.includes("community")) {
     reasons.push("地域・社会課題への関心が学部のフィールドワーク型教育とマッチしています");
   }
-  // 実践的な学び
   if ((tagFreq["hands-on"] || 0) >= 1 && university.matchTags.includes("hands-on")) {
     reasons.push("実験・実習重視の学び方の好みと大学の教育スタイルが合っています");
   }
-  // 国公立志向
   if ((tagFreq["national"] || 0) >= 1 && (university.type === "国立" || university.type === "公立")) {
     reasons.push("国公立大学を希望するあなたの条件に合っています（学費が比較的安い）");
   }
-  // ビジネス志向
-  if ((tagFreq["business"] || 0) >= 1 && university.matchTags.includes("business")) {
+  if ((tagFreq["business"] || 0) >= 1.5 && university.matchTags.includes("business")) {
     reasons.push("ビジネス・経営への関心が学部のカリキュラムと合致しています");
   }
-  // リーダーシップ
-  if ((tagFreq["leadership"] || 0) >= 1 && university.matchTags.includes("leadership")) {
+  if ((tagFreq["leadership"] || 0) >= 1.5 && university.matchTags.includes("leadership")) {
     reasons.push("リーダーシップや主体性が活かせる学風・課外活動が充実しています");
   }
-  // 起業・イノベーション志向
-  if ((tagFreq["entrepreneurship"] || 0) >= 1.5 && university.matchTags.includes("entrepreneurship")) {
+  if ((tagFreq["entrepreneurship"] || 0) >= 2 && university.matchTags.includes("entrepreneurship")) {
     reasons.push("起業・新規事業への挑戦を後押しするカリキュラムや学内環境が整っています");
   }
-  // 人文・教養志向
-  if ((tagFreq["humanities"] || 0) >= 1.5 && university.matchTags.includes("humanities")) {
+  if ((tagFreq["humanities"] || 0) >= 2 && university.matchTags.includes("humanities")) {
     reasons.push("文学・歴史・思想への関心と大学の人文系カリキュラムがマッチしています");
   }
 
-  // 理由が少なければ汎用メッセージを追加
+  // 不足時のフォールバック
   if (reasons.length === 0) {
     reasons.push("あなたの興味・関心の方向性がこの大学の特色と合っています");
   }
@@ -123,20 +225,23 @@ function buildMatchReasons(
   return reasons;
 }
 
-/** 準備度を判定 */
+// ───────────────────────────────────────────────
+// 6. 準備度を判定
+// ───────────────────────────────────────────────
 function calcReadinessLevel(
   score: number,
   answers: QuizAnswers
 ): "高" | "中" | "低" {
   const academicAnswer = answers["q6"];
   const hasHighAcademic = academicAnswer === "a" || academicAnswer === "b";
-
   if (score >= 65 && hasHighAcademic) return "高";
   if (score >= 40) return "中";
   return "低";
 }
 
-/** 準備度に応じた必要行動リストを生成 */
+// ───────────────────────────────────────────────
+// 7. 準備度に応じた必要行動リスト
+// ───────────────────────────────────────────────
 function buildRequiredActions(
   university: University,
   readiness: "高" | "中" | "低"
@@ -145,7 +250,6 @@ function buildRequiredActions(
     `${university.name}のオープンキャンパスに参加する`,
     "入試要項を確認し、出願書類を把握する",
   ];
-
   if (readiness === "低") {
     return [
       "まずは自分の興味・将来像を言語化してみる",
@@ -162,7 +266,6 @@ function buildRequiredActions(
       "総合型選抜の日程・倍率を調べる",
     ];
   }
-  // 高
   return [
     ...base,
     "志望理由書を完成させる",
@@ -171,10 +274,10 @@ function buildRequiredActions(
   ];
 }
 
-// ===========================
-// ユーザータイプ判定
-// ===========================
-
+// ───────────────────────────────────────────────
+// 8. ユーザータイプ判定
+// タグ合計が最も高いタイプを採用（複数該当時は最高スコア）
+// ───────────────────────────────────────────────
 const USER_TYPE_DATA: Record<string, UserTypeInfo> = {
   global: {
     type: "global",
@@ -223,14 +326,32 @@ const USER_TYPE_DATA: Record<string, UserTypeInfo> = {
   },
 };
 
-/** タグ頻度からユーザータイプを判定 */
 function determineUserType(tagFreq: Record<string, number>): UserTypeInfo {
   const typeScores: Record<string, number> = {
-    global:    (tagFreq["global"] || 0) + (tagFreq["international"] || 0) + (tagFreq["english"] || 0) + (tagFreq["language"] || 0),
-    stem:      (tagFreq["tech"] || 0) + (tagFreq["stem"] || 0) + (tagFreq["engineering"] || 0) + (tagFreq["math"] || 0),
-    community: (tagFreq["community"] || 0) + (tagFreq["welfare"] || 0) + (tagFreq["social"] || 0) + (tagFreq["fieldwork"] || 0),
-    business:  (tagFreq["business"] || 0) + (tagFreq["entrepreneurship"] || 0) + (tagFreq["innovation"] || 0) + (tagFreq["leadership"] || 0),
-    culture:   (tagFreq["humanities"] || 0) + (tagFreq["culture"] || 0) + (tagFreq["interdisciplinary"] || 0),
+    // globalタグが3以上で優位
+    global:    (tagFreq["global"]          || 0) +
+               (tagFreq["international"]   || 0) +
+               (tagFreq["english"]         || 0) +
+               (tagFreq["language"]        || 0),
+    // stem/tech/engineeringタグが3以上で優位
+    stem:      (tagFreq["tech"]            || 0) +
+               (tagFreq["stem"]            || 0) +
+               (tagFreq["engineering"]     || 0) +
+               (tagFreq["math"]            || 0),
+    // community/local/socialタグが3以上で優位
+    community: (tagFreq["community"]       || 0) +
+               (tagFreq["welfare"]         || 0) +
+               (tagFreq["social"]          || 0) +
+               (tagFreq["fieldwork"]       || 0),
+    // business/entrepreneurshipタグが3以上で優位
+    business:  (tagFreq["business"]        || 0) +
+               (tagFreq["entrepreneurship"]|| 0) +
+               (tagFreq["innovation"]      || 0) +
+               (tagFreq["leadership"]      || 0),
+    // culture/language/interdisciplinaryタグが3以上で優位
+    culture:   (tagFreq["humanities"]      || 0) +
+               (tagFreq["culture"]         || 0) +
+               (tagFreq["interdisciplinary"]|| 0),
   };
 
   const topType = Object.entries(typeScores)
@@ -239,9 +360,9 @@ function determineUserType(tagFreq: Record<string, number>): UserTypeInfo {
   return USER_TYPE_DATA[topType] ?? USER_TYPE_DATA["global"];
 }
 
-// ===========================
-// 地域スラッグ → 大学 region 名マッピング
-// ===========================
+// ───────────────────────────────────────────────
+// 9. 地域スラッグ → 大学 region 名マッピング
+// ───────────────────────────────────────────────
 const REGION_MAP: Record<string, string[]> = {
   "hokkaido-tohoku": ["北海道", "東北"],
   "kanto":           ["関東"],
@@ -252,20 +373,24 @@ const REGION_MAP: Record<string, string[]> = {
   "anywhere":        [],
 };
 
-// ===========================
-// メイン：診断結果を生成
-// ===========================
+// ───────────────────────────────────────────────
+// 10. メイン：診断結果を生成
+// ───────────────────────────────────────────────
 export function generateMatchResults(answers: QuizAnswers, region = ""): DiagnosisResult {
   const tagFreq = buildTagFrequency(answers);
   const regionNames = REGION_MAP[region] ?? [];
+  const userType = determineUserType(tagFreq);
 
   const matchResults: MatchResult[] = universities.map((univ) => {
     let score = calcScore(univ, tagFreq);
+
+    // 地域ボーナス（選択地域と一致する大学を優遇）
     if (regionNames.length > 0 && regionNames.includes(univ.region)) {
       score = Math.min(100, score + 20);
     }
-    const matchReasons = buildMatchReasons(univ, tagFreq);
-    const readinessLevel = calcReadinessLevel(score, answers);
+
+    const matchReasons    = buildMatchReasons(univ, tagFreq);
+    const readinessLevel  = calcReadinessLevel(score, answers);
     const requiredActions = buildRequiredActions(univ, readinessLevel);
 
     return {
@@ -274,13 +399,12 @@ export function generateMatchResults(answers: QuizAnswers, region = ""): Diagnos
       matchReasons,
       readinessLevel,
       requiredActions,
+      userType,      // MatchResult に userType を付与
     };
   });
 
   // スコア降順でソート
   matchResults.sort((a, b) => b.score - a.score);
-
-  const userType = determineUserType(tagFreq);
 
   return { matchResults, userType };
 }

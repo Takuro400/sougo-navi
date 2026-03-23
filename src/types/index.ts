@@ -97,6 +97,7 @@ export interface MatchResult {
   matchReasons: string[];  // おすすめ理由
   readinessLevel: "高" | "中" | "低"; // 準備度
   requiredActions: string[]; // 出願までに必要な行動
+  userType: UserTypeInfo;  // 判定されたユーザータイプ
 }
 
 /** generateMatchResults の戻り値 */
