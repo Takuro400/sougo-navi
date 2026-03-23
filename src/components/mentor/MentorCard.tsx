@@ -57,7 +57,7 @@ export default function MentorCard({ mentor, universityName, onConsult }: Props)
       {/* 相談申込ボタン */}
       <button
         onClick={() => onConsult(mentor)}
-        className="w-full mt-4 py-2.5 text-sm font-bold text-white bg-primary-600 hover:bg-primary-700 rounded-xl transition-colors active:scale-95"
+        className="w-full mt-4 py-2.5 text-sm font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 rounded-xl transition-all active:scale-95 shadow-sm shadow-indigo-200/50"
       >
         この先輩に相談する
       </button>

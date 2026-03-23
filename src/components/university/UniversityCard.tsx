@@ -41,46 +41,46 @@ export default function UniversityCard({ result, rank, isSaved, onSave }: Props)
   };
 
   const readinessConfig = {
-    高: { color: "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30", label: "準備度：高" },
-    中: { color: "bg-amber-500/20 text-amber-400 border border-amber-500/30",   label: "準備度：中" },
-    低: { color: "bg-orange-500/20 text-orange-400 border border-orange-500/30", label: "準備度：低" },
+    高: { color: "bg-emerald-50 text-emerald-700 border border-emerald-200", label: "準備度：高" },
+    中: { color: "bg-amber-50 text-amber-700 border border-amber-200",       label: "準備度：中" },
+    低: { color: "bg-orange-50 text-orange-700 border border-orange-200",    label: "準備度：低" },
   };
 
   const sougoConfig = {
-    高: "bg-indigo-500/20 text-indigo-300 border border-indigo-500/30",
-    中: "bg-violet-500/20 text-violet-300 border border-violet-500/30",
-    低: "bg-white/10 text-white/40 border border-white/10",
+    高: "bg-indigo-50 text-indigo-700 border border-indigo-200",
+    中: "bg-violet-50 text-violet-700 border border-violet-200",
+    低: "bg-slate-50 text-slate-500 border border-slate-200",
   };
 
   const typeConfig = {
-    国立: "bg-purple-500/20 text-purple-300 border border-purple-500/30",
-    公立: "bg-teal-500/20 text-teal-300 border border-teal-500/30",
-    私立: "bg-pink-500/20 text-pink-300 border border-pink-500/30",
+    国立: "bg-purple-50 text-purple-700 border border-purple-200",
+    公立: "bg-teal-50 text-teal-700 border border-teal-200",
+    私立: "bg-pink-50 text-pink-700 border border-pink-200",
   };
 
   // ランクに応じたグラデーション
   const rankGradient =
     rank === 1 ? "from-amber-500 to-yellow-400" :
     rank === 2 ? "from-slate-400 to-slate-300" :
-    rank === 3 ? "from-orange-600 to-amber-500" :
+    rank === 3 ? "from-orange-500 to-amber-400" :
     "from-indigo-500 to-violet-500";
 
   return (
-    <div className="bg-slate-800/60 backdrop-blur-md rounded-2xl border border-white/10 p-5 hover:border-indigo-500/30 hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300">
+    <div className="bg-white rounded-2xl border border-slate-200 p-5 hover:border-violet-300 hover:shadow-lg hover:shadow-violet-100/60 transition-all duration-300">
       {/* ヘッダー行 */}
       <div className="flex items-start gap-3 mb-4">
         <div className={`w-9 h-9 rounded-full bg-gradient-to-br ${rankGradient} text-white text-sm font-black flex items-center justify-center shrink-0`}>
           {rank}
         </div>
         <div className="flex-1 min-w-0">
-          <h3 className="font-display font-black text-white text-lg leading-tight">{univ.name}</h3>
-          <p className="text-sm text-white/50 mt-0.5 truncate">{univ.faculty}</p>
+          <h3 className="font-mincho font-bold text-slate-800 text-lg leading-tight">{univ.name}</h3>
+          <p className="text-sm text-slate-500 mt-0.5 truncate">{univ.faculty}</p>
         </div>
         {onSave && (
           <button
             onClick={() => onSave(univ.id)}
             className={`p-2 rounded-full transition-colors shrink-0 ${
-              isSaved ? "text-rose-400" : "text-white/20 hover:text-rose-400"
+              isSaved ? "text-rose-500" : "text-slate-300 hover:text-rose-400"
             }`}
             aria-label={isSaved ? "保存済み" : "気になる大学に保存"}
           >
@@ -95,7 +95,7 @@ export default function UniversityCard({ result, rank, isSaved, onSave }: Props)
       {/* バッジ群 */}
       <div className="flex flex-wrap gap-1.5 mb-4">
         <span className={`badge ${typeConfig[univ.type]}`}>{univ.type}</span>
-        <span className="badge bg-white/10 text-white/50 border border-white/10">{univ.prefecture}</span>
+        <span className="badge bg-slate-50 text-slate-600 border border-slate-200">{univ.prefecture}</span>
         <span className={`badge ${sougoConfig[univ.sougoCompatibility]}`}>
           総合型選抜：{univ.sougoCompatibility}
         </span>
@@ -111,10 +111,10 @@ export default function UniversityCard({ result, rank, isSaved, onSave }: Props)
 
       {/* おすすめ理由 */}
       <div className="mb-5 space-y-2">
-        <p className="text-xs font-bold text-white/30 uppercase tracking-wider">なぜおすすめ？</p>
+        <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">なぜおすすめ？</p>
         {matchReasons.slice(0, 2).map((reason, i) => (
-          <div key={i} className="flex items-start gap-2 text-sm text-white/70">
-            <span className="mt-0.5 text-indigo-400 shrink-0 font-bold">✓</span>
+          <div key={i} className="flex items-start gap-2 text-sm text-slate-600">
+            <span className="mt-0.5 text-indigo-500 shrink-0 font-bold">✓</span>
             <span>{reason}</span>
           </div>
         ))}
@@ -125,13 +125,13 @@ export default function UniversityCard({ result, rank, isSaved, onSave }: Props)
         <div className="flex gap-2">
           <Link
             href={`/universities/${univ.id}`}
-            className="flex-1 text-center py-3 text-sm font-bold text-indigo-300 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/20 hover:border-indigo-500/40 rounded-xl transition-all"
+            className="flex-1 text-center py-3 text-sm font-bold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 rounded-xl transition-all"
           >
             詳細を見る
           </Link>
           <Link
             href={`/mentors?university=${univ.id}`}
-            className="flex-1 text-center py-3 text-sm font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 rounded-xl transition-all shadow-md shadow-indigo-500/20"
+            className="flex-1 text-center py-3 text-sm font-bold text-white bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 rounded-xl transition-all shadow-md shadow-indigo-200/40"
           >
             先輩に相談
           </Link>
@@ -143,10 +143,10 @@ export default function UniversityCard({ result, rank, isSaved, onSave }: Props)
           disabled={isFull}
           className={`w-full py-2.5 text-sm font-bold rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-1.5
             ${isCompared
-              ? "bg-indigo-500/20 text-indigo-300 border border-indigo-500/40"
+              ? "bg-indigo-50 text-indigo-600 border border-indigo-200"
               : isFull
-                ? "bg-white/5 text-white/20 border border-white/5 cursor-not-allowed"
-                : "bg-white/5 text-white/40 border border-white/10 hover:bg-indigo-500/10 hover:text-indigo-300 hover:border-indigo-500/30"
+                ? "bg-slate-50 text-slate-300 border border-slate-200 cursor-not-allowed"
+                : "bg-slate-50 text-slate-500 border border-slate-200 hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-200"
             }`}
         >
           {isCompared ? (
@@ -156,7 +156,7 @@ export default function UniversityCard({ result, rank, isSaved, onSave }: Props)
               <Link
                 href="/compare"
                 onClick={(e) => e.stopPropagation()}
-                className="ml-auto text-xs text-indigo-400 hover:underline"
+                className="ml-auto text-xs text-indigo-500 hover:underline"
               >
                 比較する →
               </Link>
