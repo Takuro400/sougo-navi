@@ -30,7 +30,23 @@ function ResultContent() {
 
   useEffect(() => {
     const raw = searchParams.get("answers");
-    if (!raw) { setLoading(false); return; }
+    if (!raw) {
+      // URLパラメータがない場合はlocalStorageから復元
+      try {
+        const saved = localStorage.getItem("sougo_navi_result");
+        if (saved) {
+          const { matchResults, userType } = JSON.parse(saved);
+          if (matchResults?.length) {
+            setResults(matchResults);
+            setUserType(userType);
+          }
+        }
+      } catch (e) {
+        console.error("保存済み結果の読み込みに失敗しました", e);
+      }
+      setLoading(false);
+      return;
+    }
     try {
       const answers: QuizAnswers = JSON.parse(decodeURIComponent(raw));
       const region = searchParams.get("region") ?? "";
