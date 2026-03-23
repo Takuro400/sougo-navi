@@ -712,6 +712,149 @@ export const universities: University[] = [
     },
     mentorCount: 1,
   },
+  // ===========================
+  // 追加5校（実践・PBL重視）
+  // ===========================
+  {
+    id: "fun_hakodate",
+    name: "公立はこだて未来大学",
+    faculty: "システム情報科学部",
+    department: "情報アーキテクチャ学科・複雑系知能学科",
+    region: "北海道",
+    prefecture: "北海道",
+    type: "公立",
+    description:
+      "「未来」をコンセプトに設計された個性派の公立大学。4年間すべての学年が参加するプロジェクト学習（PBL）が最大の特色で、チームで実社会の課題に取り組む実践教育が徹底されている。情報・デザイン・複雑系を横断的に学べる少人数制の環境が整っており、総合型選抜では主体性・発想力・協働力が評価される。",
+    features: ["PBL特化", "情報×デザイン", "少人数教育", "公立", "プロジェクト型学習"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "自らアイデアを形にする行動力があり、チームで問題解決に取り組むことが好きな学生。情報技術やデザインに興味を持ち、社会課題に挑みたい人。",
+    requiredActivities: [
+      "プログラミング・デザインなどの自主制作物の準備",
+      "チームプロジェクトへの参加経験を言語化する",
+      "社会課題と情報技術の接点を探究した活動実績",
+    ],
+    matchTags: ["tech", "design", "hands-on", "innovation", "interdisciplinary", "creative", "stem", "community"],
+    links: {
+      official: "https://www.fun.ac.jp/",
+      admissions: "https://www.fun.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E3%81%AF%E3%81%93%E3%81%A0%E3%81%A6%E6%9C%AA%E6%9D%A5%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.fun.ac.jp/event/",
+    },
+    mentorCount: 1,
+  },
+  {
+    id: "kochi_tech",
+    name: "高知工科大学",
+    faculty: "システム工学群・環境理工学群・情報学群・経済・マネジメント学群",
+    department: "各学科",
+    region: "中国・四国",
+    prefecture: "高知県",
+    type: "公立",
+    description:
+      "高知県唯一の工科系大学で、2009年に公立化。国公立大学の学費でエンジニアリングを学べるコスパの高さが魅力。実社会の課題に取り組む実践的な教育と少人数ゼミによる丁寧な指導が特徴で、地方にいながら最先端の工学・情報を学べる環境が整っている。総合型選抜では工学への熱意と主体性が問われる。",
+    features: ["工科系特化", "公立でコスパ高い", "少人数ゼミ", "実践教育", "地方国公立"],
+    sougoCompatibility: "中",
+    idealStudent:
+      "エンジニアやIT系の仕事を目指し、実践的なスキルを身につけたい学生。地方で学びながら専門性を高め、ものづくりや技術開発に挑戦したい人。",
+    requiredActivities: [
+      "プログラミングや電子工作など理工系の自主学習・制作",
+      "工学系コンテストや科学部・ロボット部などの活動実績",
+      "志望する工学分野への関心を具体的に言語化する",
+    ],
+    matchTags: ["tech", "stem", "engineering", "hands-on", "innovation", "career-focused", "research", "math"],
+    links: {
+      official: "https://www.kochi-tech.ac.jp/",
+      admissions: "https://www.kochi-tech.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E9%AB%98%E7%9F%A5%E5%B7%A5%E7%A7%91%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.kochi-tech.ac.jp/event/",
+    },
+    mentorCount: 1,
+  },
+  {
+    id: "tsuru_bunka",
+    name: "都留文科大学",
+    faculty: "文学部・教養学部・比較文化学部",
+    department: "各学科",
+    region: "関東",
+    prefecture: "山梨県",
+    type: "公立",
+    description:
+      "全国有数の低学費が特徴の山梨県の公立大学。文学・教育・国際文化など文系学問を幅広く学べる環境で、特に教員養成に定評がある。授業料が私立の約3分の1程度と非常にリーズナブルで、奨学金や生活支援も充実。少人数ゼミ形式で深い学びが可能で、教員・公務員を目指す学生に人気が高い。",
+    features: ["学費が非常に安い", "文系特化", "教員養成", "公立", "少人数ゼミ"],
+    sougoCompatibility: "中",
+    idealStudent:
+      "文学・教育・国際文化に関心があり、学費負担を抑えながら充実した学びを求める学生。教員や公務員など安定したキャリアを目指す人。",
+    requiredActivities: [
+      "読書・文章表現の実績（作文・読書感想文・論文等）",
+      "教育・子ども支援に関するボランティア体験",
+      "志望する学問分野への関心を具体的に言語化する",
+    ],
+    matchTags: ["humanities", "culture", "language", "interdisciplinary", "social", "career-focused", "welfare"],
+    links: {
+      official: "https://www.tsuru.ac.jp/",
+      admissions: "https://www.tsuru.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E9%83%BD%E7%95%99%E6%96%87%E7%A7%91%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.tsuru.ac.jp/event/",
+    },
+    mentorCount: 1,
+  },
+  {
+    id: "tufs",
+    name: "東京外国語大学",
+    faculty: "言語文化学部・国際社会学部",
+    department: "各言語・地域専攻",
+    region: "関東",
+    prefecture: "東京都",
+    type: "国立",
+    description:
+      "日本最高峰の語学・国際系大学。60以上の言語専攻を持ち、語学力だけでなく対象地域の歴史・文化・社会も深く学ぶ「地域研究」が特徴。国際機関・外交・ジャーナリズムなど多様なグローバルキャリアに強く、外国語を武器に世界を舞台に活躍したい学生に最適。総合型選抜では言語への情熱と国際的な関心・実績が重視される。",
+    features: ["語学最強", "60言語以上", "国立", "国際系", "地域研究"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "特定の言語や地域文化に強い関心を持ち、グローバルな視野で社会に貢献したい学生。語学力と国際的な好奇心を兼ね備えた人。",
+    requiredActivities: [
+      "英語以外の外国語の自主学習や語学検定の取得",
+      "海外経験・国際交流・留学生との交流実績",
+      "志望言語・地域に関する文化・社会への深い関心を言語化する",
+    ],
+    matchTags: ["global", "international", "english", "language", "culture", "humanities", "academic", "national"],
+    links: {
+      official: "https://www.tufs.ac.jp/",
+      admissions: "https://www.tufs.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E6%9D%B1%E4%BA%AC%E5%A4%96%E5%9B%BD%E8%AA%9E%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.tufs.ac.jp/event/",
+    },
+    mentorCount: 2,
+  },
+  {
+    id: "meijigakuin",
+    name: "明治学院大学",
+    faculty: "国際学部・社会学部・心理学部・法学部・経済学部・文学部",
+    department: "各学科",
+    region: "関東",
+    prefecture: "東京都",
+    type: "私立",
+    description:
+      "「Do for Others（他者への奉仕）」を建学の精神に掲げるキリスト教主義の私立大学。国際学部と社会学部・社会福祉学科が特に充実しており、グローバルな視点と社会貢献の精神を育む教育が特徴。少人数のゼミ制度と海外フィールドワークの機会が豊富で、国際協力・社会福祉・NGO活動に関心を持つ学生に人気が高い。",
+    features: ["国際×社会福祉", "キリスト教主義", "少人数制", "私立", "フィールドワーク充実"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "社会問題や国際協力に関心を持ち、「誰かの役に立つ」キャリアを目指す学生。ボランティアや社会活動の経験を持ち、多様な価値観を受け入れられる人。",
+    requiredActivities: [
+      "ボランティア・社会貢献活動への継続的な参加",
+      "国際交流・異文化体験（留学・ホームステイ等）の経験",
+      "社会課題への関心と自分が貢献できることを言語化する",
+    ],
+    matchTags: ["global", "welfare", "social", "community", "international", "fieldwork", "humanities", "leadership"],
+    links: {
+      official: "https://www.meijigakuin.ac.jp/",
+      admissions: "https://www.meijigakuin.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E6%98%8E%E6%B2%BB%E5%AD%A6%E9%99%A2%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.meijigakuin.ac.jp/event/",
+    },
+    mentorCount: 2,
+  },
 ];
 
 /** IDで大学を取得 */
