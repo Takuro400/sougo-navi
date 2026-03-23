@@ -16,9 +16,6 @@ const REGION_OPTIONS = [
   { value: "anywhere", label: "どこでもOK" },
 ];
 
-// ===========================
-// 診断ページ
-// ===========================
 export default function QuizPage() {
   const router = useRouter();
   const [step, setStep] = useState<"region" | "quiz">("region");
@@ -65,38 +62,41 @@ export default function QuizPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 relative overflow-hidden">
-      {/* 背景グラデーションオーブ */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl pointer-events-none" />
+    <div className="min-h-screen bg-white relative overflow-hidden">
+      {/* 背景グラデーション（ファーストビューと同一） */}
+      <div className="absolute inset-0 bg-gradient-to-br from-violet-50/70 via-white to-sky-50/50 pointer-events-none" />
+      <div className="absolute -top-32 right-0 w-[700px] h-[700px] bg-gradient-to-bl from-violet-100/35 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 -left-20 w-[500px] h-[500px] bg-gradient-to-tr from-sky-100/30 to-transparent rounded-full blur-3xl pointer-events-none" />
 
-      <Header />
+      <Header variant="light" />
 
-      {/* グローバル進捗バー */}
-      <div className="fixed top-14 left-0 right-0 z-40 h-0.5 bg-white/5">
+      {/* プログレスバー */}
+      <div className="fixed top-14 left-0 right-0 z-40 h-0.5 bg-violet-100">
         <div
           className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-700 ease-out"
           style={{ width: `${progress}%` }}
         />
       </div>
 
-      <div className="relative max-w-lg mx-auto px-4 pt-10 pb-16">
+      <div className="relative max-w-lg mx-auto px-4 pt-12 pb-16">
 
         {step === "region" ? (
           <>
             {/* ヘッダー行 */}
-            <div className="flex items-center justify-between mb-8">
-              <div className="flex items-center gap-2 text-white/30">
-                <span className="text-2xl font-black text-white">1</span>
-                <span className="text-sm">/ {total + 1}</span>
+            <div className="flex items-center justify-between mb-10">
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-mincho text-4xl font-bold bg-gradient-to-r from-violet-600 to-indigo-500 bg-clip-text text-transparent leading-none">
+                  1
+                </span>
+                <span className="text-sm text-slate-400 font-sans">/ {total + 1}</span>
               </div>
-              <span className="text-xs font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">
+              <span className="text-xs font-bold text-violet-600 bg-violet-50 border border-violet-200 px-3 py-1.5 rounded-full">
                 地域志向
               </span>
             </div>
 
             {/* 質問文 */}
-            <h2 className="font-display font-black text-2xl text-white leading-snug mb-8">
+            <h2 className="font-mincho text-[1.55rem] font-bold text-slate-800 leading-[1.5] mb-9 tracking-wide">
               志望するエリアを教えてください。
             </h2>
 
@@ -108,27 +108,27 @@ export default function QuizPage() {
                   <button
                     key={option.value}
                     onClick={() => setRegionSelected(option.value)}
-                    className={`w-full text-left px-5 py-5 rounded-2xl border-2 transition-all duration-200 active:scale-[0.97]
+                    className={`w-full text-left px-5 py-4 rounded-2xl border transition-all duration-200 active:scale-[0.97]
                       ${isActive
-                        ? "bg-gradient-to-r from-indigo-600/70 to-violet-600/70 border-indigo-400/70 shadow-lg shadow-indigo-500/20 text-white"
-                        : "bg-white/5 border-white/10 text-white/75 hover:bg-white/8 hover:border-white/20 hover:text-white"
+                        ? "bg-gradient-to-r from-indigo-500 to-violet-500 border-transparent shadow-lg shadow-indigo-200/60 text-white"
+                        : "bg-white border-slate-200 text-slate-700 hover:border-violet-300 hover:bg-violet-50/40 shadow-sm hover:shadow-md"
                       }`}
                   >
                     <span className="flex items-center gap-4">
                       <span
-                        className={`w-6 h-6 rounded-full border-2 shrink-0 flex items-center justify-center transition-all duration-200
+                        className={`w-5 h-5 rounded-full border-2 shrink-0 flex items-center justify-center transition-all duration-200
                           ${isActive
-                            ? "border-white/60 bg-white/20 scale-110"
-                            : "border-white/20"
+                            ? "border-white/70 bg-white/20"
+                            : "border-slate-300"
                           }`}
                       >
                         {isActive && (
-                          <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 12 12">
+                          <svg className="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 12 12">
                             <path d="M2.5 6L5 8.5L9.5 3.5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
                         )}
                       </span>
-                      <span className="text-base font-medium leading-snug">{option.label}</span>
+                      <span className="font-mincho text-base leading-snug">{option.label}</span>
                     </span>
                   </button>
                 );
@@ -136,35 +136,35 @@ export default function QuizPage() {
             </div>
 
             {/* ナビゲーション */}
-            <div className="flex gap-3">
-              <button
-                onClick={handleRegionNext}
-                disabled={!regionSelected}
-                className={`flex-1 py-4 text-base font-bold rounded-xl transition-all duration-200
-                  ${regionSelected
-                    ? "bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 text-white shadow-lg shadow-indigo-500/25 active:scale-95"
-                    : "bg-white/5 text-white/20 cursor-not-allowed"
-                  }`}
-              >
-                次の質問へ →
-              </button>
-            </div>
+            <button
+              onClick={handleRegionNext}
+              disabled={!regionSelected}
+              className={`w-full py-4 font-mincho text-base font-bold rounded-xl transition-all duration-200
+                ${regionSelected
+                  ? "bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 text-white shadow-lg shadow-indigo-300/40 active:scale-95"
+                  : "bg-slate-100 text-slate-300 cursor-not-allowed"
+                }`}
+            >
+              次の質問へ →
+            </button>
           </>
         ) : (
           <>
             {/* ヘッダー行 */}
-            <div className="flex items-center justify-between mb-8">
-              <div className="flex items-center gap-2 text-white/30">
-                <span className="text-2xl font-black text-white">{currentIndex + 2}</span>
-                <span className="text-sm">/ {total + 1}</span>
+            <div className="flex items-center justify-between mb-10">
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-mincho text-4xl font-bold bg-gradient-to-r from-violet-600 to-indigo-500 bg-clip-text text-transparent leading-none">
+                  {currentIndex + 2}
+                </span>
+                <span className="text-sm text-slate-400 font-sans">/ {total + 1}</span>
               </div>
-              <span className="text-xs font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">
+              <span className="text-xs font-bold text-violet-600 bg-violet-50 border border-violet-200 px-3 py-1.5 rounded-full">
                 {categoryLabel(current.category)}
               </span>
             </div>
 
             {/* 質問文 */}
-            <h2 className="font-display font-black text-2xl text-white leading-snug mb-8">
+            <h2 className="font-mincho text-[1.55rem] font-bold text-slate-800 leading-[1.5] mb-9 tracking-wide">
               {current.text}
             </h2>
 
@@ -176,27 +176,27 @@ export default function QuizPage() {
                   <button
                     key={option.value}
                     onClick={() => handleSelect(option.value)}
-                    className={`w-full text-left px-5 py-5 rounded-2xl border-2 transition-all duration-200 active:scale-[0.97]
+                    className={`w-full text-left px-5 py-4 rounded-2xl border transition-all duration-200 active:scale-[0.97]
                       ${isActive
-                        ? "bg-gradient-to-r from-indigo-600/70 to-violet-600/70 border-indigo-400/70 shadow-lg shadow-indigo-500/20 text-white"
-                        : "bg-white/5 border-white/10 text-white/75 hover:bg-white/8 hover:border-white/20 hover:text-white"
+                        ? "bg-gradient-to-r from-indigo-500 to-violet-500 border-transparent shadow-lg shadow-indigo-200/60 text-white"
+                        : "bg-white border-slate-200 text-slate-700 hover:border-violet-300 hover:bg-violet-50/40 shadow-sm hover:shadow-md"
                       }`}
                   >
                     <span className="flex items-center gap-4">
                       <span
-                        className={`w-6 h-6 rounded-full border-2 shrink-0 flex items-center justify-center transition-all duration-200
+                        className={`w-5 h-5 rounded-full border-2 shrink-0 flex items-center justify-center transition-all duration-200
                           ${isActive
-                            ? "border-white/60 bg-white/20 scale-110"
-                            : "border-white/20"
+                            ? "border-white/70 bg-white/20"
+                            : "border-slate-300"
                           }`}
                       >
                         {isActive && (
-                          <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 12 12">
+                          <svg className="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 12 12">
                             <path d="M2.5 6L5 8.5L9.5 3.5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
                         )}
                       </span>
-                      <span className="text-base font-medium leading-snug">{option.label}</span>
+                      <span className="font-mincho text-base leading-snug">{option.label}</span>
                     </span>
                   </button>
                 );
@@ -207,17 +207,17 @@ export default function QuizPage() {
             <div className="flex gap-3">
               <button
                 onClick={handleBack}
-                className="py-4 px-6 text-base font-bold text-white/40 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-colors"
+                className="py-4 px-6 font-mincho text-base font-bold text-slate-500 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl transition-colors shadow-sm"
               >
                 ← 戻る
               </button>
               <button
                 onClick={handleNext}
                 disabled={!selected}
-                className={`flex-1 py-4 text-base font-bold rounded-xl transition-all duration-200
+                className={`flex-1 py-4 font-mincho text-base font-bold rounded-xl transition-all duration-200
                   ${selected
-                    ? "bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 text-white shadow-lg shadow-indigo-500/25 active:scale-95"
-                    : "bg-white/5 text-white/20 cursor-not-allowed"
+                    ? "bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 text-white shadow-lg shadow-indigo-300/40 active:scale-95"
+                    : "bg-slate-100 text-slate-300 cursor-not-allowed"
                   }`}
               >
                 {isLast ? "診断結果を見る ✨" : "次の質問へ →"}
@@ -227,7 +227,7 @@ export default function QuizPage() {
         )}
 
         {/* 注意文 */}
-        <p className="text-center text-xs text-white/20 mt-6 leading-relaxed">
+        <p className="text-center text-xs text-slate-400 mt-8 leading-relaxed font-sans">
           診断結果は参考情報です。合格を保証するものではありません。
         </p>
       </div>
