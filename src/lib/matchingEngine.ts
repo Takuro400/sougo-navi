@@ -381,14 +381,14 @@ export function generateMatchResults(answers: QuizAnswers, region = ""): Diagnos
   const regionNames = REGION_MAP[region] ?? [];
   const userType = determineUserType(tagFreq);
 
-  // 偏差値帯ボーナス用マッピング
-  const hensachiBonus: Record<string, string[]> = {
-    "hensachi-high":     ["最難関", "難関"],
-    "hensachi-mid-high": ["難関", "中堅上位"],
-    "hensachi-mid":      ["中堅上位", "中堅"],
-    "hensachi-low":      ["中堅", "挑戦しやすい"],
+  // 偏差値帯ボーナス用マッピング（hensachi数値で判定）
+  const hensachiRanges: Record<string, (h: number) => boolean> = {
+    "hensachi-high":     (h) => h >= 60,
+    "hensachi-mid-high": (h) => h >= 53 && h <= 59,
+    "hensachi-mid":      (h) => h >= 46 && h <= 52,
+    "hensachi-low":      (h) => h <= 45,
   };
-  const hensachiTag = Object.keys(hensachiBonus).find((tag) => (tagFreq[tag] || 0) > 0) ?? null;
+  const hensachiTag = Object.keys(hensachiRanges).find((tag) => (tagFreq[tag] || 0) > 0) ?? null;
 
   const matchResults: MatchResult[] = universities.map((univ) => {
     let score = calcScore(univ, tagFreq);
@@ -399,7 +399,7 @@ export function generateMatchResults(answers: QuizAnswers, region = ""): Diagnos
     }
 
     // 偏差値帯ボーナス
-    if (hensachiTag && univ.hensachiRange && hensachiBonus[hensachiTag].includes(univ.hensachiRange)) {
+    if (hensachiTag && univ.hensachi != null && hensachiRanges[hensachiTag](univ.hensachi)) {
       score = Math.min(100, score + 15);
     }
 
