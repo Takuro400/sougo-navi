@@ -51,7 +51,7 @@ function ResultContent() {
         if (saved) {
           const { matchResults, userType, answers: savedAnswers } = JSON.parse(saved);
           if (matchResults?.length) {
-            setResults(matchResults);
+            setResults(matchResults.slice(0, 5));
             setUserType(userType);
             if (savedAnswers) setRawAnswers(savedAnswers);
           }
@@ -66,7 +66,7 @@ function ResultContent() {
       const answers: QuizAnswers = JSON.parse(decodeURIComponent(raw));
       const region = searchParams.get("region") ?? "";
       const { matchResults: matched, userType: type } = generateMatchResults(answers, region);
-      setResults(matched);
+      setResults(matched.slice(0, 5));
       setUserType(type);
       setRawAnswers(answers);
       localStorage.setItem("sougo_navi_result", JSON.stringify({
@@ -217,8 +217,11 @@ function ResultContent() {
         ⚠️ この結果は参考情報です。合格を保証するものではありません。進路決定は先生・保護者と相談のうえ行ってください。
       </div>
 
-      {/* 全結果リスト */}
-      <div className="space-y-4 mb-10">
+      {/* 上位5件リスト */}
+      <h2 className="font-mincho font-bold text-slate-800 text-base mb-3">
+        あなたにおすすめの大学 TOP5
+      </h2>
+      <div className="space-y-4 mb-6">
         {results.map((result, i) => (
           <UniversityCard
             key={result.university.id}
@@ -228,6 +231,14 @@ function ResultContent() {
             onSave={handleSave}
           />
         ))}
+      </div>
+
+      {/* 再診断促進 */}
+      <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-6 text-center">
+        <p className="text-sm text-slate-500 mb-3">他にも候補があります。条件を変えて再診断してみましょう</p>
+        <Link href="/quiz" className="btn-primary justify-center py-2.5 text-sm">
+          条件を変えて再診断する
+        </Link>
       </div>
 
       {/* 次のアクション */}
