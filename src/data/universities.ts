@@ -572,6 +572,146 @@ export const universities: University[] = [
     },
     mentorCount: 2,
   },
+  {
+    id: "hiroshima",
+    name: "広島大学",
+    faculty: "文学部・教育学部・理学部・工学部・医学部他",
+    department: "各学科",
+    region: "中国・四国",
+    prefecture: "広島県",
+    type: "国立",
+    description:
+      "中国・四国地方を代表する総合国立大学。教育・医学・工学など幅広い分野で高い研究実績を誇る。東広島キャンパスを中心に、広大な敷地でのびのびと学べる環境が整っている。総合型選抜では志望分野への深い関心と探究心が重視される。",
+    features: ["旧官立大学", "総合大学", "研究力が高い", "国立", "医学部あり"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "特定の学問分野に対して強い探究心を持ち、自ら課題を設定して取り組める学生。研究や社会貢献への高い志を持つ人。",
+    requiredActivities: [
+      "志望分野に関する自主研究・探究活動",
+      "学外コンテストや研究発表への参加",
+      "高い学業成績と課外活動の実績",
+    ],
+    matchTags: ["academic", "research", "stem", "national", "chugoku-shikoku", "medicine", "education"],
+    links: {
+      official: "https://www.hiroshima-u.ac.jp/",
+      admissions: "https://www.hiroshima-u.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%BA%83%E5%B3%B6%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.hiroshima-u.ac.jp/event/",
+    },
+    mentorCount: 3,
+  },
+  {
+    id: "okayama",
+    name: "岡山大学",
+    faculty: "文学部・法学部・経済学部・理学部・工学部・医学部他",
+    department: "各学科",
+    region: "中国・四国",
+    prefecture: "岡山県",
+    type: "国立",
+    description:
+      "岡山県の総合国立大学として、医学・農学・工学など幅広い学問分野を擁する。医療系学部が充実しており、医師・歯科医師・薬剤師など医療専門職の養成でも高い実績を持つ。地域社会との連携も積極的に推進している。",
+    features: ["総合大学", "医学・歯学・薬学", "地域連携", "国立", "研究重視"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "医療・理工・人文など特定分野への強い関心を持ち、専門性を深めながら社会に貢献したい学生。",
+    requiredActivities: [
+      "志望分野に関する探究活動や自主学習",
+      "医療・福祉・地域に関するボランティア活動",
+      "学外コンテストや発表経験",
+    ],
+    matchTags: ["medicine", "research", "national", "chugoku-shikoku", "community", "engineering", "agriculture"],
+    links: {
+      official: "https://www.okayama-u.ac.jp/",
+      admissions: "https://www.okayama-u.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%B2%A1%E5%B1%B1%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.okayama-u.ac.jp/event/",
+    },
+    mentorCount: 2,
+  },
+  {
+    id: "yamaguchi",
+    name: "山口大学",
+    faculty: "人文学部・教育学部・経済学部・理学部・工学部・医学部他",
+    department: "各学科",
+    region: "中国・四国",
+    prefecture: "山口県",
+    type: "国立",
+    description:
+      "山口県の総合国立大学。医学・工学・農学など幅広い分野を有し、地域産業との連携教育に力を入れている。少人数教育ときめ細かい学習支援が特徴で、学生一人ひとりの成長をサポートする環境が整っている。",
+    features: ["総合大学", "地域産業連携", "少人数教育", "国立", "医学部あり"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "地域や産業の課題に関心を持ち、専門的な知識を身につけて社会に貢献したいと考える学生。",
+    requiredActivities: [
+      "地域課題や産業に関する探究・フィールドワーク",
+      "ボランティアや社会貢献活動",
+      "志望分野に関する自主学習や資格取得",
+    ],
+    matchTags: ["engineering", "medicine", "community", "national", "chugoku-shikoku", "local", "research"],
+    links: {
+      official: "https://www.yamaguchi-u.ac.jp/",
+      admissions: "https://www.yamaguchi-u.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E5%B1%B1%E5%8F%A3%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.yamaguchi-u.ac.jp/event/",
+    },
+    mentorCount: 1,
+  },
+  {
+    id: "ehime",
+    name: "愛媛大学",
+    faculty: "法文学部・教育学部・理学部・工学部・農学部・医学部他",
+    department: "各学科",
+    region: "中国・四国",
+    prefecture: "愛媛県",
+    type: "国立",
+    description:
+      "愛媛県の総合国立大学。農学・水産・環境分野の研究が盛んで、瀬戸内海の豊かな自然を活かしたフィールド研究が特徴。地域の一次産業や食品産業との連携も深く、実践的な学びの機会が豊富。",
+    features: ["農学・水産", "環境研究", "地域連携", "国立", "医学部あり"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "農業・水産・環境・医療など地域に密着した分野に関心を持ち、実践的な研究や社会貢献を目指す学生。",
+    requiredActivities: [
+      "農業・水産・環境に関する探究活動やフィールドワーク",
+      "地域ボランティアや社会課題への関与",
+      "志望分野への主体的な学習・資格取得",
+    ],
+    matchTags: ["agriculture", "marine", "environment", "national", "chugoku-shikoku", "community", "local"],
+    links: {
+      official: "https://www.ehime-u.ac.jp/",
+      admissions: "https://www.ehime-u.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E6%84%9B%E5%AA%9B%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.ehime-u.ac.jp/event/",
+    },
+    mentorCount: 1,
+  },
+  {
+    id: "ryukyu",
+    name: "琉球大学",
+    faculty: "法文学部・教育学部・理学部・工学部・農学部・医学部他",
+    department: "各学科",
+    region: "沖縄",
+    prefecture: "沖縄県",
+    type: "国立",
+    description:
+      "沖縄県唯一の国立総合大学。亜熱帯の自然環境を活かした海洋・環境・生命科学分野の研究が世界的にも注目される。沖縄の独自文化や地理的優位性を活かした国際交流も盛んで、東アジア・東南アジアとの連携が深い。",
+    features: ["海洋・環境研究", "亜熱帯生態系", "国際連携", "国立", "医学部あり"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "海洋・環境・国際問題に強い関心を持ち、沖縄の自然や文化を活かしたフィールドで学びたい学生。",
+    requiredActivities: [
+      "海洋・環境・生態系に関する探究活動",
+      "国際交流や異文化体験の経験",
+      "地域課題（沖縄の歴史・文化・環境等）への関与",
+    ],
+    matchTags: ["marine", "environment", "global", "national", "okinawa", "research", "international"],
+    links: {
+      official: "https://www.u-ryukyu.ac.jp/",
+      admissions: "https://www.u-ryukyu.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/search/univ?keyword=%E7%90%89%E7%90%83%E5%A4%A7%E5%AD%A6",
+      openCampus: "https://www.u-ryukyu.ac.jp/event/",
+    },
+    mentorCount: 1,
+  },
 ];
 
 /** IDで大学を取得 */
