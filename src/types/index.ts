@@ -48,12 +48,28 @@ export interface UserTypeInfo {
 /** 診断の回答セット */
 export type QuizAnswers = Record<string, string>;
 
-/** 大学データ */
+export type FacultyType = "文系" | "理系" | "文理融合";
+
+export type MajorField =
+  | "経済・経営"
+  | "法・政治"
+  | "文学・語学"
+  | "社会・福祉"
+  | "理工・情報"
+  | "医療・生命"
+  | "芸術・デザイン"
+  | "農・環境"
+  | "教育"
+  | "国際";
+
+/** 大学データ（大学×学部で1レコード） */
 export interface University {
   id: string;
   name: string;
   faculty: string;        // 学部名
   department: string;     // 学科名
+  facultyType: FacultyType; // 文系・理系・文理融合
+  majorField: MajorField;   // 専攻分野カテゴリ
   region: string;         // 地域
   prefecture: string;     // 都道府県
   type: "国立" | "公立" | "私立";
