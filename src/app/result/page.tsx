@@ -33,7 +33,8 @@ function ResultContent() {
     if (!raw) { setLoading(false); return; }
     try {
       const answers: QuizAnswers = JSON.parse(decodeURIComponent(raw));
-      const { matchResults: matched, userType: type } = generateMatchResults(answers);
+      const region = searchParams.get("region") ?? "";
+      const { matchResults: matched, userType: type } = generateMatchResults(answers, region);
       setResults(matched);
       setUserType(type);
       localStorage.setItem("sougo_navi_result", JSON.stringify({

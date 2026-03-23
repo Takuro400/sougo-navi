@@ -240,13 +240,30 @@ function determineUserType(tagFreq: Record<string, number>): UserTypeInfo {
 }
 
 // ===========================
+// 地域スラッグ → 大学 region 名マッピング
+// ===========================
+const REGION_MAP: Record<string, string[]> = {
+  "hokkaido-tohoku": ["北海道", "東北"],
+  "kanto":           ["関東"],
+  "chubu-hokuriku":  ["中部", "北陸", "中部・北陸"],
+  "kansai":          ["関西"],
+  "chugoku-shikoku": ["中国", "四国", "中国・四国"],
+  "kyushu-okinawa":  ["九州", "沖縄"],
+  "anywhere":        [],
+};
+
+// ===========================
 // メイン：診断結果を生成
 // ===========================
-export function generateMatchResults(answers: QuizAnswers): DiagnosisResult {
+export function generateMatchResults(answers: QuizAnswers, region = ""): DiagnosisResult {
   const tagFreq = buildTagFrequency(answers);
+  const regionNames = REGION_MAP[region] ?? [];
 
   const matchResults: MatchResult[] = universities.map((univ) => {
-    const score = calcScore(univ, tagFreq);
+    let score = calcScore(univ, tagFreq);
+    if (regionNames.length > 0 && regionNames.includes(univ.region)) {
+      score = Math.min(100, score + 20);
+    }
     const matchReasons = buildMatchReasons(univ, tagFreq);
     const readinessLevel = calcReadinessLevel(score, answers);
     const requiredActions = buildRequiredActions(univ, readinessLevel);
