@@ -437,8 +437,13 @@ export function generateMatchResults(answers: QuizAnswers, region = ""): Diagnos
     stemScore > humanitiesScore * 1.5 ? "理系" :
     humanitiesScore > stemScore * 1.5  ? "文系" : null;
 
-  // Step 1: 全大学の生スコアを計算（ボーナス・ペナルティ含む）
-  const rawResults = universities.map((univ) => {
+  // Step 1: 総合型選抜が利用可能な大学のみを対象にフィルタリング
+  const eligibleUniversities = universities.filter(
+    (univ) => univ.sougouAdmission?.available === true
+  );
+
+  // Step 2: 全大学の生スコアを計算（ボーナス・ペナルティ含む）
+  const rawResults = eligibleUniversities.map((univ) => {
     let score = calcScore(univ, tagFreq);
 
     // 地域ボーナス（一致）
