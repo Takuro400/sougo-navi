@@ -2817,3 +2817,7 @@ export const universities: University[] = [
     ],
   },
 ];
+
+export function getUniversityById(id: string): University | undefined {
+  return universities.find((u) => u.id === id);
+}
