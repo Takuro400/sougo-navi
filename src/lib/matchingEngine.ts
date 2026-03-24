@@ -83,8 +83,26 @@ function calcFacultyMultiplier(
 }
 
 // ───────────────────────────────────────────────
-// 4. 大学スコア計算（0〜100）
-// 動的正規化：上位3カテゴリの重み合計をタグあたりの最大値とする
+// 4. タググループ定義（カテゴリ単位でボーナスを管理）
+// ───────────────────────────────────────────────
+const TAG_GROUPS: Record<string, string[]> = {
+  stem:          ["tech", "stem", "engineering", "math", "science", "research"],
+  hands_on:      ["hands-on", "fieldwork", "agriculture", "environment", "marine"],
+  global:        ["global", "international", "english", "language"],
+  business:      ["business", "entrepreneurship", "innovation", "career-focused", "leadership"],
+  community:     ["community", "welfare", "social", "education", "collaborative"],
+  humanities:    ["humanities", "culture", "interdisciplinary", "law"],
+  creative:      ["arts", "design", "creative"],
+  medical:       ["medical", "medicine"],
+  presence:      ["prestigious", "academic"],
+  location:      ["national", "private", "kyushu", "okinawa", "chugoku-shikoku", "local"],
+};
+
+const TAG_GROUP_MAX_BONUS = 20; // 1カテゴリにつき最大ボーナス点
+
+// ───────────────────────────────────────────────
+// 5. 大学スコア計算（0〜100）
+// カテゴリ単位でボーナスを+20点に上限設定し、100点インフレを防ぐ
 // ───────────────────────────────────────────────
 const MAX_PER_TAG = (() => {
   const top3 = Object.values(CATEGORY_WEIGHTS)
@@ -97,23 +115,37 @@ function calcScore(
   university: University,
   tagFreq: Record<string, number>
 ): number {
-  let score = 0;
-  let maxPossible = 0;
+  // 大学のタグをグループに分類し、グループ別に集計
+  const groupRawScores: Record<string, number> = {};
+  const groupMaxScores: Record<string, number> = {};
 
   university.matchTags.forEach((tag) => {
-    score += tagFreq[tag] || 0;
-    maxPossible += MAX_PER_TAG;
+    const group =
+      Object.entries(TAG_GROUPS).find(([, tags]) => tags.includes(tag))?.[0] ?? `other_${tag}`;
+    groupRawScores[group] = (groupRawScores[group] || 0) + (tagFreq[tag] || 0);
+    groupMaxScores[group] = (groupMaxScores[group] || 0) + MAX_PER_TAG;
   });
 
-  if (maxPossible === 0) return 0;
+  let totalScore = 0;
+  let totalMax = 0;
 
-  const baseScore = Math.min(100, Math.round((score / maxPossible) * 100));
+  // グループごとにTAG_GROUP_MAX_BONUSを上限として集計（同カテゴリのタグ積み増しを防ぐ）
+  Object.entries(groupRawScores).forEach(([group, rawScore]) => {
+    const groupMax = groupMaxScores[group];
+    const groupContribution = (rawScore / groupMax) * TAG_GROUP_MAX_BONUS;
+    totalScore += Math.min(TAG_GROUP_MAX_BONUS, groupContribution);
+    totalMax += TAG_GROUP_MAX_BONUS;
+  });
+
+  if (totalMax === 0) return 0;
+
+  const baseScore = Math.min(100, Math.round((totalScore / totalMax) * 100));
   const multiplier = calcFacultyMultiplier(university, tagFreq);
   return Math.min(100, Math.round(baseScore * multiplier));
 }
 
 // ───────────────────────────────────────────────
-// 5. 学部単位のおすすめ理由生成
+// 6. 学部単位のおすすめ理由生成
 // ───────────────────────────────────────────────
 type MajorField = University["majorField"];
 
@@ -226,7 +258,7 @@ function buildMatchReasons(
 }
 
 // ───────────────────────────────────────────────
-// 6. 準備度を判定
+// 7. 準備度を判定
 // ───────────────────────────────────────────────
 function calcReadinessLevel(
   score: number,
@@ -240,7 +272,7 @@ function calcReadinessLevel(
 }
 
 // ───────────────────────────────────────────────
-// 7. 準備度に応じた必要行動リスト
+// 8. 準備度に応じた必要行動リスト
 // ───────────────────────────────────────────────
 function buildRequiredActions(
   university: University,
@@ -275,7 +307,7 @@ function buildRequiredActions(
 }
 
 // ───────────────────────────────────────────────
-// 8. ユーザータイプ判定
+// 9. ユーザータイプ判定
 // タグ合計が最も高いタイプを採用（複数該当時は最高スコア）
 // ───────────────────────────────────────────────
 const USER_TYPE_DATA: Record<string, UserTypeInfo> = {
@@ -376,12 +408,16 @@ const REGION_MAP: Record<string, string[]> = {
 // ───────────────────────────────────────────────
 // 10. メイン：診断結果を生成
 // ───────────────────────────────────────────────
+
+// ランク別スコア上限（1位100点、2位最大85点、3位最大70点…と差を広げる）
+const RANK_SCORE_CAPS = [100, 85, 70, 57, 45, 35, 27, 21, 17, 14];
+
 export function generateMatchResults(answers: QuizAnswers, region = ""): DiagnosisResult {
   const tagFreq = buildTagFrequency(answers);
   const regionNames = REGION_MAP[region] ?? [];
   const userType = determineUserType(tagFreq);
 
-  // 偏差値帯ボーナス用マッピング（hensachi数値で判定）
+  // 偏差値帯マッピング
   const hensachiRanges: Record<string, (h: number) => boolean> = {
     "hensachi-high":     (h) => h >= 60,
     "hensachi-mid-high": (h) => h >= 53 && h <= 59,
@@ -390,35 +426,78 @@ export function generateMatchResults(answers: QuizAnswers, region = ""): Diagnos
   };
   const hensachiTag = Object.keys(hensachiRanges).find((tag) => (tagFreq[tag] || 0) > 0) ?? null;
 
-  const matchResults: MatchResult[] = universities.map((univ) => {
+  // 文理傾向の判定
+  const stemScore =
+    (tagFreq["tech"] || 0) + (tagFreq["stem"] || 0) + (tagFreq["engineering"] || 0) +
+    (tagFreq["math"] || 0) + (tagFreq["hands-on"] || 0);
+  const humanitiesScore =
+    (tagFreq["humanities"] || 0) + (tagFreq["culture"] || 0) +
+    (tagFreq["language"] || 0) + (tagFreq["social"] || 0);
+  const userOrientation: "理系" | "文系" | null =
+    stemScore > humanitiesScore * 1.5 ? "理系" :
+    humanitiesScore > stemScore * 1.5  ? "文系" : null;
+
+  // Step 1: 全大学の生スコアを計算（ボーナス・ペナルティ含む）
+  const rawResults = universities.map((univ) => {
     let score = calcScore(univ, tagFreq);
 
-    // 地域ボーナス（選択地域と一致する大学を優遇）
+    // 地域ボーナス（一致）
     if (regionNames.length > 0 && regionNames.includes(univ.region)) {
-      score = Math.min(100, score + 20);
+      score += 20;
+    }
+    // 地域ペナルティ（不一致）
+    if (regionNames.length > 0 && !regionNames.includes(univ.region)) {
+      score -= 20;
     }
 
-    // 偏差値帯ボーナス
+    // 偏差値帯ボーナス（一致）
     if (hensachiTag && univ.hensachi != null && hensachiRanges[hensachiTag](univ.hensachi)) {
-      score = Math.min(100, score + 15);
+      score += 15;
     }
+    // 偏差値帯ペナルティ（不一致）
+    if (hensachiTag && univ.hensachi != null && !hensachiRanges[hensachiTag](univ.hensachi)) {
+      score -= 25;
+    }
+
+    // 文理ペナルティ（理系回答なのに文系学部、または逆）
+    if (userOrientation === "理系" && univ.facultyType === "文系") {
+      score -= 30;
+    } else if (userOrientation === "文系" && univ.facultyType === "理系") {
+      score -= 30;
+    }
+
+    score = Math.max(0, score);
+
+    return { univ, score };
+  });
+
+  // Step 2: スコア降順でソート
+  rawResults.sort((a, b) => b.score - a.score);
+
+  // Step 3: 全体正規化（最高点を100として相対化）＋ランク別上限で差を広げる
+  const maxRawScore = rawResults[0]?.score ?? 1;
+
+  const matchResults: MatchResult[] = rawResults.map(({ univ, score }, index) => {
+    const normalizedScore = maxRawScore > 0
+      ? Math.round((score / maxRawScore) * 100)
+      : 0;
+    // ランク別上限を適用して上位との差を明確化
+    const rankCap = RANK_SCORE_CAPS[index] ?? 10;
+    const finalScore = Math.min(normalizedScore, rankCap);
 
     const matchReasons    = buildMatchReasons(univ, tagFreq);
-    const readinessLevel  = calcReadinessLevel(score, answers);
+    const readinessLevel  = calcReadinessLevel(finalScore, answers);
     const requiredActions = buildRequiredActions(univ, readinessLevel);
 
     return {
       university: univ,
-      score,
+      score: finalScore,
       matchReasons,
       readinessLevel,
       requiredActions,
-      userType,      // MatchResult に userType を付与
+      userType,
     };
   });
-
-  // スコア降順でソート
-  matchResults.sort((a, b) => b.score - a.score);
 
   return { matchResults, userType };
 }
