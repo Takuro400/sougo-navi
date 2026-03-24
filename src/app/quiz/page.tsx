@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/layout/Header";
 import { quizQuestions } from "@/data/quizQuestions";
@@ -36,7 +36,7 @@ export default function QuizPage() {
     setStep("quiz");
   };
 
-  const handleSelect = (value: string) => setSelected(value);
+  const handleSelect = useCallback((value: string) => setSelected(value), []);
 
   const handleNext = () => {
     if (!selected) return;
@@ -65,15 +65,15 @@ export default function QuizPage() {
     <div className="min-h-screen bg-white relative overflow-hidden">
       {/* 背景グラデーション（ファーストビューと同一） */}
       <div className="absolute inset-0 bg-gradient-to-br from-violet-50/70 via-white to-sky-50/50 pointer-events-none" />
-      <div className="absolute -top-32 right-0 w-[700px] h-[700px] bg-gradient-to-bl from-violet-100/35 to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 -left-20 w-[500px] h-[500px] bg-gradient-to-tr from-sky-100/30 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -top-32 right-0 w-[700px] h-[700px] bg-gradient-to-bl from-violet-100/35 to-transparent rounded-full blur-3xl pointer-events-none will-change-transform" />
+      <div className="absolute bottom-0 -left-20 w-[500px] h-[500px] bg-gradient-to-tr from-sky-100/30 to-transparent rounded-full blur-3xl pointer-events-none will-change-transform" />
 
       <Header variant="light" />
 
       {/* プログレスバー */}
       <div className="fixed top-14 left-0 right-0 z-40 h-0.5 bg-violet-100">
         <div
-          className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-700 ease-out"
+          className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-[width] duration-700 ease-out"
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -108,15 +108,15 @@ export default function QuizPage() {
                   <button
                     key={option.value}
                     onClick={() => setRegionSelected(option.value)}
-                    className={`w-full text-left px-5 py-4 rounded-2xl border transition-all duration-200 active:scale-[0.97]
+                    className={`w-full text-left px-5 py-4 rounded-2xl border transition-colors duration-150
                       ${isActive
                         ? "bg-gradient-to-r from-indigo-500 to-violet-500 border-transparent shadow-lg shadow-indigo-200/60 text-white"
-                        : "bg-white border-slate-200 text-slate-700 hover:border-violet-300 hover:bg-violet-50/40 shadow-sm hover:shadow-md"
+                        : "bg-white border-slate-200 text-slate-700 hover:border-violet-300 hover:bg-violet-50/40 shadow-sm"
                       }`}
                   >
                     <span className="flex items-center gap-4">
                       <span
-                        className={`w-5 h-5 rounded-full border-2 shrink-0 flex items-center justify-center transition-all duration-200
+                        className={`w-5 h-5 rounded-full border-2 shrink-0 flex items-center justify-center transition-colors duration-150
                           ${isActive
                             ? "border-white/70 bg-white/20"
                             : "border-slate-300"
@@ -139,9 +139,9 @@ export default function QuizPage() {
             <button
               onClick={handleRegionNext}
               disabled={!regionSelected}
-              className={`w-full py-4 font-mincho text-base font-bold rounded-xl transition-all duration-200
+              className={`w-full py-4 font-mincho text-base font-bold rounded-xl transition-colors duration-150
                 ${regionSelected
-                  ? "bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 text-white shadow-lg shadow-indigo-300/40 active:scale-95"
+                  ? "bg-gradient-to-r from-indigo-500 to-violet-500 text-white shadow-lg shadow-indigo-300/40 active:opacity-80"
                   : "bg-slate-100 text-slate-300 cursor-not-allowed"
                 }`}
             >
@@ -176,15 +176,15 @@ export default function QuizPage() {
                   <button
                     key={option.value}
                     onClick={() => handleSelect(option.value)}
-                    className={`w-full text-left px-5 py-4 rounded-2xl border transition-all duration-200 active:scale-[0.97]
+                    className={`w-full text-left px-5 py-4 rounded-2xl border transition-colors duration-150
                       ${isActive
                         ? "bg-gradient-to-r from-indigo-500 to-violet-500 border-transparent shadow-lg shadow-indigo-200/60 text-white"
-                        : "bg-white border-slate-200 text-slate-700 hover:border-violet-300 hover:bg-violet-50/40 shadow-sm hover:shadow-md"
+                        : "bg-white border-slate-200 text-slate-700 hover:border-violet-300 hover:bg-violet-50/40 shadow-sm"
                       }`}
                   >
                     <span className="flex items-center gap-4">
                       <span
-                        className={`w-5 h-5 rounded-full border-2 shrink-0 flex items-center justify-center transition-all duration-200
+                        className={`w-5 h-5 rounded-full border-2 shrink-0 flex items-center justify-center transition-colors duration-150
                           ${isActive
                             ? "border-white/70 bg-white/20"
                             : "border-slate-300"
@@ -207,16 +207,16 @@ export default function QuizPage() {
             <div className="flex gap-3">
               <button
                 onClick={handleBack}
-                className="py-4 px-6 font-mincho text-base font-bold text-slate-500 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl transition-colors shadow-sm"
+                className="py-4 px-6 font-mincho text-base font-bold text-slate-500 bg-white border border-slate-200 rounded-xl transition-colors duration-150 shadow-sm active:opacity-70"
               >
                 ← 戻る
               </button>
               <button
                 onClick={handleNext}
                 disabled={!selected}
-                className={`flex-1 py-4 font-mincho text-base font-bold rounded-xl transition-all duration-200
+                className={`flex-1 py-4 font-mincho text-base font-bold rounded-xl transition-colors duration-150
                   ${selected
-                    ? "bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 text-white shadow-lg shadow-indigo-300/40 active:scale-95"
+                    ? "bg-gradient-to-r from-indigo-500 to-violet-500 text-white shadow-lg shadow-indigo-300/40 active:opacity-80"
                     : "bg-slate-100 text-slate-300 cursor-not-allowed"
                   }`}
               >

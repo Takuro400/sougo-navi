@@ -15,6 +15,13 @@
 
   button, a {
     -webkit-tap-highlight-color: transparent;
+    /* タップ遅延（300ms）を除去しつつダブルタップズームを無効化 */
+    touch-action: manipulation;
+  }
+
+  /* スマホでのスムーズスクロール */
+  * {
+    -webkit-overflow-scrolling: touch;
   }
 }
 
