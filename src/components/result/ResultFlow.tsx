@@ -15,6 +15,7 @@ export interface ResultFlowProps {
   strengthData: StrengthWeaknessData;
   roadmapSteps: RoadmapStep[];
   onViewDetail: () => void;
+  onOpenModal?: () => void;
 }
 
 const TOTAL_STEPS = 5;
@@ -316,7 +317,7 @@ function StepRoadmap({
 // ============================================================
 // 画面⑤: CTA（ダーク）
 // ============================================================
-function StepCTA({ onViewDetail }: { onViewDetail: () => void }) {
+function StepCTA({ onViewDetail, onOpenModal }: { onViewDetail: () => void; onOpenModal?: () => void }) {
   return (
     <div className="flex flex-col flex-1 bg-gradient-to-br from-indigo-600 to-violet-600 relative overflow-hidden">
       {/* 装飾円 */}
@@ -358,14 +359,14 @@ function StepCTA({ onViewDetail }: { onViewDetail: () => void }) {
 
         {/* CTA */}
         <div className="flex flex-col items-center gap-4 pt-2">
-          <Link
-            href="/mentors"
+          <button
+            onClick={onOpenModal}
             className="w-full flex items-center justify-center py-4 px-6
               bg-white text-indigo-600 font-bold text-[15px] rounded-full
               shadow-lg shadow-indigo-900/20 active:opacity-80 transition-opacity duration-150"
           >
             無料で戦略を受け取る
-          </Link>
+          </button>
           <button
             onClick={onViewDetail}
             className="text-[13px] text-white/55 active:opacity-50 transition-opacity duration-150"
@@ -387,6 +388,7 @@ export default function ResultFlow({
   strengthData,
   roadmapSteps,
   onViewDetail,
+  onOpenModal,
 }: ResultFlowProps) {
   const [step, setStep] = useState(1);
   const nextStep = useCallback(() => setStep((s) => Math.min(s + 1, TOTAL_STEPS)), []);
@@ -426,7 +428,7 @@ export default function ResultFlow({
         {step === 4 && (
           <StepRoadmap roadmapSteps={roadmapSteps} {...sharedProps} />
         )}
-        {step === 5 && <StepCTA onViewDetail={onViewDetail} />}
+        {step === 5 && <StepCTA onViewDetail={onViewDetail} onOpenModal={onOpenModal} />}
       </div>
     </div>
   );

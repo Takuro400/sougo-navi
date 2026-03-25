@@ -16,6 +16,7 @@ import RoadmapSection from "@/components/result/RoadmapSection";
 import ConsultationCTA from "@/components/result/ConsultationCTA";
 import ResultFlow from "@/components/result/ResultFlow";
 import RankedUniversityList from "@/components/result/RankedUniversityList";
+import LineModal from "@/components/result/LineModal";
 import { strengthWeaknessMap, roadmapMap } from "@/data/resultData";
 
 // ユーザータイプごとのカラー（ライト版）
@@ -49,6 +50,8 @@ function ResultContent() {
   const [isAiMatched, setIsAiMatched] = useState(false);
   // フロー表示 or 詳細表示の切り替え
   const [viewMode, setViewMode] = useState<"flow" | "detail">("flow");
+  // LINEモーダル
+  const [showLineModal, setShowLineModal] = useState(false);
 
   // 既存AI分析
   const [aiLoading, setAiLoading] = useState(false);
@@ -223,13 +226,21 @@ function ResultContent() {
     const strengthData = strengthWeaknessMap[userType.type];
     const roadmapSteps = roadmapMap[userType.type];
     return (
-      <ResultFlow
-        userType={userType}
-        results={results}
-        strengthData={strengthData}
-        roadmapSteps={roadmapSteps}
-        onViewDetail={() => setViewMode("detail")}
-      />
+      <>
+        <ResultFlow
+          userType={userType}
+          results={results}
+          strengthData={strengthData}
+          roadmapSteps={roadmapSteps}
+          onViewDetail={() => setViewMode("detail")}
+          onOpenModal={() => setShowLineModal(true)}
+        />
+        <LineModal
+          isOpen={showLineModal}
+          onClose={() => setShowLineModal(false)}
+          userTypeLabel={userType.label}
+        />
+      </>
     );
   }
 
