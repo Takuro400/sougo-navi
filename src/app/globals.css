@@ -85,3 +85,10 @@
   50%       { transform: translateY(-12px); }
 }
 .animate-float { animation: float 6s ease-in-out infinite; }
+
+/* ResultFlow ステップ遷移アニメーション */
+@keyframes slideInStep {
+  from { opacity: 0; transform: translateX(12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.step-enter { animation: slideInStep 0.22s ease-out both; }

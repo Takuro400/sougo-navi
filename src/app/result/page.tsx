@@ -14,6 +14,8 @@ import type { AiMatchingResponse } from "@/app/api/ai-matching/route";
 import StrengthWeaknessCard from "@/components/result/StrengthWeaknessCard";
 import RoadmapSection from "@/components/result/RoadmapSection";
 import ConsultationCTA from "@/components/result/ConsultationCTA";
+import ResultFlow from "@/components/result/ResultFlow";
+import { strengthWeaknessMap, roadmapMap } from "@/data/resultData";
 
 // ユーザータイプごとのカラー（ライト版）
 const typeGradients: Record<string, string> = {
@@ -44,6 +46,8 @@ function ResultContent() {
   const [rawAnswers, setRawAnswers] = useState<QuizAnswers>({});
   const [rawRegion, setRawRegion] = useState<string>("");
   const [isAiMatched, setIsAiMatched] = useState(false);
+  // フロー表示 or 詳細表示の切り替え
+  const [viewMode, setViewMode] = useState<"flow" | "detail">("flow");
 
   // 既存AI分析
   const [aiLoading, setAiLoading] = useState(false);
@@ -213,8 +217,34 @@ function ResultContent() {
   const top = results[0];
   const typeKey = userType?.type ?? "stem";
 
+  // ── フロー表示モード ──
+  if (viewMode === "flow" && userType) {
+    const strengthData = strengthWeaknessMap[userType.type];
+    const roadmapSteps = roadmapMap[userType.type];
+    return (
+      <ResultFlow
+        userType={userType}
+        results={results}
+        strengthData={strengthData}
+        roadmapSteps={roadmapSteps}
+        onViewDetail={() => setViewMode("detail")}
+      />
+    );
+  }
+
+  // ── 詳細表示モード ──
   return (
     <div className="max-w-2xl mx-auto px-4 py-10">
+      {/* 詳細表示に戻ってきた場合のバナー */}
+      <div className="flex items-center justify-between bg-violet-50 border border-violet-200 rounded-xl px-4 py-3 mb-6">
+        <p className="text-sm text-violet-700 font-medium">ストーリー形式で見直す</p>
+        <button
+          onClick={() => setViewMode("flow")}
+          className="text-xs font-bold text-violet-600 bg-violet-100 px-3 py-1.5 rounded-full active:opacity-70 transition-opacity duration-150"
+        >
+          フローを見る ←
+        </button>
+      </div>
 
       {/* 結果ヘッダー */}
       <div className="text-center mb-8">
