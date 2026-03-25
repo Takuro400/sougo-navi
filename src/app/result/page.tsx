@@ -11,6 +11,9 @@ import { MatchResult, QuizAnswers, UserTypeInfo } from "@/types";
 import { universities } from "@/data/universities";
 import type { AiAnalysisResponse } from "@/app/api/ai-analysis/route";
 import type { AiMatchingResponse } from "@/app/api/ai-matching/route";
+import StrengthWeaknessCard from "@/components/result/StrengthWeaknessCard";
+import RoadmapSection from "@/components/result/RoadmapSection";
+import ConsultationCTA from "@/components/result/ConsultationCTA";
 
 // ユーザータイプごとのカラー（ライト版）
 const typeGradients: Record<string, string> = {
@@ -248,6 +251,9 @@ function ResultContent() {
         </div>
       )}
 
+      {/* 強み・伸びしろカード */}
+      {userType && <StrengthWeaknessCard userType={userType.type} />}
+
       {/* 1位ピックアップ */}
       <div className="relative bg-gradient-to-br from-indigo-500 to-violet-600 rounded-2xl p-5 mb-5 overflow-hidden shadow-lg shadow-indigo-200/60">
         <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/5 rounded-full pointer-events-none" />
@@ -368,20 +374,8 @@ function ResultContent() {
         </Link>
       </div>
 
-      {/* 次のアクション */}
-      <div className="card bg-indigo-50 border-indigo-200 mb-6">
-        <h2 className="font-mincho font-bold text-slate-800 mb-3">📋 次にやること</h2>
-        <ul className="space-y-2.5 text-sm text-slate-600">
-          {top.requiredActions.slice(0, 3).map((action, i) => (
-            <li key={i} className="flex items-start gap-2.5">
-              <span className="mt-0.5 w-5 h-5 rounded-full bg-indigo-100 text-indigo-600 text-xs font-black flex items-center justify-center shrink-0">
-                {i + 1}
-              </span>
-              {action}
-            </li>
-          ))}
-        </ul>
-      </div>
+      {/* ロードマップ */}
+      {userType && <RoadmapSection userType={userType.type} />}
 
       {/* AIによる詳細分析セクション */}
       <div className="mb-6">
@@ -464,11 +458,13 @@ function ResultContent() {
         )}
       </div>
 
-      {/* CTAボタン群 */}
+      {/* 相談CTA（タイプ別パーソナライズ） */}
+      {userType && <ConsultationCTA userType={userType.type} />}
+
+      {/* 再診断・マイページ */}
       <div className="flex flex-col gap-3">
-        <Link href="/mentors"  className="btn-primary justify-center py-3.5">先輩大学生に相談する</Link>
-        <Link href="/mypage"   className="btn-secondary justify-center py-3.5">マイページで結果を確認する</Link>
-        <Link href="/quiz"     className="text-center text-sm text-slate-400 hover:text-slate-600 py-2 transition-colors">
+        <Link href="/mypage" className="btn-secondary justify-center py-3.5">マイページで結果を保存する</Link>
+        <Link href="/quiz" className="text-center text-sm text-slate-400 py-2 transition-colors active:opacity-70">
           もう一度診断する
         </Link>
       </div>

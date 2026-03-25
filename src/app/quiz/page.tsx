@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Header from "@/components/layout/Header";
 import { quizQuestions } from "@/data/quizQuestions";
 import { QuizAnswers } from "@/types";
+import InterimFeedbackCard from "@/components/result/InterimFeedbackCard";
 
 const REGION_OPTIONS = [
   { value: "hokkaido-tohoku", label: "北海道・東北" },
@@ -24,6 +25,8 @@ export default function QuizPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<QuizAnswers>({});
   const [selected, setSelected] = useState<string | null>(null);
+  // 中間フィードバック: Q5(index=4)回答後→1, Q10(index=9)回答後→2
+  const [feedbackStep, setFeedbackStep] = useState<1 | 2 | null>(null);
 
   const current = quizQuestions[currentIndex];
   const total = quizQuestions.length;
@@ -47,12 +50,20 @@ export default function QuizPage() {
         `/result?answers=${encodeURIComponent(JSON.stringify(newAnswers))}&region=${encodeURIComponent(region ?? "")}`
       );
     } else {
-      setCurrentIndex((i) => i + 1);
-      setSelected(null);
+      const nextIndex = currentIndex + 1;
+      setCurrentIndex(nextIndex);
+      setSelected(answers[quizQuestions[nextIndex]?.id] || null);
+      // Q5(index=4→5), Q10(index=9→10) のタイミングで中間フィードバック
+      if (nextIndex === 5) setFeedbackStep(1);
+      else if (nextIndex === 10) setFeedbackStep(2);
     }
   };
 
   const handleBack = () => {
+    if (feedbackStep !== null) {
+      setFeedbackStep(null);
+      return;
+    }
     if (currentIndex === 0) {
       setStep("region");
       return;
@@ -60,6 +71,21 @@ export default function QuizPage() {
     setCurrentIndex((i) => i - 1);
     setSelected(answers[quizQuestions[currentIndex - 1].id] || null);
   };
+
+  // 中間フィードバック表示
+  if (feedbackStep !== null) {
+    return (
+      <>
+        <Header variant="light" />
+        <InterimFeedbackCard
+          step={feedbackStep}
+          answers={answers}
+          totalQuestions={total}
+          onContinue={() => setFeedbackStep(null)}
+        />
+      </>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
