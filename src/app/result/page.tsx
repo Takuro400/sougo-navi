@@ -15,6 +15,7 @@ import StrengthWeaknessCard from "@/components/result/StrengthWeaknessCard";
 import RoadmapSection from "@/components/result/RoadmapSection";
 import ConsultationCTA from "@/components/result/ConsultationCTA";
 import ResultFlow from "@/components/result/ResultFlow";
+import RankedUniversityList from "@/components/result/RankedUniversityList";
 import { strengthWeaknessMap, roadmapMap } from "@/data/resultData";
 
 // ユーザータイプごとのカラー（ライト版）
@@ -284,52 +285,24 @@ function ResultContent() {
       {/* 強み・伸びしろカード */}
       {userType && <StrengthWeaknessCard userType={userType.type} />}
 
-      {/* 1位ピックアップ */}
-      <div className="relative bg-gradient-to-br from-indigo-500 to-violet-600 rounded-2xl p-5 mb-5 overflow-hidden shadow-lg shadow-indigo-200/60">
-        <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/5 rounded-full pointer-events-none" />
-        {isAiMatched && (
-          <span className="inline-flex items-center gap-1 bg-white/20 text-white text-xs font-bold px-2.5 py-1 rounded-full mb-2">
-            ✨ AI選定
-          </span>
-        )}
-        <p className="text-xs font-bold text-white/70 mb-2">🏆 最もおすすめの大学</p>
-        <p className="font-mincho font-bold text-xl text-white">{top.university.name}</p>
-        <p className="text-sm text-white/70 mt-0.5">{top.university.faculty}</p>
-        <div className="flex items-baseline gap-2 mt-3 mb-3">
-          <span className="text-3xl font-black bg-gradient-to-r from-amber-300 to-yellow-300 bg-clip-text text-transparent">
-            {top.score}
-          </span>
-          <span className="text-sm text-white/60">点</span>
-          <span className="text-xs text-white/40">/ 相性スコア</span>
+      {/* ランキング形式・大学リスト */}
+      <div className="mb-2">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="font-mincho font-bold text-slate-800 text-base">
+            {isAiMatched ? "✨ AIが選んだおすすめ大学" : "あなたにおすすめの大学"}
+          </h2>
+          {isAiMatched && (
+            <span className="text-xs font-bold text-fuchsia-600 bg-fuchsia-50 border border-fuchsia-200 px-2.5 py-1 rounded-full">
+              AI選定
+            </span>
+          )}
         </div>
-        <div className="space-y-1.5">
-          {top.matchReasons.slice(0, 2).map((r, i) => (
-            <p key={i} className="text-xs text-white/80 flex items-start gap-1.5">
-              <span className="shrink-0 text-indigo-200 mt-0.5">✓</span>{r}
-            </p>
-          ))}
-        </div>
+        <RankedUniversityList results={results} />
       </div>
 
       {/* 免責注意 */}
-      <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-7 text-xs text-amber-700 leading-relaxed">
+      <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 my-5 text-xs text-amber-700 leading-relaxed">
         ⚠️ この結果は参考情報です。合格を保証するものではありません。進路決定は先生・保護者と相談のうえ行ってください。
-      </div>
-
-      {/* 上位5件リスト */}
-      <h2 className="font-mincho font-bold text-slate-800 text-base mb-3">
-        {isAiMatched ? "✨ AIが選んだおすすめ大学 TOP5" : "あなたにおすすめの大学 TOP5"}
-      </h2>
-      <div className="space-y-4 mb-6">
-        {results.map((result, i) => (
-          <UniversityCard
-            key={result.university.id}
-            result={result}
-            rank={i + 1}
-            isSaved={savedIds.includes(result.university.id)}
-            onSave={handleSave}
-          />
-        ))}
       </div>
 
       {/* ── AIマッチングセクション ── */}

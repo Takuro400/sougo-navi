@@ -4,6 +4,7 @@ import { useState, useCallback } from "react";
 import Link from "next/link";
 import { UserType, UserTypeInfo, MatchResult } from "@/types";
 import { StrengthWeaknessData, RoadmapStep } from "@/data/resultData";
+import RankedUniversityList from "@/components/result/RankedUniversityList";
 
 // ============================================================
 // 型
@@ -223,33 +224,10 @@ function StepUniversities({
         </h2>
       </div>
 
-      {/* スクロール可能なリスト */}
+      {/* スクロール可能なランキングリスト */}
       <div className="flex-1 overflow-y-auto px-5 pb-2 min-h-0">
-        {/* グラデーション（スクロール示唆） */}
-        <div className="space-y-2.5">
-          {results.slice(0, 5).map((r, i) => (
-            <div
-              key={r.university.id}
-              className="flex items-start gap-3 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm"
-            >
-              {/* ランク */}
-              <span
-                className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-black leading-none
-                  ${i === 0 ? "bg-amber-100 text-amber-600" : "bg-slate-100 text-slate-500"}`}
-              >
-                {i + 1}
-              </span>
-              <div className="min-w-0">
-                <p className="font-bold text-slate-800 text-[13px] leading-snug">{r.university.name}</p>
-                <p className="text-[11px] text-slate-400 mt-0.5 leading-snug">{r.university.faculty}</p>
-                <p className="text-[12px] text-indigo-500 mt-1.5 leading-relaxed">
-                  {r.matchReasons[0]}
-                </p>
-              </div>
-            </div>
-          ))}
-          <div className="h-2" />
-        </div>
+        <RankedUniversityList results={results.slice(0, 5)} compact />
+        <div className="h-4" />
       </div>
 
       {/* 固定フッター */}
