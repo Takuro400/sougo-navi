@@ -437,22 +437,33 @@ export function generateMatchResults(answers: QuizAnswers, region = ""): Diagnos
     stemScore > humanitiesScore * 1.5 ? "理系" :
     humanitiesScore > stemScore * 1.5  ? "文系" : null;
 
+  // 地元志向フラグ（Q8で「地元で学びたい」を選択した場合は "local" タグが入る）
+  const isLocalPreference = (tagFreq["local"] || 0) > 0 && regionNames.length > 0;
+
   // Step 1: 総合型選抜が利用可能な大学のみを対象にフィルタリング
-  const eligibleUniversities = universities.filter(
-    (univ) => univ.sougouAdmission?.available === true
-  );
+  // 地元志向の場合は選択地域内の大学のみに絞る
+  const eligibleUniversities = universities.filter((univ) => {
+    if (!univ.sougouAdmission?.available) return false;
+    if (isLocalPreference && !regionNames.includes(univ.region)) return false;
+    return true;
+  });
 
   // Step 2: 全大学の生スコアを計算（ボーナス・ペナルティ含む）
   const rawResults = eligibleUniversities.map((univ) => {
     let score = calcScore(univ, tagFreq);
 
-    // 地域ボーナス（一致）
-    if (regionNames.length > 0 && regionNames.includes(univ.region)) {
-      score += 20;
-    }
-    // 地域ペナルティ（不一致）
-    if (regionNames.length > 0 && !regionNames.includes(univ.region)) {
-      score -= 20;
+    if (isLocalPreference) {
+      // 地元志向強化：一致地域に+40、不一致は既にフィルタ済みなので適用なし
+      score += 40;
+    } else {
+      // 通常の地域ボーナス（一致）
+      if (regionNames.length > 0 && regionNames.includes(univ.region)) {
+        score += 20;
+      }
+      // 通常の地域ペナルティ（不一致）
+      if (regionNames.length > 0 && !regionNames.includes(univ.region)) {
+        score -= 20;
+      }
     }
 
     // 偏差値帯ボーナス（一致）
