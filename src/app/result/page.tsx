@@ -37,6 +37,62 @@ const typeTextColor: Record<string, string> = {
 };
 
 // ===========================
+// SNSシェアボタン
+// ===========================
+function ShareSection({ userTypeLabel }: { userTypeLabel: string }) {
+  const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://sougo-navi.vercel.app";
+  const shareUrl = `${siteUrl}/quiz`;
+  const shareText = `AIが診断した私のタイプは「${userTypeLabel}」でした！\n総合型選抜の志望校、無料で診断してみて👇\n#総合型選抜 #AO入試 #大学受験`;
+
+  const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+  const lineUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl + "?ref=line")}&text=${encodeURIComponent(shareText)}`;
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(`${shareText}\n${shareUrl}`).catch(() => {});
+  };
+
+  return (
+    <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 mb-6">
+      <p className="text-xs font-bold text-slate-500 text-center mb-1">友達にも教える</p>
+      <p className="text-center text-sm text-slate-600 mb-4">
+        同じ悩みの友達に紹介してあげよう
+      </p>
+      <div className="flex gap-2">
+        <a
+          href={xUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 flex items-center justify-center gap-1.5 py-3 rounded-xl font-bold text-sm text-white bg-black hover:bg-slate-800 transition-colors active:scale-95"
+        >
+          <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.261 5.632 5.903-5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+          Xでシェア
+        </a>
+        <a
+          href={lineUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 flex items-center justify-center gap-1.5 py-3 rounded-xl font-bold text-sm text-white bg-[#06C755] hover:bg-[#05b04c] transition-colors active:scale-95"
+        >
+          <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.02 2 11c0 4.12 2.82 7.63 6.84 9.29.3.13.51.44.51.77v1.18c0 .27.29.43.53.29l2.65-1.53c.17-.1.37-.13.57-.1.45.07.91.1 1.38.1 5.52 0 10-4.02 10-8.97C22 6.02 17.52 2 12 2z" />
+          </svg>
+          LINEで送る
+        </a>
+        <button
+          onClick={handleCopy}
+          className="px-4 py-3 rounded-xl font-bold text-sm text-slate-600 bg-white border border-slate-200 hover:bg-slate-50 transition-colors active:scale-95"
+          title="リンクをコピー"
+        >
+          🔗
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ===========================
 // 診断結果ページ（内部コンポーネント）
 // ===========================
 function ResultContent() {
@@ -474,6 +530,9 @@ function ResultContent() {
 
       {/* 相談CTA（タイプ別パーソナライズ） */}
       {userType && <ConsultationCTA userType={userType.type} />}
+
+      {/* SNSシェア */}
+      {userType && <ShareSection userTypeLabel={userType.label} />}
 
       {/* 再診断・マイページ */}
       <div className="flex flex-col gap-3">

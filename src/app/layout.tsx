@@ -1,10 +1,46 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Script from "next/script";
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://sougo-navi.vercel.app";
+const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
 export const metadata: Metadata = {
-  title: "総合型選抜ナビ | 自分に合う大学を見つけよう",
+  title: {
+    default: "STORY 総合型対策 | AIが志望校を診断する無料サービス",
+    template: "%s | STORY 総合型対策",
+  },
   description:
-    "総合型選抜を受ける高校生のための進路発見・大学研究・合格戦略支援サービス。質問に答えるだけで自分に合う大学が分かります。",
+    "15の質問に答えるだけで、AIがあなたにぴったりの大学・学部を提案。総合型選抜（AO入試）を受ける高校生のための無料診断サービス。登録不要・3分で完了。",
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    type: "website",
+    locale: "ja_JP",
+    url: siteUrl,
+    siteName: "STORY 総合型対策",
+    title: "STORY 総合型対策 | AIが志望校を診断する無料サービス",
+    description:
+      "15の質問に答えるだけで、AIがあなたにぴったりの大学・学部を提案。総合型選抜（AO入試）対策の無料診断。登録不要・3分で完了。",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "STORY 総合型対策",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "STORY 総合型対策 | AIが志望校を診断する無料サービス",
+    description:
+      "15の質問に答えるだけで、AIがあなたにぴったりの大学・学部を提案。総合型選抜（AO入試）対策の無料診断。",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -24,6 +60,22 @@ export default function RootLayout({
       </head>
       <body className="font-sans bg-slate-950 text-white min-h-screen antialiased">
         {children}
+        {gaId && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${gaId}');
+              `}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   );
