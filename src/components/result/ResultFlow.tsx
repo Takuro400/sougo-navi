@@ -317,7 +317,20 @@ function StepRoadmap({
 // ============================================================
 // 画面⑤: CTA（ダーク）
 // ============================================================
-function StepCTA({ onViewDetail, onOpenModal }: { onViewDetail: () => void; onOpenModal?: () => void }) {
+function StepCTA({
+  onViewDetail,
+  onOpenModal,
+  userTypeLabel,
+}: {
+  onViewDetail: () => void;
+  onOpenModal?: () => void;
+  userTypeLabel: string;
+}) {
+  const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://sougo-navi.vercel.app";
+  const shareUrl = `${siteUrl}/quiz`;
+  const shareText = `AIが診断した私のタイプは「${userTypeLabel}」でした！\n総合型選抜の志望校、無料で診断してみて👇\n#総合型選抜 #AO入試 #大学受験`;
+  const xShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+
   return (
     <div className="flex flex-col flex-1 bg-gradient-to-br from-indigo-600 to-violet-600 relative overflow-hidden">
       {/* 装飾円 */}
@@ -358,7 +371,7 @@ function StepCTA({ onViewDetail, onOpenModal }: { onViewDetail: () => void; onOp
         </div>
 
         {/* CTA */}
-        <div className="flex flex-col items-center gap-4 pt-2">
+        <div className="flex flex-col items-center gap-3 pt-2">
           <button
             onClick={onOpenModal}
             className="w-full flex items-center justify-center py-4 px-6
@@ -367,6 +380,20 @@ function StepCTA({ onViewDetail, onOpenModal }: { onViewDetail: () => void; onOp
           >
             無料で戦略を受け取る
           </button>
+          {/* Xシェアボタン */}
+          <a
+            href={xShareUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full flex items-center justify-center gap-2 py-3.5 px-6
+              bg-white/15 text-white font-bold text-[14px] rounded-full border border-white/25
+              active:opacity-70 transition-opacity duration-150"
+          >
+            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.261 5.632 5.903-5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+            Xでシェアして広める
+          </a>
           <button
             onClick={onViewDetail}
             className="text-[13px] text-white/55 active:opacity-50 transition-opacity duration-150"
@@ -428,7 +455,7 @@ export default function ResultFlow({
         {step === 4 && (
           <StepRoadmap roadmapSteps={roadmapSteps} {...sharedProps} />
         )}
-        {step === 5 && <StepCTA onViewDetail={onViewDetail} onOpenModal={onOpenModal} />}
+        {step === 5 && <StepCTA onViewDetail={onViewDetail} onOpenModal={onOpenModal} userTypeLabel={userType.label} />}
       </div>
     </div>
   );
