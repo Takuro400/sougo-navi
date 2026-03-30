@@ -21,21 +21,12 @@ export const metadata: Metadata = {
     title: "STORY 総合型対策 | AIが志望校を診断する無料サービス",
     description:
       "15の質問に答えるだけで、AIがあなたにぴったりの大学・学部を提案。総合型選抜（AO入試）対策の無料診断。登録不要・3分で完了。",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "STORY 総合型対策",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "STORY 総合型対策 | AIが志望校を診断する無料サービス",
     description:
       "15の質問に答えるだけで、AIがあなたにぴったりの大学・学部を提案。総合型選抜（AO入試）対策の無料診断。",
-    images: ["/og-image.png"],
   },
   robots: {
     index: true,
