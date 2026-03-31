@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { supabase } from "@/lib/supabase";
 
 type DiagnosisRow = {
@@ -84,8 +84,8 @@ function DonutChart({ data }: { data: { label: string; value: number; color: str
 // ─── メインコンポーネント ─────────────────────────────
 export default function AdminPage() {
   const [authed, setAuthed] = useState(false);
-  const [password, setPassword] = useState("");
   const [pwError, setPwError] = useState(false);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   const [rows, setRows] = useState<DiagnosisRow[]>([]);
   const [loading, setLoading] = useState(false);
@@ -119,7 +119,8 @@ export default function AdminPage() {
   }, [authed, fetchData]);
 
   const handleLogin = () => {
-    if (password === ADMIN_PASSWORD) {
+    const entered = passwordRef.current?.value ?? "";
+    if (entered === ADMIN_PASSWORD) {
       sessionStorage.setItem(SESSION_KEY, "1");
       setAuthed(true);
       setPwError(false);
@@ -136,9 +137,9 @@ export default function AdminPage() {
           <h1 className="text-xl font-bold text-slate-800 mb-1">管理者ページ</h1>
           <p className="text-sm text-slate-400 mb-6">パスワードを入力してください</p>
           <input
+            ref={passwordRef}
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            defaultValue=""
             onKeyDown={(e) => e.key === "Enter" && handleLogin()}
             placeholder="パスワード"
             className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-indigo-400 mb-3"
