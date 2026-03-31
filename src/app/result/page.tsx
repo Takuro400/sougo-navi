@@ -18,6 +18,7 @@ import ResultFlow from "@/components/result/ResultFlow";
 import RankedUniversityList from "@/components/result/RankedUniversityList";
 import LineModal from "@/components/result/LineModal";
 import { strengthWeaknessMap, roadmapMap } from "@/data/resultData";
+import { supabase } from "@/lib/supabase";
 
 // ユーザータイプごとのカラー（ライト版）
 const typeGradients: Record<string, string> = {
@@ -52,6 +53,8 @@ function ResultContent() {
   const [viewMode, setViewMode] = useState<"flow" | "detail">("flow");
   // LINEモーダル
   const [showLineModal, setShowLineModal] = useState(false);
+  // Supabase保存済みレコードID
+  const [savedRecordId, setSavedRecordId] = useState<string | null>(null);
 
   // 既存AI分析
   const [aiLoading, setAiLoading] = useState(false);
@@ -93,6 +96,27 @@ function ResultContent() {
       localStorage.setItem("sougo_navi_result", JSON.stringify({
         matchResults: matched, userType: type, answers, region, savedAt: new Date().toISOString(),
       }));
+
+      // Supabaseに診断結果を保存
+      const top = matched[0];
+      const prefectureFromRegion = answers["q_region"] as string ?? region ?? null;
+      supabase
+        .from("diagnosis_results")
+        .insert({
+          user_type: type.label,
+          top_university: top?.university.name ?? null,
+          top_faculty: top?.university.faculty ?? null,
+          score: top?.score ?? null,
+          prefecture: prefectureFromRegion,
+          answers: answers as Record<string, unknown>,
+          line_clicked: false,
+          user_agent: typeof navigator !== "undefined" ? navigator.userAgent : null,
+        })
+        .select("id")
+        .single()
+        .then(({ data }) => {
+          if (data?.id) setSavedRecordId(data.id);
+        });
     } catch (e) {
       console.error("回答データの解析に失敗しました", e);
     }
@@ -233,7 +257,17 @@ function ResultContent() {
           strengthData={strengthData}
           roadmapSteps={roadmapSteps}
           onViewDetail={() => setViewMode("detail")}
-          onOpenModal={() => setShowLineModal(true)}
+          onOpenModal={() => {
+            setShowLineModal(true);
+            // LINE誘導クリックを記録
+            if (savedRecordId) {
+              supabase
+                .from("diagnosis_results")
+                .update({ line_clicked: true })
+                .eq("id", savedRecordId)
+                .then(() => {});
+            }
+          }}
         />
         <LineModal
           isOpen={showLineModal}
