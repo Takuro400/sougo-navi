@@ -11,6 +11,20 @@ import { QuizQuestion } from "@/types";
 
 export const quizQuestions: QuizQuestion[] = [
 
+  // ── 追加問①：学年（Q0）──────────────────────────────────────────
+  {
+    id: "q_grade",
+    category: "academic",
+    text: "今の学年を教えてください",
+    options: [
+      { value: "a", label: "高校1年生", tags: ["high1"] },
+      { value: "b", label: "高校2年生", tags: ["high2"] },
+      { value: "c", label: "高校3年生", tags: ["high3"] },
+      { value: "d", label: "浪人生",    tags: ["ronin"] },
+      { value: "e", label: "その他",    tags: ["other"] },
+    ],
+  },
+
   // ── 軸①：何を学びたいか（Q1〜Q3）──────────────────────────────
 
   {
@@ -429,6 +443,35 @@ export const quizQuestions: QuizQuestion[] = [
         value: "d",
         label: "総合型より一般入試のほうが向いていると思っている・学力重視で進む予定",
         tags: ["specialty-academic", "stem", "tech"],
+      },
+    ],
+  },
+
+  // ── 追加問②：困っていること（最終問）─────────────────────────────
+  {
+    id: "q_concern",
+    category: "activity",
+    text: "総合型選抜の対策で、今一番困っていることは何ですか？",
+    options: [
+      {
+        value: "a",
+        label: "志望校・学部が決まらない",
+        tags: ["needs-university-advice", "sougo-beginner"],
+      },
+      {
+        value: "b",
+        label: "志望理由書・自己PRの書き方が分からない",
+        tags: ["needs-writing-support", "sougo-aware"],
+      },
+      {
+        value: "c",
+        label: "面接・プレゼンが不安",
+        tags: ["needs-interview-support", "sougo-aware"],
+      },
+      {
+        value: "d",
+        label: "活動実績・課外活動が足りない気がする",
+        tags: ["needs-activity-support", "sougo-aware"],
       },
     ],
   },
