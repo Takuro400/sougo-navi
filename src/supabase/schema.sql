@@ -32,3 +32,9 @@ CREATE POLICY "Allow anonymous update" ON diagnosis_results
 CREATE POLICY "Allow service role select" ON diagnosis_results
   FOR SELECT TO anon
   USING (true);
+
+-- カラム追加（既存テーブルへの追加）
+-- Supabase SQL Editor で実行してください
+ALTER TABLE diagnosis_results ADD COLUMN IF NOT EXISTS nickname TEXT;
+ALTER TABLE diagnosis_results ADD COLUMN IF NOT EXISTS grade TEXT;
+ALTER TABLE diagnosis_results ADD COLUMN IF NOT EXISTS concern TEXT;

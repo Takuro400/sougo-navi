@@ -48,6 +48,8 @@ function ResultContent() {
   const [loading, setLoading] = useState(true);
   const [rawAnswers, setRawAnswers] = useState<QuizAnswers>({});
   const [rawRegion, setRawRegion] = useState<string>("");
+  const [rawPrefecture, setRawPrefecture] = useState<string>("");
+  const [rawNickname, setRawNickname] = useState<string>("");
   const [isAiMatched, setIsAiMatched] = useState(false);
   // フロー表示 or 詳細表示の切り替え
   const [viewMode, setViewMode] = useState<"flow" | "detail">("flow");
@@ -71,12 +73,14 @@ function ResultContent() {
       try {
         const saved = localStorage.getItem("sougo_navi_result");
         if (saved) {
-          const { matchResults, userType, answers: savedAnswers, region: savedRegion } = JSON.parse(saved);
+          const { matchResults, userType, answers: savedAnswers, region: savedRegion, prefecture: savedPrefecture, nickname: savedNickname } = JSON.parse(saved);
           if (matchResults?.length) {
             setResults(matchResults.slice(0, 5));
             setUserType(userType);
-            if (savedAnswers) setRawAnswers(savedAnswers);
-            if (savedRegion) setRawRegion(savedRegion);
+            if (savedAnswers)    setRawAnswers(savedAnswers);
+            if (savedRegion)     setRawRegion(savedRegion);
+            if (savedPrefecture) setRawPrefecture(savedPrefecture);
+            if (savedNickname)   setRawNickname(savedNickname);
           }
         }
       } catch (e) {
@@ -87,30 +91,45 @@ function ResultContent() {
     }
     try {
       const answers: QuizAnswers = JSON.parse(decodeURIComponent(raw));
-      const region = searchParams.get("region") ?? "";
+      const region     = searchParams.get("region")     ?? "";
+      const prefecture = searchParams.get("prefecture") ?? "";
+      const nickname   = searchParams.get("nickname")   ?? "";
       const { matchResults: matched, userType: type } = generateMatchResults(answers, region);
       setResults(matched.slice(0, 5));
       setUserType(type);
       setRawAnswers(answers);
       setRawRegion(region);
+      setRawPrefecture(prefecture);
+      setRawNickname(nickname);
       localStorage.setItem("sougo_navi_result", JSON.stringify({
-        matchResults: matched, userType: type, answers, region, savedAt: new Date().toISOString(),
+        matchResults: matched, userType: type, answers, region, prefecture, nickname, savedAt: new Date().toISOString(),
       }));
 
       // Supabaseに診断結果を保存
       const top = matched[0];
-      const prefectureFromRegion = answers["q_region"] as string ?? region ?? null;
+      const GRADE_LABELS: Record<string, string> = {
+        a: "高校1年生", b: "高校2年生", c: "高校3年生", d: "浪人生", e: "その他",
+      };
+      const CONCERN_LABELS: Record<string, string> = {
+        a: "志望校・学部が決まらない",
+        b: "志望理由書・自己PRの書き方が分からない",
+        c: "面接・プレゼンが不安",
+        d: "活動実績・課外活動が足りない気がする",
+      };
       supabase
         .from("diagnosis_results")
         .insert({
-          user_type: type.label,
+          user_type:      type.label,
           top_university: top?.university.name ?? null,
-          top_faculty: top?.university.faculty ?? null,
-          score: top?.score ?? null,
-          prefecture: prefectureFromRegion,
-          answers: answers as Record<string, unknown>,
-          line_clicked: false,
-          user_agent: typeof navigator !== "undefined" ? navigator.userAgent : null,
+          top_faculty:    top?.university.faculty ?? null,
+          score:          top?.score ?? null,
+          prefecture:     prefecture || null,
+          nickname:       nickname || null,
+          grade:          answers["q_grade"] ? (GRADE_LABELS[answers["q_grade"]] ?? null) : null,
+          concern:        answers["q_concern"] ? (CONCERN_LABELS[answers["q_concern"]] ?? null) : null,
+          answers:        answers as Record<string, unknown>,
+          line_clicked:   false,
+          user_agent:     typeof navigator !== "undefined" ? navigator.userAgent : null,
         })
         .select("id")
         .single()

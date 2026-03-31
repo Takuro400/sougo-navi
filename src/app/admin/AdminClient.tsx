@@ -11,6 +11,9 @@ type DiagnosisRow = {
   top_faculty: string | null;
   score: number | null;
   prefecture: string | null;
+  nickname: string | null;
+  grade: string | null;
+  concern: string | null;
   line_clicked: boolean;
   answers: Record<string, unknown> | null;
 };
@@ -103,7 +106,7 @@ export default function AdminPage() {
     setError(null);
     const { data, error: err } = await supabase
       .from("diagnosis_results")
-      .select("id, created_at, user_type, top_university, top_faculty, score, prefecture, line_clicked, answers")
+      .select("id, created_at, user_type, top_university, top_faculty, score, prefecture, nickname, grade, concern, line_clicked, answers")
       .order("created_at", { ascending: false })
       .limit(500);
     if (err) {
@@ -278,7 +281,7 @@ export default function AdminPage() {
               <table className="w-full text-xs">
                 <thead className="bg-slate-50 border-b border-slate-200">
                   <tr>
-                    {["日時","ユーザータイプ","1位の大学","学部","スコア","都道府県","LINE"].map((h) => (
+                    {["日時","ニックネーム","学年","ユーザータイプ","1位の大学","学部","スコア","都道府県","困っていること","LINE"].map((h) => (
                       <th key={h} className="px-4 py-3 text-left text-slate-500 font-bold whitespace-nowrap">{h}</th>
                     ))}
                   </tr>
@@ -299,6 +302,8 @@ export default function AdminPage() {
                             hour: "2-digit", minute: "2-digit",
                           })}
                         </td>
+                        <td className="px-4 py-2.5 text-slate-700 font-medium">{r.nickname ?? "—"}</td>
+                        <td className="px-4 py-2.5 text-slate-500 whitespace-nowrap">{r.grade ?? "—"}</td>
                         <td className="px-4 py-2.5">
                           <span className="bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
                             {r.user_type ?? "—"}
@@ -308,6 +313,9 @@ export default function AdminPage() {
                         <td className="px-4 py-2.5 text-slate-500 max-w-[120px] truncate">{r.top_faculty ?? "—"}</td>
                         <td className="px-4 py-2.5 font-bold text-slate-700">{r.score ?? "—"}</td>
                         <td className="px-4 py-2.5 text-slate-500">{r.prefecture ?? "—"}</td>
+                        <td className="px-4 py-2.5">
+                          <ConcernBadge concern={r.concern} />
+                        </td>
                         <td className="px-4 py-2.5">
                           {r.line_clicked
                             ? <span className="text-green-600 font-bold">✓ クリック</span>
@@ -333,6 +341,19 @@ export default function AdminPage() {
       </main>
     </div>
   );
+}
+
+// ─── 困っていることバッジ ──────────────────────────────
+function ConcernBadge({ concern }: { concern: string | null }) {
+  if (!concern) return <span className="text-slate-300">—</span>;
+  let cls = "px-2 py-0.5 rounded-full text-xs font-bold whitespace-nowrap ";
+  if (concern.includes("志望校"))     cls += "bg-blue-50 text-blue-700";
+  else if (concern.includes("志望理由")) cls += "bg-green-50 text-green-700";
+  else if (concern.includes("面接"))   cls += "bg-yellow-50 text-yellow-700";
+  else if (concern.includes("活動実績")) cls += "bg-orange-50 text-orange-700";
+  else                                 cls += "bg-slate-100 text-slate-600";
+  const short = concern.length > 12 ? concern.slice(0, 12) + "…" : concern;
+  return <span className={cls}>{short}</span>;
 }
 
 // ─── サマリーカード ────────────────────────────────────
