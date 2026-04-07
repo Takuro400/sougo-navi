@@ -328,8 +328,9 @@ function StepCTA({
 }) {
   const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://sougo-navi.vercel.app";
   const shareUrl = `${siteUrl}/quiz`;
-  const shareText = `AIが診断した私のタイプは「${userTypeLabel}」でした！\n総合型選抜の志望校、無料で診断してみて👇\n#総合型選抜 #AO入試 #大学受験`;
-  const xShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+  const shareText = `AIが診断した私のタイプは「${userTypeLabel}」でした！\n総合型選抜の志望校、無料で診断してみて👇`;
+  const hashtags = "総合型選抜,AO入試,大学受験";
+  const xShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}&hashtags=${encodeURIComponent(hashtags)}`;
 
   return (
     <div className="flex flex-col flex-1 bg-gradient-to-br from-indigo-600 to-violet-600 relative overflow-hidden">
