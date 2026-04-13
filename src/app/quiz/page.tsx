@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/layout/Header";
 import { quizQuestions } from "@/data/quizQuestions";
@@ -69,7 +69,7 @@ export default function QuizPage() {
   const [flowStep, setFlowStep] = useState<FlowStep>("nickname");
 
   // ニックネーム
-  const nicknameRef = useRef<HTMLInputElement>(null);
+  const [nickname, setNickname] = useState("");
   const [nicknameError, setNicknameError] = useState(false);
 
   // 都道府県選択
@@ -94,8 +94,7 @@ export default function QuizPage() {
 
   // ── ニックネーム → 次へ ──
   const handleNicknameNext = () => {
-    const val = nicknameRef.current?.value.trim() ?? "";
-    if (!val) { setNicknameError(true); return; }
+    if (!nickname.trim()) { setNicknameError(true); return; }
     setNicknameError(false);
     setFlowStep("prefecture");
   };
@@ -115,7 +114,6 @@ export default function QuizPage() {
     const newAnswers = { ...answers, [current.id]: selected };
     setAnswers(newAnswers);
     if (isLast) {
-      const nickname = nicknameRef.current?.value.trim() ?? "";
       const regionSlug = selectedPrefecture
         ? (PREFECTURE_TO_SLUG[selectedPrefecture] ?? "anywhere")
         : "anywhere";
@@ -194,11 +192,10 @@ export default function QuizPage() {
             <div className="mb-6">
               <label className="block text-sm font-bold text-slate-700 mb-2">ニックネーム</label>
               <input
-                ref={nicknameRef}
                 type="text"
+                value={nickname}
+                onChange={(e) => { setNickname(e.target.value); setNicknameError(false); }}
                 placeholder="例：たろう、さくら"
-                defaultValue=""
-                onChange={() => setNicknameError(false)}
                 className={`w-full border rounded-2xl px-5 py-4 text-base outline-none transition-colors duration-150
                   ${nicknameError
                     ? "border-red-400 focus:border-red-500 bg-red-50"
