@@ -150,7 +150,7 @@ function ResultContent() {
       const region     = searchParams.get("region")     ?? "";
       const prefecture = searchParams.get("prefecture") ?? "";
       const nickname   = searchParams.get("nickname")   ?? "";
-      const { matchResults: matched, userType: type } = generateMatchResults(answers, region);
+      const { matchResults: matched, userType: type } = generateMatchResults(answers, region, prefecture);
       setResults(matched.slice(0, 5));
       setUserType(type);
       setRawAnswers(answers);
