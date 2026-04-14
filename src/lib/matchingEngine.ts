@@ -415,6 +415,9 @@ const RANK_SCORE_CAPS = [100, 85, 70, 57, 45, 35, 27, 21, 17, 14];
 // 福岡県選択時に九州工業大学へボーナスを与える対象ID
 const KYUTECH_IDS = new Set(["kyutech-info", "kyutech-ko"]);
 
+// 東京都選択時に中央大学へボーナスを与える対象ID
+const CHUO_IDS = new Set(["chuo-ho", "chuo-keizai", "chuo-sho", "chuo-kokusai-keiei", "chuo-kokusai-info"]);
+
 export function generateMatchResults(answers: QuizAnswers, region = "", prefecture = ""): DiagnosisResult {
   const tagFreq = buildTagFrequency(answers);
   const regionNames = REGION_MAP[region] ?? [];
@@ -487,6 +490,11 @@ export function generateMatchResults(answers: QuizAnswers, region = "", prefectu
 
     // 福岡県選択時：九州工業大学にボーナス+30
     if (prefecture === "福岡県" && KYUTECH_IDS.has(univ.id)) {
+      score += 30;
+    }
+
+    // 東京都選択時：中央大学にボーナス+30
+    if (prefecture === "東京都" && CHUO_IDS.has(univ.id)) {
       score += 30;
     }
 
