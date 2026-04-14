@@ -412,7 +412,10 @@ const REGION_MAP: Record<string, string[]> = {
 // ランク別スコア上限（1位100点、2位最大85点、3位最大70点…と差を広げる）
 const RANK_SCORE_CAPS = [100, 85, 70, 57, 45, 35, 27, 21, 17, 14];
 
-export function generateMatchResults(answers: QuizAnswers, region = ""): DiagnosisResult {
+// 福岡県選択時に九州工業大学へボーナスを与える対象ID
+const KYUTECH_IDS = new Set(["kyutech-info", "kyutech-ko"]);
+
+export function generateMatchResults(answers: QuizAnswers, region = "", prefecture = ""): DiagnosisResult {
   const tagFreq = buildTagFrequency(answers);
   const regionNames = REGION_MAP[region] ?? [];
   const userType = determineUserType(tagFreq);
@@ -480,6 +483,11 @@ export function generateMatchResults(answers: QuizAnswers, region = ""): Diagnos
       score -= 30;
     } else if (userOrientation === "文系" && univ.facultyType === "理系") {
       score -= 30;
+    }
+
+    // 福岡県選択時：九州工業大学にボーナス+30
+    if (prefecture === "福岡県" && KYUTECH_IDS.has(univ.id)) {
+      score += 30;
     }
 
     score = Math.max(0, score);

@@ -7870,6 +7870,50 @@ export const universities: University[] = [
       { date: "2025年8月中旬", title: "横浜国立大学オープンキャンパス2025", url: "https://www.ynu.ac.jp/news/", isOnline: false, note: "要事前予約" },
     ],
   },
+
+  {
+    id: "kyutech-ko",
+    name: "九州工業大学",
+    faculty: "工学部",
+    department: "機械知能工学科・宇宙システム工学科・電気電子工学科・マテリアル工学科・建設社会工学科",
+    facultyType: "理系",
+    majorField: "理工・情報",
+    region: "九州",
+    prefecture: "福岡県",
+    type: "国立",
+    description:
+      "九州工業大学工学部は、機械・電気・宇宙・材料・建設など多彩な工学系学科を擁する国立大学の理工系看板学部。九州の産業界・製造業との連携が深く、実践的なエンジニア育成が特色。ロボット・宇宙工学分野の研究でも全国トップクラスの実績を持ち、地元企業・大手メーカー・インフラ企業への就職に強い。",
+    features: ["工学・理系総合", "宇宙・ロボット研究", "国立", "産学連携", "九州就職に強い"],
+    sougoCompatibility: "高",
+    idealStudent:
+      "ものづくりや機械・電気・建設に興味があり、実践的なエンジニアを目指す学生。手を動かして学ぶことが好きな人。",
+    requiredActivities: [
+      "理系科目での優秀な成績・実績",
+      "ものづくりや電子工作の経験",
+      "部活や研究での問題解決経験",
+    ],
+    matchTags: ["tech", "stem", "engineering", "national", "kyushu", "hands-on", "local"],
+    links: {
+      official: "https://www.kyutech.ac.jp/",
+      admissions: "https://www.kyutech.ac.jp/admission/",
+      passnavi: "https://passnavi.obunsha.co.jp/univ/0870/top/",
+      openCampus: "https://www.kyutech.ac.jp/event/",
+    },
+    mentorCount: 1,
+    hensachi: 55,
+    hensachiRange: "中堅上位",
+    sougouAdmission: {
+      available: true,
+      timing: "8月出願・9月選考",
+      selectionMethod: ["志望理由書", "面接", "実績資料"],
+      quota: "若干名",
+      difficulty: "中",
+      point: "工学への強い関心とものづくりの経験をアピールすることが重要。プログラミングや電子工作の実績があると有利。",
+    },
+    openCampusEvents: [
+      { date: "2025年8月9日（土）", title: "九工大オープンキャンパス2025", url: "https://www.kyutech.ac.jp/event/", isOnline: false, note: "要事前予約" },
+    ],
+  },
 ];
 
 export function getUniversityById(id: string): University | undefined {
